@@ -3,5 +3,8 @@ descr="programmer blog"
 gh repo create @owner.github.io   --public  --description $descr  --gitignore Node
 --template https://github.com/cotes2020/chirpy-starter
 
-update pages-deploy.yml 
-ruby-version: 3.2 (instead 3)
+update pages-deploy.yml
+ruby-version: 3.2 (instead 3) # set your current version  `ruby --version` otherwise the compilation is failed.
+
+
+mkdir -p assets/img/favicons #  use https://realfavicongenerator.net/
