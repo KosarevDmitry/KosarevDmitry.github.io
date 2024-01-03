@@ -1,0 +1,18 @@
+Puml class generator
+https://khalidabuhakmeh.com/dotnet-class-diagrams-in-jetbrains-rider-with-plantuml
+install
+with -g arg  need runing
+dotnet tool install -g  PlantUmlClassDiagramGenerator
+ //You can invoke the tool using the following command: puml-gen
+
+without  -g arg need runing 
+dotnet new tool-manifest
+dotnet tool install -g  PlantUmlClassDiagramGenerator
+    //You can invoke the tool from this directory using the following commands: 'dotnet tool run puml-gen' or 'dotnet puml-gen'.
+    //Tool 'plantumlclassdiagramgenerator' (version '1.3.4') was successfully installed. Entry is added to the manifest file D:\Дмитрий\EDX\_Test\UMLTest\.config\dotnet-tools.json.
+
+// to generate from all files in dir Models
+dotnet puml-gen ./Models ./puml -dir  -createAssociation
+
+// only public classes
+//dotnet puml-gen ./Models ./puml -dir -public -createAssociation

@@ -1,0 +1,19 @@
+How to create report 
+https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-code-coverage?tabs=windows
+D:\src\samples\csharp\unit-testing-code-coverage
+
+needs
+<PackageReference Include="coverlet.collector" Version="3.1.2">
+https://github.com/coverlet-coverage/coverlet
+
+1.dotnet test --collect:"XPlat Code Coverage"  # create folder TestResults and generate  xml there
+	or 
+dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura # generate report in root folder
+
+
+2. dotnet tool install -g dotnet-reportgenerator-globaltool # needs any way
+
+3. reportgenerator -reports:".\coverage.cobertura.xml" -targetdir:"coveragereport" -reporttypes:Html
+
+<PackageReference Include="ReportGenerator" Version="5.1.9" /> # It seems it is not required
+https://github.com/danielpalme/ReportGenerator

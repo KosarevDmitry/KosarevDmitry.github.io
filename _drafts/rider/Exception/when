@@ -1,0 +1,17 @@
+filter
+try
+{
+	await new HttpClient().GetStringAsync ("http://www.albahari.com/x");
+}
+catch (HttpRequestException ex) when (ex.StatusCode == HttpStatusCode.NotFound)
+{
+	"Page not found".Dump();
+}
+catch (HttpRequestException ex) when (ex.StatusCode == HttpStatusCode.InternalServerError)
+{
+	"Internal server error!".Dump();
+}
+catch (HttpRequestException ex) 
+{
+	$"Some other failure: {ex.StatusCode}".Dump();
+}

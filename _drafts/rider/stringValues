@@ -1,0 +1,9 @@
+features 
+combine  without string.Empty, null
+  { new[]{ "abc", "bcd", "foo", string.Empty, null }. toString() ==   "abc,bcd,foo" 
+   extended choices  for equal no matter how  it was initialisired
+   mutable -  unpossible  to insert, to remove, to add
+    
+   
+   
+   

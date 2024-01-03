@@ -1,0 +1,16 @@
+// Exceptions can be thrown either by the runtime or in user code:
+
+try
+{
+	Display (null);
+}
+catch (ArgumentNullException ex)
+{
+	ex.Dump ("Caught the exception");
+}
+
+void Display (string name)
+{
+	ArgumentNullException.ThrowIfNull (name);
+	Console.WriteLine (name);
+}

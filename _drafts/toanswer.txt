@@ -1,0 +1,46 @@
+C#:
+
+What is the difference between Task and ValueTask?
+
+How would you use record types?
+ASP.NET MVC:
+
+In an MVC application, how to prioritize filter executions?
+How to avoid XSS Vulnerabilities in .NET MVC?
+
+
+How would you submit a form with JavaScript?
+What will you get if you type javascript:alert(!0) into a browser URL string?
+What are the ways to pass dates between the front end and back end?
+Vue/React:
+
+merge base Octopus Independent Is-ancestor Forkpoint
+
+.gitmodules
+
+
+
+JSONArray jarr = new JSONArray(....);
+                    for (int i = 0; i < jarr.length(); i++) {
+                        JSONObject obj = (......);
+                       ....
+}
+
+ jArr.JSONObject()
+jArr.getJSONObject(i)
+jArr.JSONobject(i)
+JSONArray.response(i)
+
+
+HTTP/1.1 200 OK
+Content-Type: application/xml
+
+<configuration id="9977">
+    <link rel="..." href="/configurations/9977" />
+    <content><![CDATA[. updated content here .]]></content>
+    <status>active</status>
+    <link  rel="...." href="....." />
+</configuration>
+
+
+post

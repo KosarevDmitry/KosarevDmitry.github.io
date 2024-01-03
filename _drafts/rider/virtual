@@ -1,0 +1,15 @@
+ so good there is no private string becouse code apply directly to base class
+ public class DerivedOptions : ComplexOptions
+ {
+     public override string Virtual
+     {
+         get
+         {
+             return base.Virtual;
+         }
+         set
+         {
+             base.Virtual = "Derived:" + value;
+         }
+     }
+ }

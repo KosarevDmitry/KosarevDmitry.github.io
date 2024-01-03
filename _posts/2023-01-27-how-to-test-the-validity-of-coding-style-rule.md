@@ -1,8 +1,8 @@
 ---
-title: How to test the validity of a Coding Style rule.
+title: How to test the validity of a Coding Style rule
 date: 2023-12-28 16:32:27
 categories: [Csharp]
-tags: [cod style]
+tags: [code style]
 ---
 
 Is it possible to refute the statement by citing the code in [runtime], which is probably **fine** from Microsoft’s point of view?
@@ -11,7 +11,11 @@ For example, there is a statement: it is desirable that there is only one exit `
 Such statements are involuntarily remembered because they are categorical and simple.  
 Maybe I'm wrong, so just in case, I typed keywords into Google **function only one return statement**
 The number of references is enough to confirm that such a statement exists.
-Look at the code [HashHelpers.cs]
+
+Probably, it would be possible to compile a list of statements of this kind and then refute them,
+prove that in general they mean nothing.
+
+Look at the code [HashHelpers.cs].
 
 ```csharp
   public static bool IsPrime(int candidate) 
@@ -30,8 +34,7 @@ Look at the code [HashHelpers.cs]
     } 
 ```
 
-An alternative option could probably be like this:
-
+An alternative approach could probably be like this:
 
 ```csharp
     public static bool IsPrime(int candidate) 

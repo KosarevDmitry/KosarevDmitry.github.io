@@ -1,0 +1,23 @@
+interface IA
+{
+    void M() { WriteLine("IA.M"); } //have implemintation
+}
+A class that implements this interface need not implement its concrete method.
+class C : IA { } // OK
+
+IA i = new C();
+i.M(); // prints "IA.M"
+The final override for IA.M in class C is the concrete method M declared in IA.
+ Note that a class does not inherit members from its interfaces; that is not changed by this feature:
+
+new C().M(); // error: class 'C' does not contain a member 'M'
+
+
+ public interface IOptions<[DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] out TOptions>
+        where TOptions : class
+    {
+        /// <summary>
+        /// The default configured <typeparamref name="TOptions"/> instance
+        /// </summary>
+        TOptions Value { get; }
+    }

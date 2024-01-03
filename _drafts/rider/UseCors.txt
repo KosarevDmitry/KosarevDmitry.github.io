@@ -1,0 +1,13 @@
+https://learn.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-7.0
+var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy  =>
+                      {
+                          policy.WithOrigins("http://example.com",
+                                              "http://www.contoso.com");
+                      });
+});
+
+app.UseCors(MyAllowSpecificOrigins);

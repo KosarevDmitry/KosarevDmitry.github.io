@@ -1,0 +1,11 @@
+https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/expressions#129-unary-operators
+
+The await operator is used to suspend evaluation of the enclosing async function until the asynchronous operation represented by the operand has completed.
+The task of an await_expression is required to be awaitable. An expression t is awaitable if one of the following holds:
+t is of compile-time type dynamic
+t has an accessible instance or extension method called GetAwaiter with no parameters and no type parameters, and a return type A for which all of the following hold:
+A implements the interface System.Runtime.CompilerServices.INotifyCompletion (hereafter known as INotifyCompletion for brevity)
+A has an accessible, readable instance property IsCompleted of type bool
+A has an accessible instance method GetResult with no parameters and no type parameters
+
+The expression await t is classified the same way as the expression (t).GetAwaiter().GetResult()

@@ -1,0 +1,8 @@
+sort out:
+Exception already has a StackTrace property; however, this
+property returns a simple string—not a StackTrace object. A
+StackTrace object is far more useful in logging exceptions
+that occur after deployment—where no .pdb files are available
+—because you can log the IL offset in lieu of line and column
+numbers. With an IL offset and ildasm, you can pinpoint
+where within a method an error occurred.

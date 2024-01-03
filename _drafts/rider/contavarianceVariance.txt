@@ -1,0 +1,10 @@
+for string parameter  relevants object arg  =>contavariance
+for object parameter relevants string arg => covariance 
+https://blog.ndepend.com/covariance-and-contravariance-in-csharp-explained/
+Variance is how subtyping between more complex types relates to subtyping between their components
+object=> string
+object<=string A ≤ B, then I<B> ≤ I<A> contravariant
+
+IEnumerable<Cat> is a subtype of IEnumerable<Animal>. The subtyping is preserved because IEnumerable<T> is covariant on T.
+Action<Animal> is a subtype of Action<Cat>. The subtyping is reversed because Action<T> is contravariant on T.
+Neither IList<Cat> nor IList<Animal> is a subtype of the other, because IList<T> is invariant on T.

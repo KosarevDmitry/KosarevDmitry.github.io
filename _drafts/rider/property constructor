@@ -1,0 +1,30 @@
+
+  private  Guid _quid;
+  public Scoped()
+    {
+        Guid  = System.Guid.NewGuid();
+    }
+    public Guid Guid{
+        get{ return _quid;}
+        set{ _quid = value; }
+       // private set{ _quid = value; }
+    }
+    
+     public Scoped()
+        {
+          _quid  = System.Guid.NewGuid();
+       }
+      public Guid Guid=> _quid;
+       private readonly Guid _quid;
+
+
+  public Scoped()
+  {
+    Guid  = System.Guid.NewGuid();
+  }
+   public Guid Guid{ get; set; }
+   //public Guid Guid{ get; private set; }
+   // public Guid Guid{ get; }
+ 
+  
+    

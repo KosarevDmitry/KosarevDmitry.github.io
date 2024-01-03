@@ -1,0 +1,2 @@
+Optimisation in code - how to struggle it
+Switch on option "Use JIT even if pre-compiled assemblies are available"

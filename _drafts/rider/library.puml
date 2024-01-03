@@ -1,0 +1,21 @@
+#It is easy to forget reasons why I downloaded repo.
+@startuml
+skinparam componentStyle rectangle
+header "why I sort out with these repo"
+[parsing C# comments feature]  --> [docfx]
+[github pages] --> [docfx] 
+[docfx] -->  [Spectre.Console.Cli]
+[Spectre.Console.Cli] --> [dotnet-example]
+'#https://github.com/patriksvensson/dotnet-example/tree/main) dotnet tool install -g dotnet-example
+'[https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/Configuration.md]
+[dotnet-example] --> [stylecop.json] 
+[stylecop.json] -->  [VS analizer]: .editorconfig, .ruleset
+    
+Econtainer --> Shouldly
+
+@enduml
+ 
+ 
+
+   
+   

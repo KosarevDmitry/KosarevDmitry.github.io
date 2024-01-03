@@ -1,0 +1,15 @@
+#### dotcover
+Test
+Continues testing settings
+Autostart test -> after Build
+Autostart test -> after Save  -> choose this one
+Session ->  aka new tab
+Coverage is  a view for all public method in tested project
+Remove selected test means  removing  test method from current  tab (aka session)
+Copy or "Copy reference"  copy name or DisplayName of current test method
+Cover all test -> renew Unit Tests Coverage window
+Profile -> dotnet trace ?
+
+Test method can be private.
+to hide the unittests classes themself from coverage window add attribute
+[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute] 

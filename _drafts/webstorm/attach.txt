@@ -1,0 +1,3 @@
+to attach several projects
+File --> Open --> Go to the project directory --> Open:
+In the Open Project dialog , select "Attach".

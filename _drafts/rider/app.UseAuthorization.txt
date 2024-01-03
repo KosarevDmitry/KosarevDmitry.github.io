@@ -1,0 +1,63 @@
+https://learn.microsoft.com/en-us/aspnet/core/security/authorization/policies?view=aspnetcore-7.0
+```
+public class AlwaysFailed :
+    AuthorizationHandler<AlwaysFailed>,
+    IAuthorizationRequirement
+{
+    protected override Task HandleRequirementAsync(
+        AuthorizationHandlerContext context,
+        AlwaysFailed requirement)
+    {
+        context.Fail();
+        return Task.FromResult(0);
+    }
+}
+
+public class AlwaysSucceed :
+    AuthorizationHandler<AlwaysSucceed>,
+    IAuthorizationRequirement
+{
+    protected override Task HandleRequirementAsync(
+        AuthorizationHandlerContext context,
+        AlwaysSucceed requirement)
+    {
+        context.Succeed( this);
+        return Task.FromResult(0);
+    }
+}
+
+```
+
+``` Startup.cs
+  app.UseAuthorization();
+  
+    services.AddAuthorization(options =>
+            {
+               options.AddPolicy("policy1", policy => policy.Requirements.Add(new AlwaysFailed()));
+                options.AddPolicy("policy2", policy => policy.Requirements.Add(new AlwaysSucceed()));
+            });
+			
+	```		
+			
+
+``` Controller
+
+ [Authorize(Policy = "policy1")]
+    [HttpGet (template:"[action]")]
+    public IActionResult WithPolicyFailed() {
+        return Ok();
+    }
+    
+    
+    [HttpGet (template:"[action]")]
+    public IActionResult WithoutPolicy() {
+        return Ok();//MethodBase.GetCurrentMethod().Name
+    }
+    
+    [Authorize(Policy = "policy2")]
+    [HttpGet (template:"[action]")]
+    public IActionResult WithPolicySucceed() {
+        return Ok(); //new StackFrame(0).GetMethod().Name
+    }
+	
+	```
