@@ -16,12 +16,18 @@ name=$d-${1// /-}.md # $1 -first arg replace whitespace tp '-'
 # or
 # image: /path/to/image
 
-cat >../_posts/$name <<EOF
+md='../_posts/'$name
+if [[ ${PWD##*/} = "KosarevDmitry.github.io" ]]; then
+md='./_posts/'$name
+fi 
+
+cat >$md <<EOF
 ---
 title: $1
 date: $d $t $z
-categories: [csharp, microservice]
-tags: [authorization]
+categories: [${2}]
+tags: [${3}]
 ---
 EOF
 
+notepad $md

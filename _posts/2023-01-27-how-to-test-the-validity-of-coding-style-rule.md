@@ -1,10 +1,9 @@
 ---
-title: Coding style
+title: How to test the validity of a Coding Style rule.
 date: 2023-12-28 16:32:27
 categories: [Csharp]
 tags: [cod style]
 ---
-
 
 Is it possible to refute the statement by citing the code in [runtime], which is probably **fine** from Microsoft’s point of view?
 I think it's acceptable, I don't know other criteria. I have a feeling that reading recommendations is useless, just as in a language you need to listen to live speech, read books, and not short topics.
@@ -12,7 +11,7 @@ For example, there is a statement: it is desirable that there is only one exit `
 Such statements are involuntarily remembered because they are categorical and simple.  
 Maybe I'm wrong, so just in case, I typed keywords into Google **function only one return statement**
 The number of references is enough to confirm that such a statement exists.
-Look at the code [HashHelpers.cs](https://github.com/dotnet/runtime/blob/main/src/libraries/System.Private.CoreLib/src/System/Collections/HashHelpers.cs)
+Look at the code [HashHelpers.cs]
 
 ```csharp
   public static bool IsPrime(int candidate) 
@@ -55,5 +54,5 @@ An alternative option could probably be like this:
     } 
 ```
 	
-----	
-[runtime](https://github.com/dotnet/runtime/)
+[runtime]:https://github.com/dotnet/runtime/
+[HashHelpers.cs]:https://github.com/dotnet/runtime/blob/main/src/libraries/System.Private.CoreLib/src/System/Collections/HashHelpers.cs

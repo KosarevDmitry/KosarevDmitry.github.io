@@ -1,0 +1,10 @@
+﻿@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+title Patch
+client -> server: get
+server --> client: return record
+client -> server: Another authentication Request
+client <-- server: another authentication Response
+@enduml
