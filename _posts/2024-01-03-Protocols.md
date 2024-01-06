@@ -5,37 +5,57 @@ categories: [web]
 tags: [networking]
 ---
 
-TCP
-: <https://datatracker.ietf.org/doc/rfc9293/>
 
-PATCH
+
+
+Transmission Control Protocol (TCP)  
+: <https://www.rfc-editor.org/rfc/rfc9293.txt> 
+
+HTTP
+: <https://datatracker.ietf.org/doc/html/rfc1945>
+ * http codes:  <https://datatracker.ietf.org/doc/html/rfc1945#section-9>
+
+DOMAIN NAMES 
+: <https://www.rfc-editor.org/rfc/rfc1035.txt>
+
+
+HTTP Semantics
+: <https://www.rfc-editor.org/rfc/rfc9110.txt>
+
+HTTP Caching
+: <https://www.rfc-editor.org/rfc/rfc9111.txt>
+
+
+PATCH Method for HTTP
 : <https://datatracker.ietf.org/doc/rfc5789/>
+
+---
+HTML Living standard
+: <https://html.spec.whatwg.org/#toc-introduction>
 
 mailarchive (very interesting) 
 : <https://mailarchive.ietf.org/arch/search/?q=%22rfc5789%22>
 
-HTML Living standard
-: <https://html.spec.whatwg.org/#toc-introduction>
+---
+How to Read an RFC by Mark Nottingham
+: <https://www.ietf.org/blog/how-read-rfc/>
 
+RFC 
+: <https://www.ietf.org/standards/rfcs/>
 
->Info about `html codes` is better to take from https://developer.mozilla.org/en-US/docs/Web/HTTP/Status.
-Each article has a link to the corresponding RFC
+RFC Editor
+: <https://www.rfc-editor.org/search/rfc_search_detail.php>
 
+Internet-Draft Author Resources
+: <https://authors.ietf.org/>
 
-sources:
-: 
-- https://www.ietf.org/blog/how-read-rfc/
-- https://authors.ietf.org/
-- https://wiki.ietf.org/
-- https://github.com/ietf-tools
-- https://www.rfc-editor.org/rfc/rfc1035.txt  
-- https://www.rfc-editor.org/rfc/rfc9110.txt  
-- https://www.rfc-editor.org/rfc/rfc9111.txt  
-- https://www.rfc-editor.org/rfc/rfc9293.txt 
-- https://en.wikipedia.org/wiki/Request_for_Comments
-- https://www.ietf.org/standards/rfcs/
-- https://www.rfc-editor.org/search/rfc_search_detail.php?sortkey=Number&sorting=DESC&page=All&pubstatus%5B%5D=Standards%20Track&std_trk=Internet%20Standard
+ietf.org
+:  <https://wiki.ietf.org/>
 
+Tools
+: <https://github.com/ietf-tools>
 
-persons
-: https://datatracker.ietf.org/person/alexey.melnikov@isode.com
+---
+
+Persons
+: <https://datatracker.ietf.org/person/alexey.melnikov@isode.com>
