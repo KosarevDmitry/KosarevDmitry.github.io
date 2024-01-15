@@ -55,7 +55,5 @@ ietf.org
 Tools
 : <https://github.com/ietf-tools>
 
----
 
-Persons
-: <https://datatracker.ietf.org/person/alexey.melnikov@isode.com>
+

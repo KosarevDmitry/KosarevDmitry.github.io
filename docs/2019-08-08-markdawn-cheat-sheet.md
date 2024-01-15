@@ -47,20 +47,20 @@ relative link
 2. Second item
 
 
-- First item   
-* Second item 
-+ Third item 
-
-
 ```markdawn
 1. First item
 2. Second item
-
+```
 
 - First item   
 * Second item 
 + Third item 
 
+
+```
+- First item   
+* Second item 
++ Third item 
 ```
 
 `code`  \`code\`  
@@ -71,6 +71,7 @@ relative link
 
 
 [Markdown Guide](https://www.markdownguide.org)  
+
 ```markdawn
 [Markdown Guide](https://www.markdownguide.org)  
 ```
@@ -97,22 +98,20 @@ relative link
 
 Code block <https://github.com/github-linguist/linguist/blob/master/lib/linguist/languages.yml>
 
-```
+
 {
   "firstName": "John",
   "lastName": "Smith",
   "age": 25
 }
+
 ```
-
-
-
 {  
   "firstName": "John",  
   "lastName": "Smith",  
   "age": 25  
 }  
-
+```
 
 
 Sentence with a footnote. [^1]
@@ -120,7 +119,7 @@ Sentence with a footnote. [^1]
 [^1]: This is the footnote.  `[^1]: This is the footnote.`
 
 
-term
+term  
 : definition
 
 ```
@@ -154,6 +153,14 @@ term
 
 
 [mylink]
+
+
+
+```
+[mylink]
+```
+
+[link to repo dir](repolink) 
 
 ## Details
 
