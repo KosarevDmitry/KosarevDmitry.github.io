@@ -1,2 +1,0 @@
-We could consider a shorthand T! x on parameters, that auto-generates a runtime null check.
- public HealthCheckRegistration Registration { get; set; } = default!; //check nullable

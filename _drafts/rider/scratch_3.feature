@@ -1,1 +1,0 @@
-dotnet sln XUnit.Coverage.sln add (ls **/*.csproj) --in-root

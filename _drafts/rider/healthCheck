@@ -1,6 +1,0 @@
-﻿D:\Дмитрий\EDX\_Test\HealthChecksSampleModified 
-aspnetcore/host-and-deploy/health-checks/samples/7.x/HealthChecksSample
-run  curl http://localhost:5000/healthz
-https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-7.0
-"D:\src\aspnetcore1\aspnetcore\src\HealthChecks\startvs.cmd"
-

@@ -1,4 +1,0 @@
-
-ANSI X3.274-1996, Programming Language REXX. (This document is useful in understanding floating-point decimal arithmetic rules.)
-https://digteh.ru/proc/float/
-http://neerc.ifmo.ru/wiki/index.php?title=%D0%9F%D1%80%D0%B5%D0%B4%D1%81%D1%82%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_%D0%B2%D0%B5%D1%89%D0%B5%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D1%85_%D1%87%D0%B8%D1%81%D0%B5%D0%BB

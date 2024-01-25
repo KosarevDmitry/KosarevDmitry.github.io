@@ -1,7 +1,0 @@
-  c.RoutePrefix = string.Empty;
-  https://localhost:5001/index.html
-  instead
-  https://localhost:5001/swagger/index.html
-  
-  
-  https://github.com/domaindrivendev/Swashbuckle.AspNetCore/blob/master/README.md#swashbuckleaspnetcoreannotations

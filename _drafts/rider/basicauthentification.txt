@@ -1,5 +1,0 @@
-realm 
-The realm attribute (case-insensitive) is required for all authentication schemes.
-resume: pages with the same realm use the sam credential
-explanation:
-https://stackoverflow.com/questions/12701085/what-is-the-realm-in-basic-authentication

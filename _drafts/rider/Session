@@ -1,5 +1,0 @@
-A session is not a service, so access it like this
-  
-  HttpContext.Session.SetString(SessionKeyName, name);
-  HttpContext.Session.SetInt32(SessionKeyAge, age);
-  

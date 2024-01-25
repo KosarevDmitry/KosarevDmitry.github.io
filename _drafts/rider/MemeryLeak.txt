@@ -1,3 +1,0 @@
- Profiler for checking memory
- windbg.exe tool can assist in finding it. There are also friendlier graphical tools such as Micro‐
-soft’s CLR Profiler, SciTech’s Memory Profiler, and Red Gate’s ANTS Memory Profiler.
