@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-n=${1^} # $1 - first arg with upper case
+title=${1^} # $1 - title has to start with uppercase
 F=$(date +"%F|%T|%z")
 d=$(echo $F | cut -d'|' -f 1) # date
 t=$(echo $F | cut -d'|' -f 2) # time
 z=$(echo $F | cut -d'|' -f 3) # timezone
-name=$d-${n// /-}.md # 
+name=$d-${title// /-}.md #  replaces whitespace with underscore in title
 
+# Legend
 # tags: [authorisation]     # TAG names should always be lowercase
 # categories: [Csharp, microservise] are designed to contain up to two elements
 # img_path: /img/path/
@@ -16,9 +17,11 @@ name=$d-${n// /-}.md #
 # or
 # image: /path/to/image
 
+#use ./post.sh mytitle categorie1,categorie2 mytag
+
 md='../_posts/'$name
 if [[ ${PWD##*/} = "KosarevDmitry.github.io" ]]; then
-md='./_posts/'$name
+md='./_drafts/'$name
 fi 
 
 cat >$md <<EOF

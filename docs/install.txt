@@ -7,4 +7,15 @@ update pages-deploy.yml
 ruby-version: 3.2 (instead 3) # set your current version  `ruby --version` otherwise the compilation is failed.
 
 
+
 mkdir -p assets/img/favicons #  use https://realfavicongenerator.net/
+
+#manual
+https://chirpy.cotes.page
+
+
+path to image ../../assets/
+
+very useful feature otherwise the compilation will fail
+put on in frontmatter:
+`render_with_liquid: false`

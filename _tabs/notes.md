@@ -42,6 +42,6 @@ cpu
 }
 ```
 
-
-
+VS new feature
+: C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Platform\WhatsNew\Content\en-US
 
