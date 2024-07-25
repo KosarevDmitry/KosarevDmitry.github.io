@@ -21,6 +21,7 @@ DOMAIN NAMES
 
 HTTP Semantics
 : <https://www.rfc-editor.org/rfc/rfc9110.txt>
+:<https://www.rfc-editor.org/rfc/rfc9110.html>
 
 HTTP Caching
 : <https://www.rfc-editor.org/rfc/rfc9111.txt>
