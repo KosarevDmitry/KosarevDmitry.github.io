@@ -101,3 +101,9 @@ public void OptionTest()
    _ = o.Value.Name;
 }
 ```
+
+
+- Open.API.NET no qlue :)
+
+- SharpYaml используется в OpenAPI парсинг yaml
+-  CommandLineParser
