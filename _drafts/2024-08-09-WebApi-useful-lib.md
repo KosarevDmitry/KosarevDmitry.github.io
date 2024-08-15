@@ -32,3 +32,4 @@ https://openapi-generator.tech/docs/generators/csharp
 тогда swagger 
 
 webserver
+

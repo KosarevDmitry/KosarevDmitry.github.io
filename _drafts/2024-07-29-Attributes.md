@@ -23,8 +23,26 @@ tags: []
     [UsedImplicitly]
 	
 	
+# To suppress something
+
+# for class and  members  
+```csharp
+ [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+ ```
+ 
+# inside method 
+```csharp
+ #pragma warning disable CS0618 // Type or member is obsolete
+ //code
+ #pragma warning restore CS0618 // Type or member is obsolete
+ ```
+ 
+ 
+ # for props and parameter
+ 
 <https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/nullable-analysis>
-	
+
+```csharp
 public class Test
 {
     [Fact]
@@ -32,7 +50,7 @@ public class Test
     {
         var s = new StaticAnalisisAttr();
         s.ScreenName =
-            null; // without [AllowNull] get Warning CS8625 : Cannot convert null literal to non-nullable reference type.
+            null; // without [AllowNull] over `ScreenName` get `Warning CS8625 : Cannot convert null literal to non-nullable reference type.`
     }
 }
 
@@ -47,3 +65,10 @@ internal class StaticAnalisisAttr
 
     private string _screenName = "temp";
 }
+ ```
+ 
+ 
+ 
+ @ Important interfaces
+ 
+ IComparable<>, IEquatable<>, IConvertible

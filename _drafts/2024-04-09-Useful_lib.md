@@ -107,3 +107,10 @@ public void OptionTest()
 
 - SharpYaml используется в OpenAPI парсинг yaml
 -  CommandLineParser
+
+- build.cake
+  https://cakebuild.net/
+  MongoDb driver repo use it
+  Надстройка на Roslyn компилятором
+  
+  
