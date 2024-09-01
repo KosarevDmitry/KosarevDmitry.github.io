@@ -5,13 +5,39 @@ categories: [aspnetcore]
 tags: []
 ---
 
-There only two exports type: pfx and pem  
+## There only two exports type: pfx and pem  
 [ref] (https://github.com/dotnet/aspnetcore/blob/a450cb69b5e4549f5515cdb057a68771f56cefd7/src/Shared/CertificateGeneration/CertificateExportFormat.cs#L6)
 
 
-X509Certificate2 
-Удобной точкой рассмотрения можеть служить [ref](
+## X509Certificate2 
+A convenient point of consideration might be [ref](
 https://github.com/dotnet/aspnetcore/blob/0acb0e4c76a6db50baba3546343b0d27848b81f7/src/Tools/dotnet-dev-certs/src/Program.cs)
 
-упирается в библиотеку Crypt32.dll которая открывает хранилище
+## rests on the Crypt32.dll library which opens the storage
+
 https://github.com/dotnet/runtime/blob/2327a36c5222a8e4e522ab27455bcbd8002efd06/src/libraries/System.Security.Cryptography/src/System/Security/Cryptography/X509Certificates/WindowsInterop.crypt32.cs#L48
+
+
+## How to build with strong name
+- generate key `mykey.snk`
+
+- add to csproj 
+
+```
+ <AssemblyOriginatorKeyFile>../mykey.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>True</SignAssembly>
+```
+
+- display public key
+- cd  in `bin` subfolder where the assembly is located
+`sn -Tp tests.dll`
+
+
+- to add access for internal class insert into  csproj 
+```
+<ItemGroup>
+ <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+   <_Parameter1>tests, PublicKey=eb832f31d8254168cd7ba5700dfbca301fbf8db614ba41ba18474de0a5f4c2d51c995bc3636c641c8cbe76f45717bfcb943b5</_Parameter1>
+  </AssemblyAttribute>
+</ItemGroup>
+````
