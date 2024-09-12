@@ -20,19 +20,26 @@ https://github.com/dotnet/runtime/blob/2327a36c5222a8e4e522ab27455bcbd8002efd06/
 
 ## How build a project with strong name
 
-- generate key `mykey.snk`
+
+- generate key `snk`
+
+`sn -k Drive.Kosarev.Tests.snk`
 
 - add it to `csproj`
 
+it is not nesserary to add key if key already exists in the repo root. and there is reference in prop. There need only to add SignAssembly. 
+
 	```
-	 <AssemblyOriginatorKeyFile>../mykey.snk</AssemblyOriginatorKeyFile>
-		<SignAssembly>True</SignAssembly>
+	<SignAssembly>True</SignAssembly>
+	 <AssemblyOriginatorKeyFile>Drive.Kosarev.Tests.snk</AssemblyOriginatorKeyFile>
 	```
 
-- display public key
-
-	cd  in `bin` subfolder where the assembly is located  
-	`sn -Tp tests.dll`
+- extract public key 
+`sn -p Drive.Kosarev.Tests.snk test.pubkey`
+- display  key
+`sn -tp test.pubkey`
+- or cd  in `bin` subfolder where the assembly is located  
+`sn -Tp tests.dll`
 
 
 - to add a access for internal class insert into  `csproj` 
