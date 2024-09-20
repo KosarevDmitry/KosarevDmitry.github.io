@@ -1,6 +1,6 @@
 ---
 title: InternalsVisibleTo
-date: 2024-09-01 09:55:20 +0200
+date: 2023-09-01 09:55:20 +0200
 categories: [infrastructure]
 tags: []
 ---

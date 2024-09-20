@@ -1,6 +1,6 @@
 ---
 title: How to test the validity of a Coding Style rule
-date: 2023-12-28 16:32:27
+date: 2018-12-28 16:32:27
 categories: [Csharp]
 tags: [code style]
 ---

@@ -1,6 +1,6 @@
 ---
 title: Manifesto for Agile & scrum
-date: 2024-07-25 14:44:56 +0200
+date: 2023-07-25 14:44:56 +0200
 categories: [humor, common sense]
 tags: [rus]
 ---

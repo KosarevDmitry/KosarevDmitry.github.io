@@ -1,6 +1,6 @@
 ---
 title: Metasyntactic variable
-date: 2024-01-03 19:56:47 +0100
+date: 2020-01-03 19:56:47 +0100
 categories: [common]
 tags: []
 ---

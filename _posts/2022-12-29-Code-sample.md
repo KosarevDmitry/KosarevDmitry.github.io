@@ -1,6 +1,6 @@
 ---
 title: Code sample
-date: 2023-12-29 16:44:03 +0100
+date: 2022-12-29 16:44:03 +0100
 categories: [sql]
 tags: [proccessing]
 ---
