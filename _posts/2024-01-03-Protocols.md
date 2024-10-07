@@ -45,7 +45,7 @@ RFC
 : <https://www.ietf.org/standards/rfcs/>
 
 RFC Editor
-: <https://www.rfc-editor.org/search/rfc_search_detail.php>
+: <https://www.rfc-editor.org/>
 
 Internet-Draft Author Resources
 : <https://authors.ietf.org/>
