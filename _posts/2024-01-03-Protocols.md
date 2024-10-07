@@ -7,34 +7,35 @@ tags: [networking]
 
 
 
-
-Transmission Control Protocol (TCP)  
+TCP - rfc9293
 : <https://www.rfc-editor.org/rfc/rfc9293.txt> 
 
-HTTP
+HTTP - rfc1945
 : <https://datatracker.ietf.org/doc/html/rfc1945>
  * http codes:  <https://datatracker.ietf.org/doc/html/rfc1945#section-9>
 
-DOMAIN NAMES 
+TLS - rfc5246
+https://datatracker.ietf.org/doc/html/rfc5246
+
+DOMAIN NAMES - rfc1035
 : <https://www.rfc-editor.org/rfc/rfc1035.txt>
 
 
-HTTP Semantics
-: <https://www.rfc-editor.org/rfc/rfc9110.txt>
-:<https://www.rfc-editor.org/rfc/rfc9110.html>
+HTTP Semantics - rfc9110 
+: <https://datatracker.ietf.org/doc/html/rfc9110>  
 
-HTTP Caching
+HTTP Caching - rfc9111
 : <https://www.rfc-editor.org/rfc/rfc9111.txt>
 
 
-PATCH Method for HTTP
+PATCH Method for HTTP - rfc5789
 : <https://datatracker.ietf.org/doc/rfc5789/>
 
 ---
 HTML Living standard
 : <https://html.spec.whatwg.org/#toc-introduction>
 
-mailarchive (very interesting) 
+Mailarchive (very interesting) 
 : <https://mailarchive.ietf.org/arch/search/?q=%22rfc5789%22>
 
 ---
@@ -55,6 +56,9 @@ ietf.org
 
 Tools
 : <https://github.com/ietf-tools>
+
+
+
 
 
 
