@@ -1,6 +1,6 @@
 ---
 title: Farewell my Lovely
-date: 2024-10-22 15:53:51 +0200
+date: 2017-10-22 15:53:51 +0200
 categories: [Reading]
 tags: []
 ---
