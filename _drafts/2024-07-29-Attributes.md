@@ -72,3 +72,8 @@ internal class StaticAnalisisAttr
  @ Important interfaces
  
  IComparable<>, IEquatable<>, IConvertible
+ 
+ # These types won't show up in Intellisense, so for most purposes, they're not public. 
+ [Browsable(false)]
+[EditorBrowsable(EditorBrowsableState.Never)]
+example https://andrewlock.net/preventing-breaking-changes-in-public-apis-with-publicapigenerator/
