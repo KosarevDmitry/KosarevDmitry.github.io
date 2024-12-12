@@ -154,11 +154,21 @@ term
 
 [mylink]
 
-
-
 ```
 [mylink]
 ```
+
+
+ссылки на md файлы в nodejs repo
+[`process.stderr`][]
+
+внизу страницы обозначаю ссылки
+[`console.error()`]: #consoleerrordata-args
+[`process.stderr`]: process.md#processstderr
+[falsy]: https://developer.mozilla.org/en-US/docs/Glossary/Falsy
+[inspector]: debugger.md
+[truthy]: https://developer.mozilla.org/en-US/docs/Glossary/Truthy
+
 
 [link to repo dir](repolink) 
 
