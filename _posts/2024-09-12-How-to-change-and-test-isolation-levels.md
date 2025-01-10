@@ -1,8 +1,8 @@
 ---
 title: How to change and test isolation levels
 date: 2024-09-12 20:52:06 +0200
-categories: [SQL]
-tags: [SQL]
+categories: [T-SQL]
+tags: [T-SQL]
 ---
 
 ### First create a procedure to show  `isolation level` in current session just for convenience
