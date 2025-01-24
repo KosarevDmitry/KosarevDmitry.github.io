@@ -20,3 +20,7 @@ tags: []
 The article I would like to check later
 5 Different ways to synchronize data from MongoDB to ElasticSearch
 https://code.likeagirl.io/5-different-ways-to-synchronize-data-from-mongodb-to-elasticsearch-d8456b83d44f
+
+- Erik Mavrinac
+Work with https://github.com/KosarevDmitry/MSBuildSdks.git
+https://devblogs.microsoft.com/engineering-at-microsoft/author/erikmav/
