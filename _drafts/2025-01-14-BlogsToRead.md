@@ -5,6 +5,10 @@ categories: []
 tags: []
 ---
 
+- list that I need sort out 
+<https://danluu.com/programming-blogs/>
+
+
 - Igor Ostrovsky
 
 <https://igoro.com/archive/what-really-happens-when-you-navigate-to-a-url/>
@@ -24,3 +28,5 @@ https://code.likeagirl.io/5-different-ways-to-synchronize-data-from-mongodb-to-e
 - Erik Mavrinac
 Work with https://github.com/KosarevDmitry/MSBuildSdks.git
 https://devblogs.microsoft.com/engineering-at-microsoft/author/erikmav/
+
+
