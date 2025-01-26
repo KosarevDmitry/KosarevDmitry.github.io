@@ -8,6 +8,8 @@ tags: []
 - list that I need sort out 
 <https://danluu.com/programming-blogs/>
 
+Gracefull blog
+https://ericsink.com/entries/why_dotnet_core.html
 
 - Igor Ostrovsky
 

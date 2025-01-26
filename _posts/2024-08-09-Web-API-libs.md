@@ -1,8 +1,8 @@
 ---
-title: WebApi useful lib
+title: Web API libs
 date: 2024-08-09 17:42:40 +0200
-categories: [C#]
-tags: [WebApi]
+categories: [REST, WebAPI]
+tags: [REST, WebAPI]
 ---
 
 # Webapi Helpers
@@ -24,6 +24,7 @@ Use <https://github.com/WireMock-Net/WireMock.Net>
 7. Specify a query string for each interface field to obtain it and create an object that will automatically create a class for the interface and methods for queries.
 Use <https://www.nuget.org/packages/refit.httpclientfactory>
 
+Other 
 
-
-
+- <https://github.com/KosarevDmitry/Hypermedia>
+- <https://github.com/FluentValidation/FluentValidation>
