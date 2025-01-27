@@ -32,5 +32,5 @@ categories: [${2}]
 tags: [${3}]
 ---
 EOF
-
+echo "Drafts have been moved to snippets"
 notepad $md

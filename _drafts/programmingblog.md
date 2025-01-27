@@ -1,1 +1,0 @@
-https://danluu.com/programming-blogs/
