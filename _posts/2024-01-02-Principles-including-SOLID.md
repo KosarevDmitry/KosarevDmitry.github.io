@@ -46,7 +46,7 @@ All `SOLID` principles are partly interconnected.
 	Time is saved on the call. A dilemma arises - to do it yourself, or assign it to someone. Control and distribution functions require resources.
 
 
-	In `dotnet`, the ability has recently appeared (I don’t know how long ago, in general it has not always been there) to describe a method inside another method, I often come across such code.
+	In `dotnet`, the ability has appeared  recently (I don’t know how long ago, in general it has not always been there) to describe a method inside another method, I often come across such code.
 
 	```csharp
 	internal  A() {
@@ -57,6 +57,9 @@ All `SOLID` principles are partly interconnected.
 
 	If one internal calls several private methods, nothing changes for testability.
 	If they were all internal, then each one could be tested.
+	
+	This method to big to fit this principle
+	<https://github.com/dotnet/aspnetcore/blob/bc6dea446731850066b2872fe42687e5f5d37292/src/Http/Routing/src/Matching/DfaMatcher.cs#L32>
 
 3. `open/close` the same logic only in relation to libraries, the functionality should not be bloated.
 
@@ -77,6 +80,10 @@ All `SOLID` principles are partly interconnected.
 	```
 
 	Links are created to a limited number of members of class A. 
+	
+There is too much responsibility in one class! Who builds like that, where is the quality control?! :)
+
+<https://github.com/dotnet/aspnetcore/blob/283237e32e52433e865988b1ec1c6f75a278283f/src/DefaultBuilder/src/WebApplication.cs#L25>
 
 
 6. `Abstraction`
