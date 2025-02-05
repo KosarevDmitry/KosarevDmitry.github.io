@@ -1,7 +1,7 @@
 ---
 title: Async-Await
 date: 2024-08-22 16:20:32 +0200
-categories: [C#]
+categories: [dotnet]
 tags: [multithreading, task]
 ---
 

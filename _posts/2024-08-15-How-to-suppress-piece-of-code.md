@@ -1,19 +1,19 @@
 ---
-title: Suppress
+title: How to suppress piece of code?
 date: 2024-08-15 17:52:06 +0200
-categories: [C#]
-tags: []
+categories: [dotnet]
+tags: [tool]
 ---
 
 
-# To suppress something
+- For class and  members  
 
-# for class and  members  
 ```csharp
  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
  ```
  
-# inside method 
+-  inside a method 
+
 ```csharp
  #pragma warning disable CS0618 // Type or member is obsolete
  //code
@@ -21,7 +21,7 @@ tags: []
  ```
  
  
- # for props and parameter
+-  Using props and parameter
  
 <https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/nullable-analysis>
 

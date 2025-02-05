@@ -1,7 +1,7 @@
 ---
 title: Principles, including `SOLID`
 date: 2024-01-02 08:04:04 +0100
-categories: [codingStyle]
+categories: ["common sense"]
 tags: [principles]
 ---
 
@@ -20,17 +20,16 @@ tags: [principles]
 - Good programmers do code once, bad ones do the same thing several times.
 
 
-
 All `SOLID` principles are partly interconnected.
 
-1. `Single responsibilty` of classes about not inflating a class.
+1. The `Single responsibilty` of classes is about not inflating a class.
 
 	The smaller the class, the greater the possibility of reuse.
-
+	
 	Probably so.
 
 	Disadvantage - since instead of one class, we have several, therefore, several memory allocation operations will be required, which reduces performance.
-	In `dotnet` it is possible to create a partial class and they are used. So there is a reason.
+	In `dotnet` there is an opportunity to create a partial class and they are used. So there is a reason.
 
 	Advantages - if there are several classes, therefore, the lifetime of each of them is shorter, the object becomes available for deletion from memory earlier.
 
@@ -61,17 +60,18 @@ All `SOLID` principles are partly interconnected.
 	This method to big to fit this principle
 	<https://github.com/dotnet/aspnetcore/blob/bc6dea446731850066b2872fe42687e5f5d37292/src/Http/Routing/src/Matching/DfaMatcher.cs#L32>
 
-3. `open/close` the same logic only in relation to libraries, the functionality should not be bloated.
+3. The `open/closed` is the same logic only in relation to libraries, the functionality should not be bloated.
 
 	The smaller the library, the greater the opportunity for reuse.
 	Using internal methods allows them to be tested from an external unittest project, at the same time they are closed from clients.
 
-	The less code is subject to changes, the better.
+	The less code is subject to be changed, the better.
 
-4. `Liskov` about continuity, stability of new implementations. I would move it to the end of SOIDL.
+4. The `Liskov substitution` is about continuity, stability of new implementations. I would move it to the end  - SOIDL.
 
 
-5. `Interfacе` about the same, if a class implements several interfaces, it can be assumed that the object has different responsibilities.
+5. The `Interface segregation`  is about the same, if a class implements several interfaces, it can be assumed that the object has different responsibilities.
+Don't wear a railroad uniform, beach shoes and a Panama hat at the same time.
 
 	```csharp
 	A :IB, IC
@@ -86,7 +86,7 @@ There is too much responsibility in one class! Who builds like that, where is th
 <https://github.com/dotnet/aspnetcore/blob/283237e32e52433e865988b1ec1c6f75a278283f/src/DefaultBuilder/src/WebApplication.cs#L25>
 
 
-6. `Abstraction`
+6. `Dependency inversion` in other words, use abstract classes
 
 	Using Interface allows: 
 
@@ -97,6 +97,5 @@ There is too much responsibility in one class! Who builds like that, where is th
 
 	1. Shortcomings are discovered.
 	2. There will be an opportunity for improvement - another logging code, caching, inclusion of any other side effects.
-	3. Changing constructions, syntax, using classes with higher performance, proposed by new versions of the language, runtime.
-	For example, instead of or along with `String` or `Array`, use `StringSegment`, `StringValues`, `Segment`, `Pathstring`, `ArrayBuilderSegment<T>`, `record`, `Arraybuilder`.
+	3. Changing constructions, syntax, using classes with higher performance, proposed by new versions of the language, runtime. For example, instead of or along with `String` or `Array`, use `StringSegment`, `StringValues`, `Segment`, `Pathstring`, `ArrayBuilderSegment<T>`, `record`, `Arraybuilder`.
 	4. Inventing a new algorithm. For runtime - this is normal, I have seen such comments to the code with a link to `github`, for applied programming it is unlikely.

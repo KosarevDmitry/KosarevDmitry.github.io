@@ -1,7 +1,7 @@
 ---
 title: What are the prospects?
 date: 2024-01-05 10:02:26 +0100
-categories: [web]
+categories: ["common sense"]
 tags: []
 ---
 

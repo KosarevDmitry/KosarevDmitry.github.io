@@ -1,8 +1,8 @@
 ---
 title: When is ToArray required
 date: 2019-09-20 18:19:30 +0200
-categories: [Linq]
-tags: [C#]
+categories: [dotnet]
+tags: [linq]
 ---
 
 Why is ToArray required in certain situations?

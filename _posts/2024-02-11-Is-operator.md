@@ -1,11 +1,11 @@
 ---
 title: Is operator
 date: 2024-02-11 15:17:58 +0100
-categories: [C#]
+categories: [dotnet]
 tags: [syntax]
 ---
 
-I haven't seen this use case for __is operator__ before and it doesn't seem to be mentioned in the manual. The idea comes down to the fact that you can add checks based on the type and value of properties.  
+I haven't seen this use case for `is` operator before and it doesn't seem to be mentioned in the manual. The idea comes down to the fact that you can add checks based on the type and value of properties.  
 
 <https://github.com/dotnet/dotnet/blob/a0bfad9e77c2eeeeb094533850ae69eebb295f7f/src/command-line-api/src/System.CommandLine/Parsing/StringExtensions.cs#L417>
 

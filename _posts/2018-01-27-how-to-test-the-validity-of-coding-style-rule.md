@@ -1,12 +1,13 @@
 ---
 title: How to test the validity of a Coding Style rule
 date: 2018-12-28 16:32:27
-categories: [Csharp]
-tags: [code style]
+categories: [dotnet]
+tags: [codestyle]
 ---
 
 Is it possible to refute the statement by citing the code in [runtime], which is probably **fine** from Microsoft’s point of view?
-I think it's acceptable, I don't know other criteria. I have a feeling that reading recommendations is useless, just as in a language you need to listen to live speech, read books, and not short topics.
+I think it's acceptable, I don't know other criteria. 
+I have a feeling that reading recommendations is useless, just as in a language you need to listen to live speech, read books, and not short topics.
 For example, there is a statement: it is desirable that there is only one exit `return statement` from a function.
 Such statements are involuntarily remembered because they are categorical and simple.  
 Maybe I'm wrong, so just in case, I typed keywords into Google **function only one return statement**

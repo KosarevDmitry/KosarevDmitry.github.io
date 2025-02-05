@@ -2,14 +2,14 @@
 title: Bash script for Chirpy Jekill post template
 date: 2024-02-11 11:42:47 +0100
 categories: [bash]
-tags: [Jekyll]
+tags: [jekyll]
 ---
 
-
-There is a principle of shifting work to others " __Let someone else do the hard part__" but faithful adherence to this principle creates new dependencies.  
+There is a principle of shifting work to others " `Let someone else do the hard part` but faithful adherence to this principle creates new dependencies.  
 There is a ruby gem to generate post template.  
 But I prefer to do it myself, although this often doesn’t justify it.  
-if the script had been written in `powershell` or `nodejs` it would have been clearer, but I wanted to write it in `bash`.  
+
+if the script had been written in `powershell` or `nodejs` it would have been clearer, but I wanted to write `bash`.  
 
 ```bash
 #!/usr/bin/env bash

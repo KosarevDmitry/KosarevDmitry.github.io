@@ -1,8 +1,8 @@
 ---
 title: Negative side of open-source development
 date: 2024-10-12 10:26:52 +0200
-categories: []
-tags: []
+categories: ["common sense"]
+tags: [practice]
 ---
 
 Posts reflecting the negative side of open-source development

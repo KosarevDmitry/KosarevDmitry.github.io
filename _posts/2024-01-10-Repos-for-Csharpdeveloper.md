@@ -1,8 +1,8 @@
 ---
 title:  Basic repos for C# developer
 date: 2024-01-10 09:32:11 +0100
-categories: [.net]
-tags: [C#]
+categories: [dotnet]
+tags: [repo]
 ---
 
 Main repositories

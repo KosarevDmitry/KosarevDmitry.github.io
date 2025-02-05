@@ -1,8 +1,8 @@
 ---
 title: Where are endpoints created?
 date: 2025-02-04 11:02:40 +0100
-categories: [AspNetCore]
-tags: [Endpoints]
+categories: [aspnetcore]
+tags: [endpoints]
 ---
 
 Since the CreatePoints call is not done directly. I couldn't find it quickly. I fiddled around. Therefore, for those who, like me, like to answer direct questions with simple answers, I inform you.

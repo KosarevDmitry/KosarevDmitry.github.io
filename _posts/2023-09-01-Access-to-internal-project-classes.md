@@ -1,20 +1,20 @@
 ---
-title: InternalsVisibleTo
+title: Access to internal project classes
 date: 2023-09-01 09:55:20 +0200
-categories: [infrastructure]
-tags: []
+categories: [dotnet]
+tags: [infrastructure]
 ---
-# Access to internal project classes
 
-1. Properties/InternalsVisibleTo.cs  
+There are several approaches to providing access to another project's internal classes.
+
+1. Add any class (usually `/root/Properties/InternalsVisibleTo.cs`) with following content 
 
 	```csharp
 	 using System.Runtime.CompilerServices;
 	 [assembly: InternalsVisibleTo("bar.tests"), InternalsVisibleTo("bar.tests1")] 
 	```
 
-
-2. Assembly.info  
+2. Adding to Assembly.info  
 
 	```csharp
 	// Copyright The OpenTelemetry Authors
@@ -48,8 +48,7 @@ tags: []
 	#endif
 	```
 
-
-1. csproj  
+1. Adding items to msbuild csproj  
 
 	```csharp
 	  <ItemGroup>

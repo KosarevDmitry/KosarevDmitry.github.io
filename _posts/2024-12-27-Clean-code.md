@@ -1,8 +1,8 @@
 ---
 title: Clean code
 date: 2024-12-27 21:22:12 +0100
-categories: [Reflections]
-tags: []
+categories: ["common sense"]
+tags: [theory]
 ---
 There is no such thing as `clean  code` - it's a myth. Abandon all hope, ye who enter here.
 

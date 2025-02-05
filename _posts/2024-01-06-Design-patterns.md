@@ -1,12 +1,13 @@
 ---
 title: Design patterns
 date: 2024-01-06 17:37:40 +0100
-categories: [OOP]
-tags: [common]
+categories: [oop]
+tags: [patterns]
 ---
 
-Mostly I took examples from <https://www.dofactory.com/> and <https://en.wikipedia.org>.
-Sometimes changed for greater clarity.  
+Mostly I took examples from <https://www.dofactory.com/> and <https://en.wikipedia.org>. 
+
+I changed the examples for clarity, added tests, and added examples if I think it’s necessary.
 
 I add interesting designs to `OtherPatterns` dir.  
 

@@ -1,11 +1,10 @@
 ---
 title: Web API libs
 date: 2024-08-09 17:42:40 +0200
-categories: [REST, WebAPI]
-tags: [REST, WebAPI]
+categories: [dotnet]
+tags: [rest, webapi]
 ---
 
-# Webapi Helpers
 
 1.  If we have only several endpoints for requests - use `httpclient`, define address, base address, path, query, get a response and deserialize it into model.
 Pattern <https://github.com/dotnet/docs/tree/main/docs/core/extensions/snippets/http>
