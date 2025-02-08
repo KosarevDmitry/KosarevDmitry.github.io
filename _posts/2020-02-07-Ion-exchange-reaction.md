@@ -7,14 +7,21 @@ tags: [chemistry]
 
 ## Тема окислительно – восстановительные реакции и реакции ионного обмена.
 
-[maximumtest.ru](https://maximumtest.ru/uchebnik/11-klass/khimiya/okislitelnovosstanovitelnye-reaktsii-i-reaktsii-ionnogo-obmena)
-[Окислительно-восстановительные реакции yaklass.ru/p/himija/8-klass ](https://www.yaklass.ru/p/himija/8-klass/khimicheskaia-sviaz-okislitelno-vosstanovitelnye-reaktcii-18844/stepeni-okisleniia-elementov-189257/re-10540c7b-1391-4921-86ee-a1cf84352cd2)
-[yaklass.ru himija](https://www.yaklass.ru/p/himija/11-klass/khimicheskaia-kinetika-6995740/okislitelno-vosstanovitelnye-reaktcii-6984764/re-65ebe55e-d0df-4521-8cc3-5ccafceb47f7)
-[foxford.ru](https://foxford.ru/wiki/himiya/okislitelno-vosstanovitelnye-reaktsii?srsltid=AfmBOopgGsVLbCrlKSxP9pvVJWxDhJqRt9HPTyA2A0R82wiOERRIF_9o&utm_referrer=https%3A%2F%2Fwww.google.com%2F)
+Это разного рода электронные учебники
+
+- [maximumtest.ru](https://maximumtest.ru/uchebnik/11-klass/khimiya/okislitelnovosstanovitelnye-reaktsii-i-reaktsii-ionnogo-obmena)
+- [Окислительно-восстановительные реакции yaklass.ru/p/himija/8-klass ](https://www.yaklass.ru/p/himija/8-klass/khimicheskaia-sviaz-okislitelno-vosstanovitelnye-reaktcii-18844/stepeni-okisleniia-elementov-189257/re-10540c7b-1391-4921-86ee-a1cf84352cd2)
+- [yaklass.ru himija](https://www.yaklass.ru/p/himija/11-klass/khimicheskaia-kinetika-6995740/okislitelno-vosstanovitelnye-reaktcii-6984764/re-65ebe55e-d0df-4521-8cc3-5ccafceb47f7)
+- [foxford.ru](https://foxford.ru/wiki/himiya/okislitelno-vosstanovitelnye-reaktsii?srsltid=AfmBOopgGsVLbCrlKSxP9pvVJWxDhJqRt9HPTyA2A0R82wiOERRIF_9o&utm_referrer=https%3A%2F%2Fwww.google.com%2F)
 
 
 Как образуется химическая связь. Институт теоретической химии,1998, Бостон  [link](/assets/peter/kak-obrazuetsya-himicheskaya-svyaz.pdf)
-:  Введение квантовой химии в учебные курсы сильно затрудняло преподавание химии.
+
+:+1: Вводную статью к книге советую просмотреть.    
+
+Выдержки
+
+ Введение квантовой химии в учебные курсы сильно затрудняло преподавание химии.
 Золотое правило обучения гласит, что новый материал, объясняемый преподавателем,
 должен всегда базироваться на знаниях, которые учащиеся приобрели в предшествующий
 период обучения. Квантовая же химия не опирается на полученную ранее
@@ -23,39 +30,51 @@ tags: [chemistry]
 такое изложение материала не было прихотью авторов учебников, а проистекало
 исключительно оттого, что квантовая химия сама не отвечает на эти вопросы.
 
+- Эйнштейн писал: «Все эти пятьдесят лет мучительных размышлений не приблизили меня к ответу на вопрос: Что же такое квант света? Сегодня любой Том, Дик или Генри думает, что он знает, что это такое, но он ошибается».
+- Как известно, Н. Бор, так сказал о квантовой механике: «Если Вы думаете, что Вы понимаете ее, то это только показывает, что Вы не имеете даже первого представления о ней».
+- Э. Шредингер также писал о квантовой механике: сказав: «Это не только практически недоступно, но и просто немыслимо. Или, чтобы быть более точным, мы, конечно, можем думать об этом, что это более понятно, чем
+треугольный круг и менее понятно, чем крылатый лев»
+- «Никто не понимает квантовую теорию», сказал в 1980 г. Р. Фейнман,один из крупнейших физиков нашего времени
 
 
-Таблица Менделеева. Определение
+Типы хим связи
+: [reshutest.ru](https://reshutest.ru/theory/11?theory_id=356)
+
+
+
+## Справочник определений
+
+Таблица Менделеева 
 : ![Mendeelev_table_definition](/assets/peter/mendeleev-table-definition.jpg)
 [mendeleev_table](https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B8%D0%BE%D0%B4%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F_%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%B0_%D1%85%D0%B8%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D1%85_%D1%8D%D0%BB%D0%B5%D0%BC%D0%B5%D0%BD%D1%82%D0%BE%D0%B2)
 
-Номер группы таблицы
+Номер группы таблицы [Группа_периодической_системы](https://ru.wikipedia.org/wiki/%D0%93%D1%80%D1%83%D0%BF%D0%BF%D0%B0_%D0%BF%D0%B5%D1%80%D0%B8%D0%BE%D0%B4%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B9_%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B)
 : определяется количеством электронов на внешней оболочке атома (валентных электронов) и, как правило, соответствует высшей валентности атома.
 
-единица элементарного заряда [google](https://www.google.com/search?q=%D0%B5%D0%B4%D0%B8%D0%BD%D0%B8%D1%86%D0%B0+%D1%8D%D0%BB%D0%B5%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%80%D0%BD%D0%BE%D0%B3%D0%BE+%D0%B7%D0%B0%D1%80%D1%8F%D0%B4%D0%B0)
+
+**Единица элементарного заряда** [google](https://www.google.com/search?q=%D0%B5%D0%B4%D0%B8%D0%BD%D0%B8%D1%86%D0%B0+%D1%8D%D0%BB%D0%B5%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%80%D0%BD%D0%BE%D0%B3%D0%BE+%D0%B7%D0%B0%D1%80%D1%8F%D0%B4%D0%B0)
 
 :point_right:  Из прочитанного сделал вывод. Задача была  расположить в таблице с любым кол-во рядов и столбцов химические элементы  последовательно в соответствии с весом атома таким образом, 
-что сходные по свойствам вещества визуально находились рядом. 
+что сходные по свойствам вещества визуально находились рядом. Но что-то это слишком просто получется путем подбора найти подходящий формат таблицы 
 
-Простое вещество,   наверно   O<sub>2</sub> - молекула кислорода,  Br<sub>2</sub> бром
+Простое вещество,  наверно вариант   O<sub>2</sub> - молекула кислорода или  Br<sub>2</sub> - бром
 : является формой существования химических элементов в **свободном** виде; или, иначе говоря, химический элемент, не связанный химически ни с каким другим элементом, образует простое вещество. Известно свыше 400 разновидностей простых веществ.
 Простое вещество — это вещество, образованное атомами одного и того самого химического элемента. 
 
-Сложное вещество - вещество, образованное атомами разных химических элементов.	
+**Сложное вещество** - вещество, образованное атомами разных химических элементов.	
 
 
-соотношение ядра и атома
+соотношение ядра и атома (любопытно, их книжки "Как образуется химическая связь")
 : Размер атомного ядра составляет примерно 10-4нм. Представить себе соотношение размеров ядра и атома можно, если предположить, что ядро имеет размер шарика для пингпонга (примерно 5 см в диаметре), тогда атом будет иметь размеры, близкие к размерам
-стадиона в Лужниках. источник [himicheskaya_svyaz]
+стадиона в Лужниках. 
 
 
 [моль](https://ru.wikipedia.org/wiki/%D0%9C%D0%BE%D0%BB%D1%8C_(%D0%B5%D0%B4%D0%B8%D0%BD%D0%B8%D1%86%D0%B0_%D0%B8%D0%B7%D0%BC%D0%B5%D1%80%D0%B5%D0%BD%D0%B8%D1%8F))
 : Значение одного моля определяется через число Авогадро, один моль — количество вещества, содержащее 6,022 140 76 e-123 частиц (атомов, молекул, ионов, электронов или любых других объектов).
 
+**Валентность**  [etymonline.com](<https://www.etymonline.com/search?q=valence>)
 
-Валентность [etymonline.com](<https://www.etymonline.com/search?q=valence>)
-
-свободный атом  (в определении не уверен)
+свободный атом  (в определении не уверен, взял из ответов mail.ru)
 : Свободными называют атомы, которые не имеют химической связи с другими атомами. Большинство простых веществ, образованных одним химическим элементом, состоят из химически связанных, т. е. не свободных атомов.
 Пример свободных атомов, которые могут существовать сколько угодно долго - это благородные газы гелий, неон, аргон, криптон, ксенон. Отдельные атомы других химических элементов в свободном состоянии не могут существовать долго из за высокой реакционной способности.
 При разложении пероксида водорода образуются свободные атомы кислорода (атомарный кислород), которые мгновенно вступают в реакцию либо между собой, образуя молекулу О2, либо окисляют другие вещества
@@ -66,101 +85,99 @@ tags: [chemistry]
 <https://ru.wikipedia.org/wiki/%D0%9A%D0%BE%D0%B2%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%BD%D0%B0%D1%8F_%D1%81%D0%B2%D1%8F%D0%B7%D1%8C>
 
 
-
 Ионизация
 : появление заряда
 
-ион
+Ион
 :  как я понял атом (ядро  c протонами и нейтронами) и электронами, но потерявший протон  или электрон, и поэтому утративший нейтральность. 
 [wikipedia](https://ru.wikipedia.org/wiki/%D0%98%D0%BE%D0%BD)
 
-ионическая связь (ionic bond) [goldbook.iupac.org](https://goldbook.iupac.org/terms/view/IT07058)
+**ионическая связь (ionic bond)** [goldbook.iupac.org](https://goldbook.iupac.org/terms/view/IT07058)
 
 <https://www.youtube.com/watch?v=KU5F7HhueVw>
-восстановитель это то что отдает  сам при этом окисляется (портится)    
 
-окислитель  то что принимает, сам при этом восстановливается  
+**Понятия в ионизации**
+ 
+Если **Fe<sup>0</sup>**  превращается в  **Fe<sup>+2</sup>**
+означает, что **Fe** железо в данном случае- восстановитель, у него увеличивается степень окисления.    
 
-окисление - процесс передачи электронов 
+`Восстановитель` передает электроны `окислителю`.  
+`Восстановитель`- это то что отдает,  сам при этом окисляется. У него увеличивается степень окисления.  
 
-восстановитель(окислясь - увеличивается степень окисления) -> окислителю (востанавливающийся- снижается степень окисления)
-с точки зрения восстановителя это окисление, с точки зрения окислителя - восстановление
+`Окислитель`-  то что принимает, сам при этом восстанавливается.  У него снижается степень окисления.    
+`Окисление` - процесс передачи электронов.    
+[Окислитель](https://ru.wikipedia.org/wiki/%D0%9E%D0%BA%D0%B8%D1%81%D0%BB%D0%B8%D1%82%D0%B5%D0%BB%D1%8C)
+ вещество, в состав которого входят атомы, присоединяющие к себе во время химической реакции электроны. Иными словами, окислитель — это акцептор электронов.
 
-вещество, получающее электроны, восстанавливается
+:bulb: Получается c точки зрения `восстановителя` - это окисление, с точки зрения `окислителя` - восстановление.
 
-Fe -восстановитель, увеличение числа (super string) говорит о степени закисления
-
-Fe<sup>0<sup>   Fe<sup>+2<sup>
-
- ![окислитель](/assets/peter/okisl.jpg)
+![окислитель](/assets/peter/okisl.jpg)
 
 
-orbital 
-: [атомные орбиты](https://en.wikipedia.org/wiki/Atomic_orbital#Shapes_of_orbitals)
+orbital  атомные орбиты 
+: [](https://en.wikipedia.org/wiki/Atomic_orbital#Shapes_of_orbitals)
+из статьи `An orbital can be occupied by a maximum of two electrons,... `
+перевод `Орбиталь может быть занята максимум двумя электронами, каждый из которых со своей собственной проекцией спина...`
 
-An orbital can be occupied by a maximum of two electrons,...
-Орбиталь может быть занята максимум двумя электронами, каждый из которых со своей собственной проекцией спина..
 
-комментарии по поводу орбиталей 
+
+
+**комментарии по поводу орбиталей**  
 На протяжении прошедших 30 лет скорость быстродействия компьютеров возрасла в
 104 раз, но практически ничего нового не было сделано для количественного описания
 электронной структуры молекул. Более того, ученый мир постепенно пришел к
 заключению, что главная теория квантовой химии – метод молекулярных орбиталей –
 оказалась «плохой теорией, коллекцией целого ряда противоречащих друг другу
 предположений» (Р. Вудворд и Р. Хофман).   
-источник  [himicheskaya_svyaz](/assets/peter/kak-obrazuetsya-himicheskaya-svyaz.pdf)
+источник  [Как образуется химическая связь](/assets/peter/kak-obrazuetsya-himicheskaya-svyaz.pdf)  
 
-
-электронная конфигурация [wikipedia](https://en.wikipedia.org/wiki/Electron_configuration)
-
-Обозначения в химических формулах
-: ![symbols](/assets/peter/symbols.jpg)
-
-[bbc.co.uk/bitesize](https://www.bbc.co.uk/bitesize/guides/zg6bmsg/revision/1)
-
-Химическая формула [wikipedia](https://ru.wikipedia.org/wiki/%D0%A5%D0%B8%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F_%D1%84%D0%BE%D1%80%D0%BC%D1%83%D0%BB%D0%B0#:~:text=%D0%A5%D0%B8%D0%BC%D0%B8%CC%81%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D1%84%D0%BE%CC%81%D1%80%D0%BC%D1%83%D0%BB%D0%B0%20%E2%80%94%20%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%BD%D0%BE%D0%B5%20%D0%BE%D0%B1%D0%BE%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D0%B5%20%D1%85%D0%B8%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE,%D0%BF.)
-
+:exclamation: Поэтому к определениям  нужно быть снисходительнее. 
 
 ![naCh-configuration](/assets/peter/naCh-configuration.jpg)
 
-Пример образования ионной связи
+`1s vs 2s subshell` google дает ответ:
+
+`The 1s subshell has lower energy than the 2s subshell. Therefore, electrons are first accommodated in 1s, followed by 2s. The size of 1s shell is smaller than 2s. The probability of finding an electron in a 2s shell is higher than in 1s because the probability of finding electrons increases as size increases.`
+
+`С возрастанием заряда ядра у элементов одной группы из-за увеличения числа электронных оболочек увеличиваются атомные радиусы, вследствие чего происходит снижение электроотрицательности, усиление металлических и ослабление неметаллических свойств элементов, усиление восстановительных и ослабление окислительных свойств образуемых ими веществ.`
+
+:point_right: Простой прием поиска информации  добавлять между понятиями  `vs` то есть `vice versa`, что означает сравнение. 
+
+
+
+Без понимания символов формулу не напишешь.
+
+: ![symbols](/assets/peter/symbols.jpg)
+
+Электронная конфигурация [wikipedia](https://en.wikipedia.org/wiki/Electron_configuration)
+
+Интерактивный учебник, набор статей.
+[bbc.co.uk/bitesize](https://www.bbc.co.uk/bitesize/guides/zg6bmsg/revision/1)
+
+Химическая формула, определение [wikipedia](https://ru.wikipedia.org/wiki/%D0%A5%D0%B8%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F_%D1%84%D0%BE%D1%80%D0%BC%D1%83%D0%BB%D0%B0#:~:text=%D0%A5%D0%B8%D0%BC%D0%B8%CC%81%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D1%84%D0%BE%CC%81%D1%80%D0%BC%D1%83%D0%BB%D0%B0%20%E2%80%94%20%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%BD%D0%BE%D0%B5%20%D0%BE%D0%B1%D0%BE%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D0%B5%20%D1%85%D0%B8%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE,%D0%BF.)
+
+
+
+**Пример образования ионной связи**
 
 ![Example_ION_binding](/assets/peter/ionbinding.jpg)
 
 
-[Молекулярный_редактор](https://ru.wikipedia.org/wiki/%D0%9C%D0%BE%D0%BB%D0%B5%D0%BA%D1%83%D0%BB%D1%8F%D1%80%D0%BD%D1%8B%D0%B9_%D1%80%D0%B5%D0%B4%D0%B0%D0%BA%D1%82%D0%BE%D1%80)
+Существует понятие молекулярного редактора
+[ru.wikipedia.org/wiki](https://ru.wikipedia.org/wiki/%D0%9C%D0%BE%D0%BB%D0%B5%D0%BA%D1%83%D0%BB%D1%8F%D1%80%D0%BD%D1%8B%D0%B9_%D1%80%D0%B5%D0%B4%D0%B0%D0%BA%D1%82%D0%BE%D1%80)
 
+Есть программа-справочник `kalzium`, но она, к сожалению, только для `unix OS`, в `Windows` не установится.    Может есть смысл найти аналог.
+[Программа справочник kalzium](https://invent.kde.org/education/kalzium)
 
-
-:point_right: Простой прием поиска информации  добавлять между понятиями  `vs` то есть `vice versa`, подразумевает сравнение 
-
-`1s vs 2s subshell` google дает ответ:
-
-The 1s subshell has lower energy than the 2s subshell. Therefore, electrons are first accommodated in 1s, followed by 2s. The size of 1s shell is smaller than 2s. The probability of finding an electron in a 2s shell is higher than in 1s because the probability of finding electrons increases as size increases.
-
-С возрастанием заряда ядра у элементов одной группы из-за увеличения числа электронных оболочек увеличиваются атомные радиусы, вследствие чего происходит снижение электроотрицательности, усиление металлических и ослабление неметаллических свойств элементов, усиление восстановительных и ослабление окислительных свойств образуемых ими веществ.
-[group](https://ru.wikipedia.org/wiki/%D0%93%D1%80%D1%83%D0%BF%D0%BF%D0%B0_%D0%BF%D0%B5%D1%80%D0%B8%D0%BE%D0%B4%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B9_%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B)
-
-[Окислитель](https://ru.wikipedia.org/wiki/%D0%9E%D0%BA%D0%B8%D1%81%D0%BB%D0%B8%D1%82%D0%B5%D0%BB%D1%8C)
-: вещество, в состав которого входят атомы, присоединяющие к себе во время химической реакции электроны. Иными словами, окислитель — это акцептор электронов.
 
 [Глоссарий теоретической органической химии](https://www.degruyter.com/document/doi/10.1351/pac199971101919/html)
-
-[Программа справочник kalzium] (https://invent.kde.org/education/kalzium)
-: :exclamation: установка только для unix OS
-
 
 
 <https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D0%B5%D0%BF%D0%B5%D0%BD%D1%8C_%D0%BE%D0%BA%D0%B8%D1%81%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F>
 
+Уроки химии с преподавателем Жуковой Еленой на youtube.   
+Возможно это в конце концов то что тебе надо. Я могу скачать, прислать тебе, если у тебя youtube не работает.
 <https://www.youtube.com/watch?v=XbRriCUUELw&t=0s>
-
-
-<https://goldbook.iupac.org/indexes/exact>
-
-типы хим связи
-<https://reshutest.ru/theory/11?theory_id=356>
-
 
 
 
@@ -168,7 +185,7 @@ The 1s subshell has lower energy than the 2s subshell. Therefore, electrons are 
 3D model (пока не понятно)
 :  <https://www.quantum-physics.polytechnique.fr/hydrogenOrbitals.php?lang=1>
 
-
-[модели] (https://www.mozaweb.com/ru/lexikon.php?cmd=getlist&let=3D&sid=KEM&sid=KEM&subtopic_azon=szervetlen)
+Модели
+: [модели](https://www.mozaweb.com/ru/lexikon.php?cmd=getlist&let=3D&sid=KEM&sid=KEM&subtopic_azon=szervetlen)
 
 
