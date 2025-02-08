@@ -108,7 +108,7 @@ An orbital can be occupied by a maximum of two electrons,...
 заключению, что главная теория квантовой химии – метод молекулярных орбиталей –
 оказалась «плохой теорией, коллекцией целого ряда противоречащих друг другу
 предположений» (Р. Вудворд и Р. Хофман).   
-источник  [himicheskaya_svyaz](/assets/peter/kak_obrazuetsya_himicheskaya_svyaz.pdf)
+источник  [himicheskaya_svyaz](/assets/peter/kak-obrazuetsya-himicheskaya-svyaz.pdf)
 
 
 электронная конфигурация [wikipedia](https://en.wikipedia.org/wiki/Electron_configuration)
