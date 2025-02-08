@@ -13,7 +13,7 @@ tags: [chemistry]
 [foxford.ru](https://foxford.ru/wiki/himiya/okislitelno-vosstanovitelnye-reaktsii?srsltid=AfmBOopgGsVLbCrlKSxP9pvVJWxDhJqRt9HPTyA2A0R82wiOERRIF_9o&utm_referrer=https%3A%2F%2Fwww.google.com%2F)
 
 
-Как образуется химическая связь. Институт теоретической химии,1998, Бостон  [link](/assets/peter/kak_obrazuetsya_himicheskaya_svyaz.pdf)
+Как образуется химическая связь. Институт теоретической химии,1998, Бостон  [link](/assets/peter/kak-obrazuetsya-himicheskaya-svyaz.pdf)
 :  Введение квантовой химии в учебные курсы сильно затрудняло преподавание химии.
 Золотое правило обучения гласит, что новый материал, объясняемый преподавателем,
 должен всегда базироваться на знаниях, которые учащиеся приобрели в предшествующий
@@ -26,7 +26,7 @@ tags: [chemistry]
 
 
 Таблица Менделеева. Определение
-: ![Mendeelev_table_definition](/assets/peter/mendeleev_table_definition.jpg)
+: ![Mendeelev_table_definition](/assets/peter/mendeleev-table-definition.jpg)
 [mendeleev_table](https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B8%D0%BE%D0%B4%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F_%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%B0_%D1%85%D0%B8%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D1%85_%D1%8D%D0%BB%D0%B5%D0%BC%D0%B5%D0%BD%D1%82%D0%BE%D0%B2)
 
 Номер группы таблицы
@@ -121,11 +121,11 @@ An orbital can be occupied by a maximum of two electrons,...
 Химическая формула [wikipedia](https://ru.wikipedia.org/wiki/%D0%A5%D0%B8%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F_%D1%84%D0%BE%D1%80%D0%BC%D1%83%D0%BB%D0%B0#:~:text=%D0%A5%D0%B8%D0%BC%D0%B8%CC%81%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D1%84%D0%BE%CC%81%D1%80%D0%BC%D1%83%D0%BB%D0%B0%20%E2%80%94%20%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%BD%D0%BE%D0%B5%20%D0%BE%D0%B1%D0%BE%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D0%B5%20%D1%85%D0%B8%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE,%D0%BF.)
 
 
-![naCh_configuration](/assets/peter/naCh_configuration.jpg)
+![naCh-configuration](/assets/peter/naCh-configuration.jpg)
 
 Пример образования ионной связи
 
-![Example_ION_binding](/assets/peter/example_ion_binding.jpg)
+![Example_ION_binding](/assets/peter/ionbinding.jpg)
 
 
 [Молекулярный_редактор](https://ru.wikipedia.org/wiki/%D0%9C%D0%BE%D0%BB%D0%B5%D0%BA%D1%83%D0%BB%D1%8F%D1%80%D0%BD%D1%8B%D0%B9_%D1%80%D0%B5%D0%B4%D0%B0%D0%BA%D1%82%D0%BE%D1%80)
