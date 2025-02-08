@@ -68,7 +68,7 @@ src: <https://ru.wikipedia.org/wiki/%D0%93%D0%B8%D0%B4%D1%80%D0%B0%D1%82%D0%B0%D
 
 NaCl конфигурация
 
-![NaCh_configuration](/assets/peter/NaCh_configuration.jpg)
+![naCh_configuration](/assets/peter/naCh_configuration.jpg)
 
 Пример образования ионной связи
 
