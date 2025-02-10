@@ -5,6 +5,8 @@ categories: [docker]
 tags: [docker]
 ---
 
+A year ago I was figuring out the topic and simultaneously practicing with `puml`. Sometimes it is very useful in a graphic form, it seems clear to me.
+
 - Script 
 
 	```bash
