@@ -3,16 +3,16 @@
 - type: github
   icon: "fab fa-github"
 
-- type: twitter
-  icon: "fa-brands fa-x-twitter"
+#- type: twitter
+#  icon: "fa-brands fa-x-twitter"
 
 - type: email
   icon: "fas fa-envelope"
   noblank: true # open link in current tab
 
-- type: rss
-  icon: "fas fa-rss"
-  noblank: true
+#- type: rss
+#  icon: "fas fa-rss"
+#  noblank: true
 # Uncomment and complete the url below to enable more contact options
 #
 # - type: mastodon
@@ -23,6 +23,26 @@
   icon: 'fab fa-linkedin'   # icons powered by <https://fontawesome.com/>
   url:  'https://www.linkedin.com/in/dmitry-kosarev-6a15501b3/'  # Fill with your Linkedin homepage
 #
-# - type: stack-overflow
-#   icon: 'fab fa-stack-overflow'
-#   url:  ''                  # Fill with your stackoverflow homepage
+- type: stack-overflow
+  icon: 'fab fa-stack-overflow'
+  url:  'https://stackoverflow.com/users/3505572/dmitrykosarev'                  # Fill with your stackoverflow homepage
+#
+- type: blogger
+  icon: 'fa-brands fa-blogger'
+  url:  'https://kosarevdm.blogspot.com/'
+#
+- type: youtube
+  icon: 'fa-brands fa-youtube'
+  url:  'https://www.youtube.com/@dmitrykosarev126'
+
+- type: facebook
+  icon: 'fa-brands fa-facebook'
+  url: 'https://www.facebook.com/pole.kosmi'
+
+- type: telegram
+  icon: 'fa-brands fa-telegram'
+  url: 'https://t.me/kosarevDm'
+
+- type: telegram
+  icon: 'fa-brands fa-telegram'
+  url: 'https://t.me/serbia_info1'
