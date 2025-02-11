@@ -19,7 +19,7 @@ Diffirent kinds of links. So to speak, with the fur on the outside:
 
 - Sound of music <https://www.youtube.com/@dmitrykosarev126>
 
-- It  mainly are travel notes. And other notes on a any topic. On russian language <https://kosarevdm.blogspot.com/>
+- It  mainly are travel notes. And other notes on any topic. On russian language <https://kosarevdm.blogspot.com/>
 
 - A little bit <https://stackoverflow.com/users/3505572/dmitrykosarev>
 
