@@ -7,10 +7,6 @@ tags: [feature]
 
 What is IEnumarable anyway.
 
-How many years have passed and I still   read into `yield return`, "Mene tekel Peres" of sorts  and didn't understand a thing really.
-Then I found it again  in one of Toub's articles I  read it waslike state mashine in an old article when trees were still big and open source no way.
-
-
 How many years have passed, and I still read into these `yield return`, "Mene tekel Peres" of sorts, and didn't understand a thing.
 Then I found it again, in one of Toub's articles I read that it was a `state machine`, in an old article, when the trees were still big and open source - no way.
 And I was already in my  "dug deeper" period.
