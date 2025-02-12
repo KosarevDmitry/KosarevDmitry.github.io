@@ -8,7 +8,9 @@ tags: [infrastructure]
 There are several approaches to providing access to another project's internal classes.
 
 1. Add any class (usually `/root/Properties/InternalsVisibleTo.cs`) with following content 
-
+    > `runtime` repo  contains at least  26 similar files  as 
+	"...runtime\src\libraries\System.Runtime.Numerics\src\Properties\InternalsVisibleTo.cs"
+	
 	```csharp
 	 using System.Runtime.CompilerServices;
 	 [assembly: InternalsVisibleTo("bar.tests"), InternalsVisibleTo("bar.tests1")] 

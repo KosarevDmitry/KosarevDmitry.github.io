@@ -1,7 +1,7 @@
 ---
 title: What does the middleware pattern look like
 date: 2024-01-25 06:00:06 +0100
-categories: [dotnet]
+categories: [aspnetcore]
 tags: [pattern]
 ---
 
