@@ -1,7 +1,7 @@
 ---
 title: How to add project in aspnetcore repo?
 date: 2025-02-10 19:38:50 +0100
-categories: [dotnet]
+categories: [aspnetcore]
 tags: [aspnetcore]
 ---
 
