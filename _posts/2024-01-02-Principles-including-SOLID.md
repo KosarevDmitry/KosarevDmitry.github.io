@@ -9,7 +9,7 @@ tags: [principles]
 - Let someone else do the hard part.
 - Don't inventing the wheel.
 - `Don't repeat yourself` combined with `Rule of three`.
--  `Composition over inheritance` - Inerface with  default interface methods is preferewable to abstract class
+-  `Composition over inheritance` - An interface (especially one with default interface methods feature of dotnet 8.0) is preferable to an abstract class.
 - Principles are an expensive thing, and not everyone can afford them.  
 - To understand the abstraction layer, you need to understand the reason for its occurrence, go down to the layer below.
 - Programmers work for themselves
@@ -21,6 +21,7 @@ tags: [principles]
 - The only way to learn a language is to read source code, and then to coding.
 - There is never enough time to do it right, but there is always enough time to do it over. 
 - Work is what horses die of
+- `Principle of least astonishment` (like as `Liskov substitution`)
 
 All `SOLID` principles are partly interconnected.
 
