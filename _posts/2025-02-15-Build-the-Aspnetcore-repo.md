@@ -45,16 +45,21 @@ When the build failed, I got a message.
 PS D:\src\aspnetcore\src\SignalR> .\build.cmd
 Detected JDK in C:\Program Files\Java\jdk-21 (via JAVA_HOME)
  ```
-That's correct.
+This's correct.
 
 ```console
 PS D:\src\aspnetcore> echo $env:JAVA_HOME
 C:\Program Files\Java\jdk-21
  ```
 
-From the script logic it is clear that the message  is a sign  that `.\tools` jdk is not installed
-but despite this the build will continue with version from `program files`. 
+From the script logic it is clear that the message  is a sign  that  the  `.\tools` jdk is not installed
+but despite this the build process will continue with a version from `program files`. 
 
 I have updated  `Java` a couple of months ago. 
 So it means that previous version was compatible with 11.0.3,  v21.0.1 is not.
 
+Now in a compile time I get a message that suits me better.
+
+```console
+Detected JDK in D:\src\aspnetcore\eng\..\.tools\jdk\win-x64\ (via local repo convention)`
+```
