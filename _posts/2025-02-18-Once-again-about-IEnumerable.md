@@ -31,6 +31,11 @@ IEnumarable<string>  b;
 var c = [..a, ..b];
 ```
 
+Examples
+- <https://github.com/dotnet/docs/blob/main/docs/csharp/language-reference/statements/snippets/yield/Program.cs>
+	- especially  this one	<https://github.com/dotnet/docs/blob/d9cf6dbc0552f5763e4d20f41dff6891c0bb4684/docs/csharp/language-reference/statements/snippets/yield/Program.cs#L82>
+- <https://github.com/dotnet/docs/blob/main/docs/csharp/snippets/iterators/Generators.cs>
+
 
 - How it is commonly used.
  
@@ -43,6 +48,13 @@ var c = [..a, ..b];
 			yield return 2;
 		}
 
+      public IEnumerable<int> DoWhile()
+      {
+        int index = 0;
+        while (index < 10)
+            yield return index++;
+     }
+	
 		internal IEnumerable<int> @Array => new[] { 1, 2, };
 
 		internal IEnumerable<int> @For()
