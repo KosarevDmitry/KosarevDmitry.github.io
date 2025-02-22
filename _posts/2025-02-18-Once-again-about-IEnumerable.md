@@ -2,7 +2,7 @@
 title: Once again about IEnumerable
 date: 2025-02-18 14:49:15 +0100
 categories: [dotnet]
-tags: [features]
+tags: [ienumerable]
 ---
 
 IEnumerable is such a nature that it is essentially a action and not an object. The only way to be sure of this is to look at what it is transformed by msbuild.

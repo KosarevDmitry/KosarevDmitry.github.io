@@ -2,7 +2,7 @@
 title: Specificity of DotNetPeek
 date: 2025-02-01 20:06:46 +0100
 categories: [dotnet]
-tags: [tool]
+tags: [tools]
 ---
 
 There are several states of code:

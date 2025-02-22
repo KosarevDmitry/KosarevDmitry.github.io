@@ -2,7 +2,7 @@
 title: How to suppress piece of code?
 date: 2024-08-15 17:52:06 +0200
 categories: [dotnet]
-tags: [tool]
+tags: [suppress]
 ---
 
 

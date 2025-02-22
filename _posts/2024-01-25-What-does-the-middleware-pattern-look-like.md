@@ -2,7 +2,7 @@
 title: What does the middleware pattern look like
 date: 2024-01-25 06:00:06 +0100
 categories: [aspnetcore]
-tags: [pattern]
+tags: [patterns]
 ---
 
 What does the middleware pattern in ASPNETCORE look like?

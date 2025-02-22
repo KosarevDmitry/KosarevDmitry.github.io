@@ -2,7 +2,7 @@
 title: What is IEnumarable anyway
 date: 2025-01-12 10:55:10 +0100
 categories: [dotnet]
-tags: [feature]
+tags: [ienumerable]
 ---
 
 What is IEnumarable anyway.

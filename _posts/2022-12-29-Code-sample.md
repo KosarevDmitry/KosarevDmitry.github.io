@@ -2,7 +2,7 @@
 title: Code sample
 date: 2022-12-29 16:44:03 +0100
 categories: [sql]
-tags: [proccessing]
+tags: [easy-to-understand]
 ---
 If you have access to the repo and to the documentation in particular, it becomes possible
 pull out the piece of information that is currently of interest in an easy-to-read form.

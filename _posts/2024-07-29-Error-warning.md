@@ -2,7 +2,7 @@
 title: Turn a warning into an error
 date: 2024-07-29 07:46:13 +0200
 categories: [dotnet]
-tags: [syntax]
+tags: [warning]
 ---
 That way you will receive a more strict warning that will look like an error. 
 

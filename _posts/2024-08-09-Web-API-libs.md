@@ -2,7 +2,7 @@
 title: Web API libs
 date: 2024-08-09 17:42:40 +0200
 categories: [dotnet]
-tags: [rest, webapi]
+tags: [rest]
 ---
 
 

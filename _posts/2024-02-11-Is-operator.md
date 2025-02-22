@@ -2,7 +2,7 @@
 title: Is operator
 date: 2024-02-11 15:17:58 +0100
 categories: [dotnet]
-tags: [syntax]
+tags: [is_operator]
 ---
 
 I haven't seen this use case for `is` operator before and it doesn't seem to be mentioned in the manual. The idea comes down to the fact that you can add checks based on the type and value of properties.  
