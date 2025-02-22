@@ -1,8 +1,8 @@
 ---
 title: Manifesto for Agile & scrum
 date: 2023-07-25 14:44:56 +0200
-categories: [agile]
-tags: [humor]
+categories: [common sense]
+tags: [agile]
 ---
 
  Легенда 

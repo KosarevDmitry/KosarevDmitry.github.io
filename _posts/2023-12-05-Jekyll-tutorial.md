@@ -1,7 +1,7 @@
 ---
 title: Jekyll tutorial
 date: 2023-12-28 16:32:27
-categories: [blog]
+categories: [bash]
 tags: [jekyll]
 render_with_liquid: false
 ---
