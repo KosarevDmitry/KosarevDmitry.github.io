@@ -5,20 +5,27 @@ categories: [sql]
 tags: [t-sql]
 ---
 
+Operation levels prevent and regulate the ability to perform certain operations in parallel on one data array.
+For example, if a certain isolation level is set, until a transaction is completed by one thread, another thread can perform `Select`, but not `Update`.  
+That's the idea.
+Suppose I needed to change the settings.  
+The question arises how to test the statements and explanation from the reference source.  
+How to clearly demonstrate this to yourself and use it with confidence.  
+
 The idea is to start two sessions and open a transaction and stop the thread `WAITFOR DELAY '00:00:15';`,  15 sec is enough.  
 Then launch the second session while the first session is hanging and check the reaction.
 
-Command `select`, `update`, `delete`, `insert` can behave differently:    
+Execution of commands `select`, `update`, `delete`, `insert` can behave differently:    
 
 - wait ending of blocked transaction - the execution will hang with message  `executing query`;  
 - throw error;  
-- work before the blocking transaction ends;
+- executes before the blocking transaction ends;
 
 Therefore, it is better to check them separately.
 
-So you need open in `SQL Server Management Studio` two sessions.
+So you need open in `SQL Server Management Studio` the two sessions.
 
-1. First create a procedure to show  `isolation level` in current session just for convenience
+1. First create a procedure to show  `isolation level` in current session just for convenience.
 
 ```sql
 CREATE PROCEDURE [dbo].[DisplayIsolationLevel]
@@ -56,9 +63,10 @@ END
 	--check
 	Exec  dbo.Displayisolationlevel
 	```
+ 
+ I use db `Test` with table `dbo.name`
 
-
-2. Run in first session tab
+2. Run in the first session tab
 
 	```sql
 	begin try
@@ -89,7 +97,7 @@ END
 	```sql
 	begin try
 	  Begin tran B
-	-- commands example
+	-- command examples
 	-- Select name from  dbo.name where id=1
 	-- Update dbo.name Set name = 'passiive' where id=1;
 	-- Insert into dbo.name values ('bobo1')
@@ -108,13 +116,16 @@ END
 	end catch
 	```
 
-- List of isolation level command
+This way, you will clearly see the result, how the operations will be carried out and whether you actually need it.
+
+
+- This is a list of isolation level commands that I used
 
 	- `READ UNCOMMITTED`
 
 		```sql
 		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
-		exec [dbo].[DisplayIsolationLevel]`
+		exec [dbo].[DisplayIsolationLevel]
 		```
 
 	- `read committed`
@@ -135,7 +146,7 @@ END
 		 exec [dbo].[DisplayIsolationLevel]
 		```
 
-	- ` REPEATABLE READ`
+	- `REPEATABLE READ`
 
 		```sql
 		SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
