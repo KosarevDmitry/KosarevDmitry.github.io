@@ -35,6 +35,8 @@ All `SOLID` principles are partly interconnected.
 	In `dotnet` there is an opportunity to create a partial class and they are used. So there is a reason.
 
 	Advantages - if there are several classes, therefore, the lifetime of each of them is shorter, the object becomes available for deletion from memory earlier.
+	
+	There is rarely anything in nature with a single responsibility. It is an abstraction.
 
 2. I would add `Single responsibilty of method`
 
@@ -56,12 +58,8 @@ All `SOLID` principles are partly interconnected.
 	private C()
 	 } 
 	```
-
-	If one internal calls several private methods, nothing changes for testability.
-	If they were all internal, then each one could be tested.
+	If one internal method calls several private methods, nothing changes for testability. If they were all internal, then each one could be tested.
 	
-	This method to big to fit this principle
-	<https://github.com/dotnet/aspnetcore/blob/bc6dea446731850066b2872fe42687e5f5d37292/src/Http/Routing/src/Matching/DfaMatcher.cs#L32>
 
 3. The `open/closed` is the same logic only in relation to libraries, the functionality should not be bloated.
 
@@ -84,9 +82,6 @@ Don't wear a railroad uniform, beach shoes and a Panama hat simultaneously.
 
 	Links are created to a limited number of members of class A. 
 	
-There is too much responsibility in one class! Who builds like that, where is the quality control?! :)
-
-<https://github.com/dotnet/aspnetcore/blob/283237e32e52433e865988b1ec1c6f75a278283f/src/DefaultBuilder/src/WebApplication.cs#L25>
 
 
 6. `Dependency inversion` in other words, use abstract classes
@@ -113,3 +108,18 @@ There is too much responsibility in one class! Who builds like that, where is th
 		 http://0x80.pl/articles/simd-strfind.html#algorithm-1-generic-simd Algorithm 1: Generic SIMD by Wojciech Mula     
 
 	 
+7. Reality 
+
+
+I met assertion that a method with multiple `if` branches  maybe is a candidate to refactoring.    
+Then why are this methods so huge?  
+
+- <https://github.com/dotnet/aspnetcore/blob/bc6dea446731850066b2872fe42687e5f5d37292/src/Http/Routing/src/Matching/DfaMatcher.cs#L32>  
+- <https://github.com/dotnet/aspnetcore/blob/2b7f69b25ebe8cda7561914cb21459fefddb58c6/src/Mvc/Mvc.Core/src/Infrastructure/ResourceInvoker.cs#L289>  
+
+
+The `System\Diagnostics\Tracing\EventSource.cs` class size is **292K**. 
+Does this exactly meet the requirement of single responsibility?
+		
+
+
