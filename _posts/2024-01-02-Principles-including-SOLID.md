@@ -100,26 +100,22 @@ Don't wear a railroad uniform, beach shoes and a Panama hat simultaneously.
 		For example:
 		
 		- .\runtime\src\libraries\System.IO.Hashing\src\System\IO\Hashing\**XxHash64.cs  
-		based on  
-		https://github.com/Cyan4973/xxHash/blob/f9155bd4c57e2270a4ffbb176485e5d713de1c9b/doc/xxhash_spec.md
+		based on  [xxhash_spec.md](<https://github.com/Cyan4973/xxHash/blob/f9155bd4c57e2270a4ffbb176485e5d713de1c9b/doc/xxhash_spec.md>)
 		
 		- .\runtime\src\libraries\System.Private.CoreLib\src\System\SpanHelpers.Char.cs  
-		 based on   
-		 http://0x80.pl/articles/simd-strfind.html#algorithm-1-generic-simd Algorithm 1: Generic SIMD by Wojciech Mula     
-
-	 
-7. Reality 
+		 based on [0x80.pl/articles/simd-strfind.html](http://0x80.pl/articles/simd-strfind.html#algorithm-1-generic-simd) Algorithm 1: Generic SIMD by Wojciech Mula     
 
 
-I met assertion that a method with multiple `if` branches  maybe is a candidate to refactoring.    
-Then why are this methods so huge?  
 
-- <https://github.com/dotnet/aspnetcore/blob/bc6dea446731850066b2872fe42687e5f5d37292/src/Http/Routing/src/Matching/DfaMatcher.cs#L32>  
-- <https://github.com/dotnet/aspnetcore/blob/2b7f69b25ebe8cda7561914cb21459fefddb58c6/src/Mvc/Mvc.Core/src/Infrastructure/ResourceInvoker.cs#L289>  
+### General remarks
 
+1. 	I met the judgement that a method with multiple `if` branches  maybe is a candidate to refactoring. Then why are these methods a quite big?  
+	- [Routing/src/Matching/DfaMatcher.cs](<https://github.com/dotnet/aspnetcore/blob/bc6dea446731850066b2872fe42687e5f5d37292/src/Http/Routing/src/Matching/DfaMatcher.cs#L32>)  
+	- [src/Infrastructure/ResourceInvoker.cs](<https://github.com/dotnet/aspnetcore/blob/2b7f69b25ebe8cda7561914cb21459fefddb58c6/src/Mvc/Mvc.Core/src/Infrastructure/ResourceInvoker.cs#L289>)
 
-The `System\Diagnostics\Tracing\EventSource.cs` class size is **292K**. 
-Does this exactly meet the requirement of single responsibility?
-		
-
-
+2. [EventSource](<https://github.com/dotnet/runtime/blob/c3d95b4305e17ebe8dbda8efde3144a1c693499c/src/libraries/System.Private.CoreLib/src/System/Diagnostics/Tracing/EventSource.cs>)
+	contains  more than `4500` lines even without comments. Does this exactly meet the requirement of single responsibility?
+	
+	
+3. I have questions after I have glanced over article [class-too-large.html](<https://martinfowler.com/articles/class-too-large.html>) on Martin Fowler' site that described a refactirng experience.  
+The author presented herself as a teacher and consultant with 20 years of software development experience. If she knew so well who said what about refactoring principles, why did she make a mess of her library? Maybe she didn't even know about SOLID principles before coding? Then why her article end up on Fowler's site? Why did he pick her article out of hundreds, maybe thousands of others? It doesn't look like she was a newbie at the time of writing. Could not she figure out without some wise advices like "Make the change easy, then make the change easy"?
