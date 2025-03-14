@@ -103,8 +103,7 @@ Don't wear a railroad uniform, beach shoes and a Panama hat simultaneously.
 		based on  [xxhash_spec.md](<https://github.com/Cyan4973/xxHash/blob/f9155bd4c57e2270a4ffbb176485e5d713de1c9b/doc/xxhash_spec.md>)
 		
 		- .\runtime\src\libraries\System.Private.CoreLib\src\System\SpanHelpers.Char.cs  
-		 based on  Algorithm 1: Generic SIMD by Wojciech Mula  
-			<a href = '//www.0x80.pl/articles/simd-strfind.html#algorithm-1-generic-simd'>simd-strfind.html</a>
+		 based on `http://www.0x80.pl/articles/simd-strfind.html#algorithm-1-generic-simd`  Algorithm 1: Generic SIMD by Wojciech Mula 
 
 
 ### General remarks
