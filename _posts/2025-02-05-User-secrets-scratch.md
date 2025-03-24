@@ -11,8 +11,14 @@ tags: [user-secrets]
 
 	../AspNetCore.Docs/aspnetcore/security/app-secrets/samples/6.x/UserSecrets
 
-- storage path
-	`~/.microsoft/usersecrets/<user_secrets_id>/secrets.json`
+-init
+	- `dotnet user-secrets init`
+
+As  result it will be created element in
+- csproj `<UserSecretsId> user_secrets_id </UserSecretsId>`	
+ - storage path to `/<user_secrets_id>/secrets.json`
+	- `~/.microsoft/usersecrets`
+	- `%APPDATA%\Microsoft\UserSecrets`
 
 - commands
 
@@ -26,8 +32,6 @@ tags: [user-secrets]
 	dotnet user-secrets clear
 	cat ~/.microsoft/usersecrets/934ecfd0-bf73-4a27-92aa-bd6334cc944d/secrets.json
 	```
-
-- csproj `<UserSecretsId>179fda9c-92c3-424f-9a38-43c5ceba7363</UserSecretsId> `
 
 - usage
 
