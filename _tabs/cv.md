@@ -3,6 +3,11 @@ icon: fas fa-tags
 order: 3
 ---
 
+templated CV :
+- [CV 1](/assets/cv/CV_DmitryKosarev_web-developer.pdf)  
+- [CV 2](/assets/cv/NETEngineer_DmitryKosarev.pdf)  
+
+Sertificates  
 
 - [DART.IMT.C.01: C Programming: Getting Started](https://courses.edx.org/certificates/420bbbb9da4346e1a47d00b297c937a6)
 
