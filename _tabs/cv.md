@@ -4,8 +4,8 @@ order: 3
 ---
 
 templated CV :
-- [CV 1](/assets/cv/CV_DmitryKosarev_web-developer.pdf)  
-- [CV 2](/assets/cv/NETEngineer_DmitryKosarev.pdf)  
+- [CV 1](/assets/cv/CV_DmitryKosarev.pdf)  
+- [CV 2](/assets/cv/CV_DmitryKosarev_web-developer.pdf)  
 
 Sertificates  
 
