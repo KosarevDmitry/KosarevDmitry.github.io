@@ -55,3 +55,14 @@ and exports Scanner `module.exports.Scanner = nativeBinding.Scanner`
 
 **Conclusion**  
 To understand properly how tailwindcss works you need to understand Rust code.
+
+**Using**  
+This seems to be the most convenient approach for local use
+
+0. `npm install tailwindcss @tailwindcss/cli`
+1. add to empty `./input.css`  `@import "tailwindcss";`
+2. create empty `src/style.css`
+3. execute `npx @tailwindcss/cli -i ./input.css -o ./src/style.css --watch`
+4. run on localhost any html with `<link href="./style.css" rel="stylesheet">`
+
+The watch command assumes that if class list is changed in any file that references to style.css , then Tailwind CLI will parse the file and update styles.css
