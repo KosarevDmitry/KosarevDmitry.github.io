@@ -1,0 +1,2271 @@
+---
+// ### ROOT D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts
+
+Search patterns:
+Directory to include:all
+Only root dir: false
+
+Total files: 25
+about.md
+
+2025-05-09-About.md
+
+athors.md
+
+2025-05-25-Authentication.md
+
+2025-05-15-CosmosDB.md
+
+2025-01-14-Blogs-to-read.md
+
+2025-05-25-C#.md
+
+2025-03-10-Catch-in-rye.md
+
+2025-05-26-FeatureCollection.md
+
+2025-03-02-EshopContainer.md
+
+2025-02-19-REadme.md
+
+2025-06-03-Flow.md
+
+2025-05-25-How-to-sort-out-with-repository.md
+
+2025-04-09-Interrogator.md
+
+2020-02-07-Ion-exchange-reaction.md
+
+additionaltoNodeJs.md
+
+2025-05-16-Logging.md
+
+2025-05-25-OptionsMonitor.md
+
+2025-05-19-Oauth2.md
+
+2024-01-04-Openssl.md
+
+2025-06-07-Promise.md
+
+2025-02-25-Runtime-debugging.md
+
+2025-05-14-IdentytyServer.md
+
+softaware_estimation.md
+
+2025-03-26-Web-security-issues.md
+---
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\about.md
+---
+# the default layout is 'page'
+icon: fas fa-info-circle
+order: 4
+---
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\2025-05-09-About.md
+---
+title: About
+date: 2025-05-09 09:03:37 +0200
+categories: []
+tags: []
+---
+
+How said russian writer Chehov : Fools love to teach, smart people love to learn. So I have to be careful with this, writing educational posts takes time.
+
+These are notes, drafts that are more or less smoothed out for publication, which, by the way, is important to me. When you write not only for yourself, you become more responsible about consistency  and clarity of expression,  and then it will be easier to use, to remember what I meant through several months.
+
+The number of posts on the topic of programming leaves almost no chance that this article will be of any use. They are secondary; most likely, these questions have already been covered many times on Quora, Stackoverflow, etc. I also don’t want to preface several lines of code with large comments. So these are sometimes just rough drafts, installation instructions.
+
+Diffirent kinds of links. So to speak, with the fur on the outside:
+
+
+- Now I don't write or comment anymore. Self-censorship <https://www.facebook.com/pole.kosmi/>
+
+- I looking for job <https://www.linkedin.com/in/dmitry-kosarev-6a15501b3/>
+
+- Sound of music <https://www.youtube.com/@dmitrykosarev126>
+
+- It  mainly are travel notes. And other notes on any topic. On russian language <https://kosarevdm.blogspot.com/>
+
+- A little bit <https://stackoverflow.com/users/3505572/dmitrykosarev>
+
+- There is something about a living in Serbia. Mostly reposts <https://t.me/serbia_info1>
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\athors.md
+https://github.com/BillWagner
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\2025-05-25-Authentication.md
+---
+title: Authentication
+date: 2025-05-25 22:02:56 +0200
+categories: [C#]
+tags: []
+---
+
+authentification
+выполняется как и все в несколько приемов
+
+В startup разработчиком добавляются схемы 
+имя стринговая переменная c привязкой к  handler class у которого есть согласованный метод для этой задачи. определенный как обычно контрактом интерфейсом
+
+
+во вторых нужно добавить  в цепочку вызовов  какой нибудь middleware стандартный вариант добавляет  AuthenticationMiddleware
+хотя это не обязательно, подойдет любой middleware или feature  которым можно перехватить контекст
+в тестах так и делается поищите в репо `private static async Task<TestServer> CreateServer`
+и вызвать  context.AuthenticateAsync. Это и есть начало аутентификации.
+
+все миддлеваре вызываются автоматически в той очередности которой они добавлены.
+следовательно чем раньше вы добавите аутентификацию все последующие смогут им воспоользоваться
+
+
+что делает AuthenticationMiddleware
+Когда очередь дойдет до него в нем  перебором вызываются
+обработчики всех зарегестрированных схем
+handler.HandleRequestAsync()
+если одна из них завершается успешно нет смысла дальше продолжать потому что юзер идентифицирован, клеймы добавлены и на этом процесс заканчивается.
+если ни один из них не завершился успешно вызывается  default вариант
+
+result =  await context.AuthenticateAsync(DefaultAuthenticateScheme.Name);
+
+результат оборачивается в  AuthenticationFeatures и добавляется в FeatureСollection.
+ var authFeatures = new AuthenticationFeatures(result); 
+ context.Features.Set<IHttpAuthenticationFeature>(authFeatures);
+ context.Features.Set<IAuthenticateResultFeature>(authFeatures);
+
+теперь на всем жизненном цикле запроса можно выдергивать эти интерефейсы по необходимости.
+Feature кстати один из замечательных паттернов. 
+
+  
+context.AuthenticateAsync(mystringvar);
+сам процесс обработки происходит условно в 2 приема: 
+сначала значение перехватывается extension .AddPolicyScheme если  названия не совпадают ищется
+название схемы но сначала у по названию PolicyScheme
+и переправляется на нужную схему, логика в PolicyScheme может быть любая
+если querystring key == `boo` then go to  scheme1
+если Datetime.Now> 12 then go to scheme2
+посмотрите PolicyTest.cs
+
+более того  policy может миксировать то есть вызывать обработчики из разных схем
+ ...
+ p.ForwardDefault = "auth1";
+ p.ForwardChallenge = "auth2";
+ p.ForwardSignIn = "auth2";
+...
+результат процесса  authentification
+вызов 
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\2025-05-15-CosmosDB.md
+---
+title: CosmosDB
+date: 2025-05-15 15:22:41 +0200
+categories: [Azure]
+tags: []
+---
+What is CosmosDB?  What has it matters?
+When ask you do you know CosmosDB for instance or something else what is it mean
+I dont know code of CosmosDB as 
+but I can know  a client which call CosmosDB 
+May be it sound strange but in reality  it is very concrete things
+From this point of view I can say what I know CosmosDb  sufficiently good
+ if I understand props, methods and scenarios of Package "Microsoft.Azure.Cosmos"
+ Microsoft.Azure.Cosmos has other dependency  
+all this staff are located in  https://github.com/Azure/azure-cosmos-dotnet-v3.git
+
+Microsoft.Azure.DocumentDB.ChangeFeedProcessor"
+Bulk operation
+Azure function
+How create db Container
+
+
+src repo
+D:\src\AZURE
+
+Idea to send data as json and to query by Sql like syntax
+
+install explorer
+1. https://azure.microsoft.com/en-us/products/storage/storage-explorer#layout-container-uid0e8a
+path `C:\Users\User\AppData\Local\Programs\Microsoft Azure Storage Explorer`
+
+2.install cosmos emulator https://learn.microsoft.com/en-us/azure/cosmos-db/emulator
+
+my path `C:\Program Files\Azure Cosmos DB Emulator`
+
+run  powershell with admin right 
+```
+сd "C:\Program Files\Azure Cosmos DB Emulator"
+./Microsoft.Azure.Cosmos.Emulator.exe /Port=63123
+```
+All data will be  created locally. I don't need cosmosDb account if I have emulator NoSQL API.
+
+It needs to wait when Chrome will be automatically opened
+https://learn.microsoft.com/en-us/azure/cosmos-db/emulator-windows-arguments#manage-the-emulator-with-command-line-syntax
+
+After I logined in Azure https://portal.azure.com/#home 
+the browser opened https://localhost:63123/_explorer/index.html
+
+data  in page  https://localhost:63123/_explorer/index.html
+
+```
+url localhost:8081
+primary key
+connection string
+mongo connection string
+```
+I will use for connection  to run `Quickstart` app.  src D:\src\AZURE\DocumentDB-Quickstart-DotNetCore
+
+
+then  go to  `D:\src\AZURE\azure-cosmos-dotnet-v3\scratch.md`
+
+check sample. 
+D:\src\AZURE\azure-cosmos-dotnet-v3\Microsoft.Azure.Cosmos.Samples\Usage
+check tests only if it required. I am not sure it needs really.
+D:\src\AZURE\azure-cosmos-dotnet-v3\Microsoft.Azure.Cosmos\tests
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\2025-01-14-Blogs-to-read.md
+---
+title: Blogs to read
+date: 2025-01-14 08:11:02 +0100
+categories: [deep-dive-blogs]
+tags: [deep-dive-blogs]
+---
+
+
+- runtime, clr 
+https://mattwarren.org/postsByYear/
+-  boxing
+	  https://mattwarren.org/2017/08/02/A-look-at-the-internals-of-boxing-in-the-CLR/
+	  
+- deep-dive-blog-posts.md 
+ <https://github.com/dotnet/runtime/blob/main/docs/deep-dive-blog-posts.md>
+
+- list that I need sort out 
+: <https://danluu.com/programming-blogs/>
+
+Gracefull blog
+: https://ericsink.com/entries/why_dotnet_core.html
+
+
+The article I would like to check later
+5 Different ways to synchronize data from MongoDB to ElasticSearch
+: https://code.likeagirl.io/5-different-ways-to-synchronize-data-from-mongodb-to-elasticsearch-d8456b83d44f
+
+- Erik Mavrinac
+Work with https://github.com/KosarevDmitry/MSBuildSdks.git
+https://devblogs.microsoft.com/engineering-at-microsoft/author/erikmav/
+
+- Igor Ostrovsky
+: <https://igoro.com/archive/what-really-happens-when-you-navigate-to-a-url/>
+: <https://robozzle.com/puzzle.aspx?id=85>
+: <https://learn.microsoft.com/en-us/archive/msdn-magazine/2012/december/csharp-the-csharp-memory-model-in-theory-and-practice>
+
+
+- Natalia Kondratyeva
+: <https://devblogs.microsoft.com/dotnet/author/knatalia/>
+: <https://devblogs.microsoft.com/dotnet/dotnet-8-networking-improvements/>
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\2025-05-25-C#.md
+---
+title: C#
+date: 2025-05-25 08:29:59 +0200
+categories: []
+tags: []
+---
+когда вы видите generic method
+builder.AddOAuth<GoogleOptions, GoogleHandler>(authenticationScheme, displayName, configureOptions);
+это тоже самое что 
+builder.AddOAuth(typeof(GoogleOptions), typeof(GoogleHandler), authenticationScheme, displayName, configureOptions);
+это значит что у метода  2  параметра просто в данном случае известно что это типы классов.
+builder.AddOAuth<GoogleOptions, GoogleHandler>();
+
+
+главное runtime 
+как ег изучать
+сделать подбибилотеки
+и combiner
+и тесты можно запускать вне runtime
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\2025-03-10-Catch-in-rye.md
+---
+title: Catch in rye
+date: 2025-03-10 17:06:27 +0100
+categories: [englsh]
+tags: []
+---
+
+
+
+All of a sudden I quit lighting matches, and sort of leaned nearer to her over the 
+table. I had quite a few topics on my mind. "Hey, Sally," I said. 
+
+"What?" she said. She was looking at some girl on the other side of the room. 
+
+"Did you ever get fed up?" I said. "I mean did you ever get scared that everything 
+was going to go lousy unless you did something? I mean do you like school, and all that 
+stuff?" 
+
+"It's a terrific bore." 
+
+"I mean do you hate it? I know it's a terrific bore, but do you hate it, is what I 
+
+mean." 
+
+"Well, I don’t exactly hate it. You always have to—" 
+
+"Well, I hate it. Boy, do I hate it," I said. "But it isn’t just that. It's everything. I 
+hate living in New York and all. Taxicabs, and Madison Avenue buses, with the drivers 
+and all always yelling at you to get out at the rear door, and being introduced to phony 
+guys that call the Lunts angels, and going up and down in elevators when you just want to 
+go outside, and guys fitting your pants all the time at Brooks, and people always—" 
+
+"Don’t shout, please," old Sally said. Which was very funny, because I wasn’t 
+even shouting. 
+
+"Take cars," I said. I said it in this very quiet voice. "Take most people, they're 
+crazy about cars. They worry if they get a little scratch on them, and they’re always 
+talking about how many miles they get to a gallon, and if they get a brand-new car 
+already they start thinking about trading it in for one that's even newer. I don’t even like 
+old cars. I mean they don't even interest me. I’d rather have a goddam horse. A horse is at 
+least human, for God's sake. A horse you can at least—" 
+
+"I don’t know what you're even talking about," old Sally said. "You jump from 
+
+one—" 
+
+"You know something?" I said. "You're probably the only reason I'm in New 
+York right now, or anywhere. If you weren’t around, I'd probably be someplace way the 
+hell off. In the woods or some goddam place. You're the only reason I'm around, 
+practically." 
+
+"You're sweet," she said. But you could tell she wanted me to change the damn 
+
+subject. 
+
+"You ought to go to a boys' school sometime. Try it sometime," I said. "It's full of 
+phonies, and all you do is study so that you can learn enough to be smart enough to be 
+able to buy a goddam Cadillac some day, and you have to keep making believe you give 
+a damn if the football team loses, and all you do is talk about girls and liquor and sex all 
+day, and everybody sticks together in these dirty little goddam cliques. The guys that are 
+on the basketball team stick together, the Catholics stick together, the goddam 
+
+
+intellectuals stick together, the guys that play bridge stick together. Even the guys that 
+belong to the goddam Book-of-the-Month Club stick together. If you try to have a little 
+intelligent—" 
+
+"Now, listen," old Sally said. "Lots of boys get more out of school than that." 
+
+"I agree! I agree they do, some of them! But that's all I get out of it. See? That’s 
+my point. That's exactly my goddam point," I said. "I don't get hardly anything out of 
+anything. I'm in bad shape. I'm in lousy shape." 
+
+"You certainly are." 
+
+Then, all of a sudden, I got this idea. 
+
+"Look," I said. "Here's my idea. How would you like to get the hell out of here? 
+Here's my idea. I know this guy down in Greenwich Village that we can borrow his car 
+for a couple of weeks. He used to go to the same school I did and he still owes me ten 
+bucks. What we could do is, tomorrow morning we could drive up to Massachusetts and 
+Vermont, and all around there, see. It's beautiful as hell up there, It really is." I was 
+getting excited as hell, the more I thought of it, and I sort of reached over and took old 
+Sally's goddam hand. What a goddam fool I was. "No kidding," I said. "I have about a 
+hundred and eighty bucks in the bank. I can take it out when it opens in the morning, and 
+then I could go down and get this guy's car. No kidding. We'll stay in these cabin camps 
+and stuff like that till the dough runs out. Then, when the dough runs out, I could get a 
+job somewhere and we could live somewhere with a brook and all and, later on, we could 
+get married or something. I could chop all our own wood in the wintertime and all. 
+Honest to God, we could have a terrific time! Wuddaya say? C’mon! Wuddaya say? Will 
+you do it with me? Please!" 
+
+"You can't just do something like that," old Sally said. She sounded sore as hell. 
+
+"Why not? Why the hell not?" 
+
+"Stop screaming at me, please," she said. Which was crap, because I wasn't even 
+screaming at her. 
+
+"Why can'tcha? Why not?" 
+
+"Because you can't, that's all. In the first place, we’re both practically children. 
+And did you ever stop to think what you'd do if you didn't get a job when your money ran 
+out? We’d starve to death. The whole thing's so fantastic, it isn’t even—" 
+
+"It isn’t fantastic. I’d get a job. Don’t worry about that. You don’t have to worry 
+about that. What's the matter? Don’t you want to go with me? Say so, if you don’t." 
+
+"It isn't that. It isn’t that at all," old Sally said. I was beginning to hate her, in a 
+way. "We’ll have oodles of time to do those things— all those things. I mean after you go 
+to college and all, and if we should get married and all. There’ll be oodles of marvelous 
+places to go to. You're just— " 
+
+"No, there wouldn’t be. There wouldn’t be oodles of places to go to at all. It’d be 
+entirely different," I said. I was getting depressed as hell again. 
+
+"What?" she said. "I can't hear you. One minute you scream at me, and the next 
+
+you—" 
+
+"I said no, there wouldn’t be marvelous places to go to after I went to college and 
+all. Open your ears. It’d be entirely different. We’d have to go downstairs in elevators 
+with suitcases and stuff. We’d have to phone up everybody and tell ’em good-by and send 
+’em postcards from hotels and all. And I’d be working in some office, making a lot of 
+dough, and riding to work in cabs and Madison Avenue buses, and reading newspapers, 
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\2025-05-26-FeatureCollection.md
+---
+title: FeatureCollection
+date: 2025-05-26 07:20:52 +0200
+categories: [C#]
+tags: []
+---
+FeatureCollection Это node структура
+
+если запись key не находится в текущем ноде проверяется подчиненный  _defaults
+Перебор проходит по всем узлам в коллекции
+public class FeatureCollection : IFeatureCollection
+private readonly IFeatureCollection? _defaults;
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\2025-03-02-EshopContainer.md
+---
+title: EshopContainer
+date: 2025-03-02 17:48:52 +0100
+categories: [dotnet]
+tags: [architecture]
+mermaid: true
+---
+
+```mermaid
+stateDiagram-v2
+    [AppHost] --> redis
+    [AppHost] --> RabbitMQ
+    [AppHost] --> Postgres
+	Postgres--> identitydb
+	Postgres--> catalogdb
+    state First {
+        [*] --> fir
+        fir --> [*]
+    }
+    state Second {
+        [*] --> sec
+        sec --> [*]
+    }
+    state Third {
+        [*] --> thi
+        thi --> [*]
+    }
+
+
+```
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\2025-02-19-REadme.md
+---
+title: REadme
+date: 2025-02-19 22:12:27 +0100
+categories: [dotnet]
+tags: [tpl]
+---
+:question: The directory System.Threading.Tests contains tests copy.  
+
+I changed extension of some files becouse they have dependencies that there are  in  the project and  the project is not compiled, for example `ThreadLocalTests.cs_.`
+
+Left tests are partly were written by me,  a part of  runtime tests, partly taken from reference or books, frome everywhere essentialy.
+The rest of tests are partly were written by me,  a part of  runtime lib tests, partly taken from references or books, basically from everywhere.
+
+- interlocked `interlocked.Add`  application on  cpp level, in С# there is nothing. ExchangeAdd  is interested
+	
+	```csharp
+		D:\src\runtime\src\coreclr\nativeaot\System.Private.CoreLib\src\System\Threading\Interlocked.cs
+		   private static int ExchangeAdd(ref int location1, int value) 
+			   { 
+				   int oldValue; 
+				   do 
+				   { 
+					   oldValue = location1; 
+				   } while (CompareExchange(ref location1, oldValue + value, oldValue) != oldValue); 
+				   return oldValue; 
+			   } 
+	```
+
+- Interlocked.Exchange() vs Interlocked. CompareExchange  - Exchange doesn't compare but update value at once
+	Decrement /increment are Interlocked.Add(-1) Interlocked.Add(+1)
+
+- ExecutionContext
+	`ExecutionContext` манипулирует `IsyncLocal`set get и манипулирует `currentThread._executionContext`  
+	`ExecutionContext.Run` replace `executionContext` of current tread
+	`currentThread._executionContext` run callback and then и потом выполняет обратную замену на  прежний  
+	и `_synchronizationContext` тоже отслеживается  
+
+- ConfigureAwait(false); supposed I want continue, I need the context to use further.
+	https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2007
+	I return  Task  but obviously there is no need of context on client becouse I am only going to get result
+	using `await` or `getawaiter.getresult`
+	So there is no sense to keep context
+	
+	```csharp
+		public async Task Execute()
+		{
+			Task task = null;
+			await task.ConfigureAwait(false);
+		}
+	 ```
+
+- Executioncontext is what is passed from the called thread to the task and then used to call the callback
+
+	reference 	https://learn.microsoft.com/en-us/dotnet/api/system.threading?view=net-7.0
+
+- :point_right: если используются waitAsync то следовательно это не блокирующий метод
+
+- Monitor to blocks  the execution of code block for other threads. Only one thread execute command then will start next thread - inside of method  
+
+- lock essentially is Monitor
+
+- ReaderWriterLock
+
+-ReaderWriterLockSlim  рекомендуется для netcore5+
+	почитать еще код
+	to protect a resource that is read by multiple threads and written to by one thread at a time. 
+	ReaderWriterLockSlim allows multiple threads to be in read mode, allows one thread to be in write mode with
+	используется в System.Text.CodePagesEncodingProvider
+	это общеее описание
+
+- Mutex blocking code, give preference just only one thread to execute code. A Mutex is like a `lock`, but it can work across **multiple processes**. Mutex can be computer-wide as well as application-wide. It works about **50 	times slower** than a lock. Похож на Semaphor потому что он так же виден в OS другим процессам.
+
+- Semaphor blocking code allowed several thread to word ( not just only one as do monitor and mutex)  
+		виден, доступен во всех процессах  то есть любая программа может обратиться по имени и регулировать работу всех  программ использующих этот Semaphor
+	: разрешает вход нескольким тредам, а не только одному как делает lock.
+
+- SemaphorSlim  безопаснее чем Semaphor,
+    Общий смысл
+	 Wait вызывает decrement, то есть ограничивает число тредов, если 
+	currenycount  станет 0, следующий wait  приведет к остановке треда который запустил данный метод пока другой тред не выполнить Release
+	 release увеличивает increment currenycount, но не более чем maxcount
+	- примеры кода в проекте есть.
+
+- ManualResetEvent 
+
+	`mre.WaitOne()` block  
+	`mre.Set()` после `set`  WaitOne перестает действовать -   
+	it releases blocked treads and deactivates WaitOne for other treads that  will run later  
+	`mre.Reset()` если вызвать Reset снова  WaitOne будет ждать команды set.  
+	WaitOne become again active and required mre.Set()   
+	 **WaitOne**  
+	 _waitHandle.WaitOne(0) returns true if reason for jumping over it, produced by  Set(). It returns false means that timeout was happend.
+
+	треды подходят к стартовой черте и показывают waitOne что ждут выстрела для начала забега.  
+	Выстрел `Set` треды бегут любые и новые треды не обращают внимание на стартовую   
+	черту в их коде пока не скомадован Reset.   
+	они добегают до стартовой черты строки WaitOne и останавливаются в ожидании выcтрела `Set`.  
+
+	Eсли  `ManualResetEvent(true)` тогда `Waitone` не действует пока не вызывешь `Reset`, то есть все треды   
+	бегают сразу, не обращая внимания на стартовую черту. Пока их не принудят резетом остановиться.
+  
+- ManualResetEventSlim  to grasp idea first look  ManualResetEventSlimTests.cs -> public static void RunManualResetEventSlimTest1_SimpleWait()(33)
+
+- AutoResetEvent
+
+	 Wait останавливает, Set пропускает, Reset что делает не понятно
+	 если AutoResetEvent(true) тогда   один  может бегать, а  все остальные ждут. В  ManualResetEvent достаточно одного Set для всех 
+	 для каждого вызова WaitOne нужна команда Set.   два треда -2 waitone - один Set   один тред will freese, останется активным, поэтому  `Rider` через видимо timeout предложит его `kill`
+	 этот класс называется `auto` потому что когда код доходит до wait опять, тред опять остановится, а  с  ManualResetEvent тред не реагирует на `waitone` после `Set` пока не будет вызван `Reset`.
+ 
+- CountdownEvent
+
+	CountdownEvent иницирутеся с числом тредов  `_countdown=new CountdownEvent(3)` дальше вызываются треды каждый из которых 
+	вызывает `_countdown.Signal();`
+	`_countdown.Wait();`  блокирует код,  пока кол-во вызовов `_countdown.Signal();` не приравняется трем.
+
+
+- Barrier
+	похожи с `CountdownEvent` только вызов `wait` не  нужен  
+	`SignalAndWait`  останавливает выполнение кода пока  опредленное кол-во тредов   не окажутся   в точке выполнения `SignalAndWait`. Другими словами кол-во вызовов должно быть равно `ParticipantCount` тогда блокировка снимется и ParticipantCount опять восстанавливается и ждет вызовов SignalAndWait
+
+
+- Dispatcher transfers data between threads только для winform и WPF
+
+- volatile memory operations are for special cases of synchronization, where normal locking is not an acceptable alternative. Under normal circumstances, the C# lock statement, the Visual Basic SyncLock statement, and the 		Monitor class provide the easiest and least error-prone way of synchronizing access to data, and the Lazy<T> class provides a simple way to write lazy initialization code without directly using double-checked locking.
+ 
+
+- AsyncLocal это ключ для map структуры текущего контекста  
+	set get всегда обращается к  map ExecutionContext
+
+
+- Noneblocking    All  Interlocked method is unblocked
+	```
+	And
+	Or
+	Add
+	Read
+	increment
+	Decrement
+	Exchange
+	CompareExchange
+	MemoryBarrier
+	MemoryBarrierProcessWide
+	```
+
+- background thread  to finish background thread  with `Join` to eliminate issue with unrealised
+	resource  in using finally block of background thread
+	because background thread terminated at once when application finish.
+	Task is background so get result I must to call "wait" on main thread.
+
+
+- SynchronizationContext c Threadpool работает
+
+
+:question: It takes a lot of time to look through all the tests and they are often repeated with different types, so I copy the main ones or those that seemed interesting to me here.
+Or I write tests myself, for example `IdManagerTest`.
+
+## console 
+runtime\src\tests\baseservices\threading
+
+
+## System.Threading
+
+:+1: AsyncLocalTests.cs  
+:+1: AutoResetEventTests.cs  
+BarrierCancellationTests.cs  
+BarrierTests.cs  
+CountdownEventCancellationTests.cs  
+CountdownEventTests.cs  
+EtwTests.cs  
+EventWaitHandleTests.cs  
+:+1: ExecutionContextTests.cs  
+HostExecutionContextManagerTests.cs  
+HostExecutionContextTests.cs  
+:+1: InterlockedTests.cs  
+    
+    :hourglass: Interlocked.MemoryBarrierProcessWide
+
+    console tests
+ 	runtime\src\tests\CoreMangLib\system\threading\interlocked
+	runtime\src\tests\JIT\Intrinsics\Interlocked.cs
+	"D:\src\runtime\src\tests\JIT\Intrinsics\Interlocked_r.csproj"
+	"D:\src\runtime\src\tests\JIT\Intrinsics\Interlocked_ro.csproj"
+
+LockTests.cs   new class in v9  
+ManualResetEventSlimCancellationTests.cs  
+ManualResetEventSlimTests.cs  
+:+1: ManualResetEventTests.cs   also contain test for :+1: `WaitHandle` command  
+MonitorTests.cs  
+MutexTests.cs  
+ReaderWriterLockSlimTests.cs  
+ReaderWriterLockTests.cs  
+SemaphoreSlimCancellationTests.cs  
+SemaphoreSlimTests.cs  
+SemaphoreTests.cs  
+SpinLockTests.cs  
+SpinWaitTests.cs  
+SynchronizationContextTests.cs  
+ThreadLocalTests.cs
+
+## System.Threading.AccessControl
+
+AclTests.cs  
+EventWaitHandleAclTests.cs  
+MutexAclTests.cs  
+MutexSecurityTests.cs  
+SemaphoreAclTests.cs  
+ThreadingAclExtensionsTests.cs
+
+## System.Threading.Channels
+
+BoundedChannelTests.cs  
+ChannelClosedExceptionTests.cs  
+ChannelClosedExceptionTests.netcoreapp.cs  
+ChannelTests.cs  
+DebugAttributeTests.cs  
+PriorityUnboundedChannelTests.cs  
+UnboundedChannelTests.cs
+
+## System.Threading.Overlapped
+
+OverlappedTests.cs  
+ThreadPoolBoundHandle_AllocateNativeOverlappedTests.cs  
+ThreadPoolBoundHandle_BindHandleTests.cs  
+ThreadPoolBoundHandle_DisposeTests.cs  
+ThreadPoolBoundHandle_FreeNativeOverlappedTests.cs  
+ThreadPoolBoundHandle_GetNativeOverlappedStateTests.cs  
+ThreadPoolBoundHandle_HandleTests.cs  
+ThreadPoolBoundHandle_IntegrationTests.cs  
+ThreadPoolBoundHandle_IntegrationTests.netcoreapp.cs  
+ThreadPoolBoundHandle_PreAllocatedOverlappedTests.cs
+
+## System.Threading.RateLimiting
+
+BaseRateLimiterTests.cs  
+ChainedLimiterTests.cs  
+ConcurrencyLimiterTests.cs  
+FixedWindowRateLimiterTests.cs  
+PartitionedRateLimiterTests.cs  
+RateLimiterPartitionTests.cs  
+SlidingWindowRateLimiterTests.cs  
+TokenBucketRateLimiterTests.cs
+
+## System.Threading.Tasks.Dataflow
+
+ActionBlockTests.cs  
+BatchBlockTests.cs  
+BatchedJoinBlockTests.cs  
+BroadcastBlockTests.cs  
+BufferBlockTests.cs  
+ConcurrentTests.cs  
+DataflowBlockExtensionTests.cs  
+DataflowBlockExtensionTests.IAsyncEnumerable.cs  
+DataflowBlockOptionsTests.cs  
+DebugAttributeTests.cs  
+EtwTests.cs  
+JoinBlockTests.cs  
+SimpleNetworkTests.cs  
+TransformBlockTests.cs  
+TransformManyBlockTests.cs  
+TransformManyBlockTests.IAsyncEnumerable.cs  
+WriteOnceBlockTests.cs
+
+## System.Threading.Tasks.Parallel
+
+BreakTests.cs  
+EtwTests.cs  
+ParallelForEachAsyncTests.cs  
+ParallelForTests.cs  
+ParallelLoopResultTests.cs  
+RangePartitionerTests.cs  
+RangePartitionerThreadSafetyTests.cs
+
+## System.Threading.Thread
+
+CompressedStackTests.cs  
+ExceptionTests.cs  
+ThreadExceptionEventArgsTests.cs  
+ThreadTests.cs
+
+
+## System.Threading.ThreadPool
+
+RegisteredWaitTests.cs  
+ThreadPoolTests.cs  
+
+## System.Threading.Tasks.Extensions.Tests
+
+AsyncMethodBuilderAttributeTests.cs  
+AsyncValueTaskMethodBuilderTests.cs  
+ManualResetValueTaskSourceTests.cs  
+PoolingAsyncValueTaskMethodBuilderTests.cs  
+ValueTaskTests.cs
+
+## System.Threading.Tasks.Tests
+
+AggregateExceptionTests.cs  
+CancellationTokenTests.cs  
+CESchedulerPairTests.cs  
+OperationCanceledExceptionTests.cs  
+TaskToAsyncResultTests.cs  
+UnwrapTests.cs  
+AsyncIteratorMethodBuilderTests.cs  
+AsyncTaskMethodBuilderTests.cs  
+ConfiguredCancelableAsyncEnumerableTests.cs  
+TaskAwaiterTests.cs  
+YieldAwaitableTests.cs  
+AsyncEnumerableToBlockingEnumerableTests.cs  
+RunContinuationsAsynchronouslyTests.cs  
+TaskArgumentValidationTests.cs  
+TaskCanceledExceptionTests.cs  
+TaskCancelWaitTests.cs  
+TaskCompletionSourceTests.cs  
+TaskCompletionSourceTResultTests.cs  
+TaskContinueWhenAllTests.cs  
+TaskContinueWhenAnyTests.cs  
+TaskContinueWithAllAnyTests.cs  
+TaskContinueWithTests.cs  
+TaskContinueWith_ContFuncAndActionTests.cs  
+TaskContinueWith_ContFuncAndActionWithArgsTests.cs  
+TaskDisposeTests.cs  
+TaskPropertiesTests.cs  
+TaskRtTests.cs  
+TaskRtTests_Core.cs  
+TaskRunSyncTests.cs  
+TaskFactoryTests.cs  
+TaskFactory_FromAsyncTests.cs  
+TaskSchedulerTests.cs
+
+## System.Threading.Timer.Tests
+
+TimerChangeTests.cs  
+TimerConstructorTests.cs  
+TimerDisposeTests.cs  
+TimerFiringTests.cs  
+TimerMetricsTests.cs  
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\2025-06-03-Flow.md
+---
+title: Flow to C#
+date: 2025-06-03 17:46:26 +0200
+categories: [Flow]
+tags: []
+---
+
+React uses Flow. To read React repo needs to understand Flow syntax.
+
+It's good idea to me  to write down for yourself what is meant in language that I unerstand  and use it as a cheat sheet at first
+
+const fn1: (x: number) => number = x => x + 1;
+
+```
+number fn1(number x) {
+ return  x + 1;
+} 
+```
+
+const fn2: mixed = x => x + 1; 
+
+```
+mixed fn2(object x){
+ return  x + 1; 
+}
+```
+
+type RendererTask = boolean => RendererTask | null;
+
+```
+ delegate delegate RendererTask(bool x);
+```
+
+
+- Type Guards
+```
+const val: string | number = 1;
+const isNumber = (x: mixed): x is number => typeof x === 'number'; //it means if func return true then  x is number
+
+```
+
+
+- Type Annotation.
+` : string` is called  type Annotation
+```
+function concat(a: string) {
+  return a + "b";
+}
+
+concat("A"); // Works!
+concat(1); // Error!
+```
+
+-coercions 
+if (42) {} // 42 => true
+if ("") {} // "" => false
+
+
+primitives
+number 
+BigInt
+string
+null
+undefined > void in flow
+boolean
+symbol
+
+maybe
+?T is equivalent to T | null | void.
+
+optional
+{propertyName?: string}
+
+
+
+- Union
+https://flow.org/en/docs/types/unions/
+
+ no error!
+
+```
+type Success = {success: true, value: boolean, ...};
+type Failed  = {error: true, message: string, ...};
+
+function handleResponse(response:  Success | Failed) {
+ 
+}
+
+handleResponse({
+  success: true,
+  error: true,
+  value: true,
+  message: 'hi'
+});
+```
+tuples
+  ...args: ['currency', dollars: number, cents: number]
+         | ['choice', boolean]
+): string {
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\2025-05-25-How-to-sort-out-with-repository.md
+---
+title: How to sort out with repository
+date: 2025-05-25 18:14:05 +0200
+categories: [C#]
+tags: []
+---
+
+легких не бывает.
+1. репо очистить от doc comments 
+2. убрать editor settings которые слишком щепетильны в вопросах стиля. Например две пустые строки уже ошибка. 
+Понизить уровень  error to warning or none.
+читать  rfc например для Security в aspnetcore rfc for oauth2, 
+сделать draft diagram,  puml кажеться сильнее, mermaid похуже.
+
+Потом читать код, по папкам или в IDE,  если не понятно искать код по непонятному слову в  sample and test dir 
+например what means ForwardDefaultSelector
+делать свои тест там же в repo все что в голову придет. 
+лучше не заводить свой класс а добавлять в уже имеющиеся вряд ли не будет тематического класса.
+а обвязки настройки уже в нем есть
+если мне что то не понятно в тест методе, я его копирую с названием Kosarevtest и уже кручу верчу его как мне захочется. 
+Делать комментарии
+Добавить свой лог с автоматическим логированием точки вызова класс: метод: строка
+и запускать на samle или тестах
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\2025-04-09-Interrogator.md
+---
+title: Interrogator
+date: 2025-04-09 11:19:40 +0200
+categories: []
+tags: []
+---
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\2020-02-07-Ion-exchange-reaction.md
+---
+title: Реакции ионного обмена
+date: 2020-02-07 20:27:01 +0100
+categories: [peter]
+tags: [chemistry]
+---
+
+## Тема окислительно – восстановительные реакции и реакции ионного обмена.
+
+Это разного рода электронные учебники
+
+- [maximumtest.ru](https://maximumtest.ru/uchebnik/11-klass/khimiya/okislitelnovosstanovitelnye-reaktsii-i-reaktsii-ionnogo-obmena)
+- [Окислительно-восстановительные реакции yaklass.ru/p/himija/8-klass ](https://www.yaklass.ru/p/himija/8-klass/khimicheskaia-sviaz-okislitelno-vosstanovitelnye-reaktcii-18844/stepeni-okisleniia-elementov-189257/re-10540c7b-1391-4921-86ee-a1cf84352cd2)
+- [yaklass.ru himija](https://www.yaklass.ru/p/himija/11-klass/khimicheskaia-kinetika-6995740/okislitelno-vosstanovitelnye-reaktcii-6984764/re-65ebe55e-d0df-4521-8cc3-5ccafceb47f7)
+- [foxford.ru](https://foxford.ru/wiki/himiya/okislitelno-vosstanovitelnye-reaktsii?srsltid=AfmBOopgGsVLbCrlKSxP9pvVJWxDhJqRt9HPTyA2A0R82wiOERRIF_9o&utm_referrer=https%3A%2F%2Fwww.google.com%2F)
+
+
+Как образуется химическая связь. Институт теоретической химии,1998, Бостон  [link](/assets/peter/kak-obrazuetsya-himicheskaya-svyaz.pdf)
+
+:+1: Вводную статью к книге советую просмотреть.    
+
+Выдержки
+
+ Введение квантовой химии в учебные курсы сильно затрудняло преподавание химии.
+Золотое правило обучения гласит, что новый материал, объясняемый преподавателем,
+должен всегда базироваться на знаниях, которые учащиеся приобрели в предшествующий
+период обучения. Квантовая же химия не опирается на полученную ранее
+информацию и не дает знаний для последующего процесса обучения. Так, например,
+просто утверждается, что природа химической связи непосредственно связана с квантовомеханическим эффектом, но ни как, ни что при этом получается, не объясняется. Причем
+такое изложение материала не было прихотью авторов учебников, а проистекало
+исключительно оттого, что квантовая химия сама не отвечает на эти вопросы.
+
+- Эйнштейн писал: «Все эти пятьдесят лет мучительных размышлений не приблизили меня к ответу на вопрос: Что же такое квант света? Сегодня любой Том, Дик или Генри думает, что он знает, что это такое, но он ошибается».
+- Как известно, Н. Бор, так сказал о квантовой механике: «Если Вы думаете, что Вы понимаете ее, то это только показывает, что Вы не имеете даже первого представления о ней».
+- Э. Шредингер также писал о квантовой механике: сказав: «Это не только практически недоступно, но и просто немыслимо. Или, чтобы быть более точным, мы, конечно, можем думать об этом, что это более понятно, чем
+треугольный круг и менее понятно, чем крылатый лев»
+- «Никто не понимает квантовую теорию», сказал в 1980 г. Р. Фейнман,один из крупнейших физиков нашего времени
+
+
+Типы хим связи
+: [reshutest.ru](https://reshutest.ru/theory/11?theory_id=356)
+
+
+
+## Справочник определений
+
+Таблица Менделеева 
+: ![Mendeelev_table_definition](/assets/peter/mendeleev-table-definition.jpg)
+[mendeleev_table](https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B8%D0%BE%D0%B4%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F_%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%B0_%D1%85%D0%B8%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D1%85_%D1%8D%D0%BB%D0%B5%D0%BC%D0%B5%D0%BD%D1%82%D0%BE%D0%B2)
+
+Номер группы таблицы [Группа_периодической_системы](https://ru.wikipedia.org/wiki/%D0%93%D1%80%D1%83%D0%BF%D0%BF%D0%B0_%D0%BF%D0%B5%D1%80%D0%B8%D0%BE%D0%B4%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B9_%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B)
+: определяется количеством электронов на внешней оболочке атома (валентных электронов) и, как правило, соответствует высшей валентности атома.
+
+
+**Единица элементарного заряда** [google](https://www.google.com/search?q=%D0%B5%D0%B4%D0%B8%D0%BD%D0%B8%D1%86%D0%B0+%D1%8D%D0%BB%D0%B5%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%80%D0%BD%D0%BE%D0%B3%D0%BE+%D0%B7%D0%B0%D1%80%D1%8F%D0%B4%D0%B0)
+
+:point_right:  Из прочитанного сделал вывод. Задача была  расположить в таблице с любым кол-во рядов и столбцов химические элементы  последовательно в соответствии с весом атома таким образом, 
+что сходные по свойствам вещества визуально находились рядом. Но что-то это слишком просто получется путем подбора найти подходящий формат таблицы 
+
+Простое вещество,  наверно вариант   O<sub>2</sub> - молекула кислорода или  Br<sub>2</sub> - бром
+: является формой существования химических элементов в **свободном** виде; или, иначе говоря, химический элемент, не связанный химически ни с каким другим элементом, образует простое вещество. Известно свыше 400 разновидностей простых веществ.
+Простое вещество — это вещество, образованное атомами одного и того самого химического элемента. 
+
+**Сложное вещество** - вещество, образованное атомами разных химических элементов.	
+
+
+соотношение ядра и атома (любопытно, их книжки "Как образуется химическая связь")
+: Размер атомного ядра составляет примерно 10-4нм. Представить себе соотношение размеров ядра и атома можно, если предположить, что ядро имеет размер шарика для пингпонга (примерно 5 см в диаметре), тогда атом будет иметь размеры, близкие к размерам
+стадиона в Лужниках. 
+
+
+[моль](https://ru.wikipedia.org/wiki/%D0%9C%D0%BE%D0%BB%D1%8C_(%D0%B5%D0%B4%D0%B8%D0%BD%D0%B8%D1%86%D0%B0_%D0%B8%D0%B7%D0%BC%D0%B5%D1%80%D0%B5%D0%BD%D0%B8%D1%8F))
+: Значение одного моля определяется через число Авогадро, один моль — количество вещества, содержащее 6,022 140 76 e-123 частиц (атомов, молекул, ионов, электронов или любых других объектов).
+
+**Валентность**  [etymonline.com](<https://www.etymonline.com/search?q=valence>)
+
+свободный атом  (в определении не уверен, взял из ответов mail.ru)
+: Свободными называют атомы, которые не имеют химической связи с другими атомами. Большинство простых веществ, образованных одним химическим элементом, состоят из химически связанных, т. е. не свободных атомов.
+Пример свободных атомов, которые могут существовать сколько угодно долго - это благородные газы гелий, неон, аргон, криптон, ксенон. Отдельные атомы других химических элементов в свободном состоянии не могут существовать долго из за высокой реакционной способности.
+При разложении пероксида водорода образуются свободные атомы кислорода (атомарный кислород), которые мгновенно вступают в реакцию либо между собой, образуя молекулу О2, либо окисляют другие вещества
+
+
+ковалентная связь
+: термин описывает химическую связь, обусловленную совместным обладанием электронами, в отличие от металлической связи, в которой электроны были свободными, или от ионной связи, в которой один из атомов отдавал электрон и становился катионом, а другой атом принимал электрон и становился анионом.
+<https://ru.wikipedia.org/wiki/%D0%9A%D0%BE%D0%B2%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%BD%D0%B0%D1%8F_%D1%81%D0%B2%D1%8F%D0%B7%D1%8C>
+
+
+Ионизация
+: появление заряда
+
+Ион
+:  атом (ядро  c протонами и нейтронами и электронами, но потерявший протон  или электрон, и поэтому утративший нейтральность. 
+[wikipedia](https://ru.wikipedia.org/wiki/%D0%98%D0%BE%D0%BD)
+
+Иоффе доходчиво объясняет процесс, статья 1934 г. с современными комментириями.
+: <https://www.nkj.ru/archive/articles/1557/>
+
+**ионическая связь (ionic bond)** [goldbook.iupac.org](https://goldbook.iupac.org/terms/view/IT07058)
+
+<https://www.youtube.com/watch?v=KU5F7HhueVw>
+
+**Понятия в ионизации**
+ 
+Если **Fe<sup>0</sup>**  превращается в  **Fe<sup>+2</sup>**
+означает, что **Fe** железо в данном случае- восстановитель, у него увеличивается степень окисления.    
+
+`Восстановитель` передает электроны `окислителю`.  
+`Восстановитель`- это то что отдает,  сам при этом окисляется. У него увеличивается степень окисления.  
+
+`Окислитель`-  то что принимает, сам при этом восстанавливается.  У него снижается степень окисления.    
+`Окисление` - процесс передачи электронов.    
+[Окислитель](https://ru.wikipedia.org/wiki/%D0%9E%D0%BA%D0%B8%D1%81%D0%BB%D0%B8%D1%82%D0%B5%D0%BB%D1%8C)
+ вещество, в состав которого входят атомы, присоединяющие к себе во время химической реакции электроны. Иными словами, окислитель — это акцептор электронов.
+
+:bulb: Получается c точки зрения `восстановителя` - это окисление, с точки зрения `окислителя` - восстановление.
+
+![окислитель](/assets/peter/okisl.jpg)
+
+
+orbital  атомные орбиты 
+: [](https://en.wikipedia.org/wiki/Atomic_orbital#Shapes_of_orbitals)
+из статьи `An orbital can be occupied by a maximum of two electrons,... `
+перевод `Орбиталь может быть занята максимум двумя электронами, каждый из которых со своей собственной проекцией спина...`
+
+
+**комментарии по поводу орбиталей**  
+На протяжении прошедших 30 лет скорость быстродействия компьютеров возрасла в
+104 раз, но практически ничего нового не было сделано для количественного описания
+электронной структуры молекул. Более того, ученый мир постепенно пришел к
+заключению, что главная теория квантовой химии – метод молекулярных орбиталей –
+оказалась «плохой теорией, коллекцией целого ряда противоречащих друг другу
+предположений» (Р. Вудворд и Р. Хофман).   
+источник  [Как образуется химическая связь](/assets/peter/kak-obrazuetsya-himicheskaya-svyaz.pdf)  
+
+:exclamation: Поэтому к определениям  нужно быть снисходительнее. 
+
+![naCh-configuration](/assets/peter/naCh-configuration.jpg)
+
+`1s vs 2s subshell` google дает ответ:
+
+`The 1s subshell has lower energy than the 2s subshell. Therefore, electrons are first accommodated in 1s, followed by 2s. The size of 1s shell is smaller than 2s. The probability of finding an electron in a 2s shell is higher than in 1s because the probability of finding electrons increases as size increases.`
+
+`С возрастанием заряда ядра у элементов одной группы из-за увеличения числа электронных оболочек увеличиваются атомные радиусы, вследствие чего происходит снижение электроотрицательности, усиление металлических и ослабление неметаллических свойств элементов, усиление восстановительных и ослабление окислительных свойств образуемых ими веществ.`
+
+:point_right: Простой прием поиска информации  добавлять между понятиями  `vs` то есть `vice versa`, что означает сравнение. 
+
+
+
+Без понимания символов формулу не напишешь.
+
+: ![symbols](/assets/peter/symbols.jpg)
+
+Электронная конфигурация [wikipedia](https://en.wikipedia.org/wiki/Electron_configuration)
+
+Интерактивный учебник, набор статей.
+[bbc.co.uk/bitesize](https://www.bbc.co.uk/bitesize/guides/zg6bmsg/revision/1)
+
+Химическая формула, определение [wikipedia](https://ru.wikipedia.org/wiki/%D0%A5%D0%B8%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F_%D1%84%D0%BE%D1%80%D0%BC%D1%83%D0%BB%D0%B0#:~:text=%D0%A5%D0%B8%D0%BC%D0%B8%CC%81%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D1%84%D0%BE%CC%81%D1%80%D0%BC%D1%83%D0%BB%D0%B0%20%E2%80%94%20%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%BD%D0%BE%D0%B5%20%D0%BE%D0%B1%D0%BE%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D0%B5%20%D1%85%D0%B8%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE,%D0%BF.)
+
+
+
+**Пример образования ионной связи**
+
+![Example_ION_binding](/assets/peter/ionbinding.jpg)
+
+
+Существует понятие молекулярного редактора
+[ru.wikipedia.org/wiki](https://ru.wikipedia.org/wiki/%D0%9C%D0%BE%D0%BB%D0%B5%D0%BA%D1%83%D0%BB%D1%8F%D1%80%D0%BD%D1%8B%D0%B9_%D1%80%D0%B5%D0%B4%D0%B0%D0%BA%D1%82%D0%BE%D1%80)
+
+Есть программа-справочник `kalzium`, но она, к сожалению, только для `unix OS`, в `Windows` не установится.    Может есть смысл найти аналог.
+[Программа справочник kalzium](https://invent.kde.org/education/kalzium)
+
+
+[Глоссарий теоретической органической химии](https://www.degruyter.com/document/doi/10.1351/pac199971101919/html)
+
+
+<https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D0%B5%D0%BF%D0%B5%D0%BD%D1%8C_%D0%BE%D0%BA%D0%B8%D1%81%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F>
+
+Уроки химии с преподавателем Жуковой Еленой на youtube.   
+Возможно это в конце концов то что тебе надо. Я могу скачать, прислать тебе, если у тебя youtube не работает.
+<https://www.youtube.com/watch?v=XbRriCUUELw&t=0s>
+
+
+
+
+3D model (пока не понятно)
+:  <https://www.quantum-physics.polytechnique.fr/hydrogenOrbitals.php?lang=1>
+
+Модели
+: [модели](https://www.mozaweb.com/ru/lexikon.php?cmd=getlist&let=3D&sid=KEM&sid=KEM&subtopic_azon=szervetlen)
+
+
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\additionaltoNodeJs.md
+Add code to Nodejs template post
+
+add to lib/package.json
+```
+{
+ "type": "commonjs",
+  "main": "index.js"
+}
+```
+add ./test.js
+```
+import o from "./lib/index.js";
+var f  = o;
+f.default();
+debugger
+```
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\2025-05-16-Logging.md
+---
+title: Logging
+date: 2025-05-16 08:29:37 +0200
+categories: [logging]
+tags: []
+---
+
+Примеры в D:\src\samples\core\logging\abba
+## Проблема
+Проблема в понимании возникает так как `ILogger` в webservice явно не объявляется.
+При этом если в `Controller` добавить параметр `Ilogger`, то запись идет в `Console`  и все в порядке. Хотя не понятно чем он разрешается.  При этом когда читаешь reference то там есть понятие `CreateLogger`, хотя по большому счету зачем читать `reference`, если и так все работает.
+Потом подключаешь `serilog` или еще что-нибудь по инструкции в `nuget` или на сайте разработчика и все работает. 
+Какое место  `serilog` занимает в этой цепочке, мне тоже было не понятно. `reference` говорит что это `provider`. Уже хорошо.
+
+вот такой serilog лог  мне не говорит главного где найти эту конкретную запись в коде
+```
+[10:50:54 INF] Application started. Press Ctrl+C to shut down.
+[10:50:54 INF] Hosting environment: Production
+
+```
+Поэтому лучше в репозитории искать самому  как реализуется Logger.
+и уяснить  код с тем что написано в reference. 
+
+
+
+## Общая идея, резюме
+Идея заключается в тот, чтобы все инстансы классов из aspnetcore которые логируют, и библиотеки из runtime, которые используются в aspnetcore,  использовали  
+Microsoft.Extensions.Logging.Ilogger. Фактически он находится в `runtime` repository в проекте `Microsoft.Extensions.Logging.Abstractions`
+и важно чтобы классы который ими манипулируют тоже был единственные, зарегестрированные с singleton lifetime.
+
+ Factory   Singleton  // factory создает логгер
+ Logger    Singleton
+ AProvider Singleton  
+   ALogger<Foo>: IDisposable
+   ALogger<Baz> : IDisposable
+ BProvider Singleton
+   BLogger<Foo> : IDisposable
+   BLogger<Baz> : IDisposable
+
+Если в коде создать свой  ILoggerFactory через new(), а не тот, который уже в ServiceCollection вы сможете логировать , но логи из aspnetcore repository в ваш файл попадать не будут.
+он должен быть зарегистриван ServiceCollection   
+
+Проекты `runtime` участвующие в процессе
+
+Общего назначения
+    * Microsoft.Extensions.Logging
+    * Microsoft.Extensions.Logging.Abstractions
+    * Microsoft.Extensions.Logging.Configuration
+
+- providers
+* Microsoft.Extensions.Logging.Console
+* Microsoft.Extensions.Logging.Debug
+* Microsoft.Extensions.Logging.EventLog
+* Microsoft.Extensions.Logging.EventSource
+* Microsoft.Extensions.Logging.TraceSource
+
+Код библиотек кажется сложным если его смотреть в лоб. Лучше понимать концепции практически всегда то есть что имеют ввиду разработчики, общую идею
+и потом уже смотреть код
+
+Коцепции
+
+- Filter `builder.AddFilter("Microsoft", LogLevel.Warning).AddFilter("System", LogLevel.Warning)`
+- Provider `builder .AddConsole();` 
+- Log event ID static class with custome values  
+- Scope не понятно.
+- message template понятно 
+- level это понятно
+
+
+Лучше иметь перед глазами интерфейсы
+```
+  public interface ILoggerFactory : IDisposable
+    {
+        ILogger CreateLogger(string categoryName);
+
+        void AddProvider(ILoggerProvider provider);
+    }
+
+      // idea to creates identical loggers (filelogger or console logger etc) with different names, which is usually the name of the library
+     // called automatically
+  public interface ILoggerProvider : IDisposable
+    {  
+        ILogger CreateLogger(string categoryName);
+    }
+
+ public interface ILogger
+    {
+     //  В конечном счете вызывается всегда автоматически этот метод
+        void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter);
+
+       // idea depending on logging  destination type to log messages with a different loglevel
+       bool IsEnabled(LogLevel logLevel);
+
+        IDisposable? BeginScope<TState>(TState state) where TState : notnull;
+    }
+
+// HostApplicationBuilder prop with extension methods addProvider, AddConcole 
+ public interface ILoggingBuilder
+  {
+    IServiceCollection Services { get; }
+  }
+ ``` 
+
+любая библиотека, источник логов, обращается к singleton ILoggerFactory.CreateLogger получаем sinleton ILogger logger
+`internal sealed class Logger : ILogger` вызывает `Logger(string categoryName, LoggerInformation[] loggers)`
+параметр `loggers` содержит список зарегистрированных логеров/ провайдеров?
+`DebugLogger`, `ConsoleLogger` и т.д.
+Дальше вызывается цикл с вызовом `DebugLogger.Log`, `ConsoleLogger.Log`, etc
+уже эти конкретные логеры определяют куда писать и формат, в общем конфигурацию.
+следовательно DebugLogger, исполнитель так сказать должны быть зарегестрированы или созданы на лету.
+то есть `LoggerFactory`  и `Logger<>` не достаточно. 
+
+
+В конечном счете вызывается всегда метод `void Log<TState (LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter);`
+
+## Как это выглядит в src
+если у нас  обычный `dotnet new console`
+
+and packages
+
+  - Microsoft.Extensions.Hosting
+  - Microsoft.Extensions.Logging
+  - Microsoft.Extensions.Logging.Abstractions
+  - Microsoft.Extensions.Logging.Console
+
+то  логгинг выглядит так
+```
+HostApplicationBuilder builder = Host.CreateApplicationBuilder();
+using IHost host = builder.Build();  `
+```
+вызывает кроме всего прочего `PopulateServiceCollection`, который задействует `services.AddLogging();`
+из `Microsoft.Extensions.DependencyInjection` namespace
+```
+  services.AddOptions(); // нужны для console logger
+  services.TryAdd(ServiceDescriptor.Singleton<ILoggerFactory, LoggerFactory>());
+  services.TryAdd(ServiceDescriptor.Singleton(typeof(ILogger<>), typeof(Logger<>)));
+   services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<LoggerFilterOptions>>(
+                new DefaultLoggerLevelConfigureOptions(LogLevel.Information)));
+```
+
+Microsoft.Extensions.Hosting\src\HostingHostBuilderExtensions.cs AddDefaultServices добавляет
+c помощью `services.AddLogging`
+```
+logging.AddConsole();
+logging.AddDebug();
+logging.AddEventSourceLogger();
+```
+AddDebug означает, что будет добавлены провайдер в DI  ILoggerProvider который разрешается в DebugLoggerProvider
+с AddConsole и AddEventSourceLogger тоже самое.
+
+
+В коде с  `aspnetcore`  `dotnet new webapi` выглядит так  
+
+1. вызывается extension в CreateDefaultBuilder
+
+``` 
+// aspnetcore 
+public static IWebHostBuilder CreateDefaultBuilder(string[] args)
+
+...
+
+ .ConfigureLogging((hostingContext, loggingBuilder) =>
+        {
+            loggingBuilder.Configure(options =>
+            {
+                options.ActivityTrackingOptions = ActivityTrackingOptions.SpanId
+                                                    | ActivityTrackingOptions.TraceId
+                                                    | ActivityTrackingOptions.ParentId;
+            });
+
+          // add config 
+            loggingBuilder.AddConfiguration(hostingContext.Configuration.GetSection("Logging")); 
+       
+   	   // add providers
+			loggingBuilder.AddConsole();
+            loggingBuilder.AddDebug();  
+            loggingBuilder.AddEventSourceLogger(); 
+        }).
+```
+
+и  сам Extension с цепочкой actions
+
+```
+// aspnetcore 
+	  public static IWebHostBuilder ConfigureLogging(this IWebHostBuilder hostBuilder, Action<WebHostBuilderContext, ILoggingBuilder> configureLogging)
+    {
+        return hostBuilder.ConfigureServices((context, collection) => collection.AddLogging(builder => configureLogging(context, builder)));
+    }
+	
+```
+
+а `collection.AddLogging` реализован в `runtime` репозитории
+
+```
+
+  public static class LoggingServiceCollectionExtensions
+    {
+  
+        public static IServiceCollection AddLogging(this IServiceCollection services, Action<ILoggingBuilder> configure)
+        {
+            ThrowHelper.ThrowIfNull(services);
+
+            services.AddOptions();
+
+            services.TryAdd(ServiceDescriptor.Singleton<ILoggerFactory, LoggerFactory>());
+            services.TryAdd(ServiceDescriptor.Singleton(typeof(ILogger<>), typeof(Logger<>)));
+
+            services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<LoggerFilterOptions>>(
+                new DefaultLoggerLevelConfigureOptions(LogLevel.Information)));
+
+            configure(new LoggingBuilder(services)); // resolve ILoggingBuilder 
+            return services;
+        }
+    }
+```
+ 
+Итого: WebHostBuilderContext инициируется в  ConfigureServices, ILoggingBuilder инициируется в AddLogging посредством new LoggingBuilder()) 
+из безусловно полезного узнать что 
+а ILogger<> и ILoggerFactory - это  singleton.
+default level is LogLevel.Information
+и то что подключены три провайдера: Console,Debug, EventSource
+
+logLevel we can override by
+
+```
+  builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<LoggerFilterOptions>>(
+       new MyConfigureOptions(LogLevel.Trace)));
+
+ 
+class MyConfigureOptions : ConfigureOptions<LoggerFilterOptions>
+{
+    public MyConfigureOptions(LogLevel level) : base(options => options.MinLevel = level)
+    {
+    }
+}		
+```
+
+LoggerFactory используются для инициализации Logger<>
+```
+ public class Logger<T> : ILogger<T>
+    {
+        [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
+        private readonly ILogger _logger;
+
+        public Logger(ILoggerFactory factory)
+        {
+            ThrowHelper.ThrowIfNull(factory);
+
+            _logger = factory.CreateLogger(GetCategoryName());
+        }
+  // GetCategoryName returns name of `T` type
+```
+
+Как используется LoggerFactory непосредсвенно Aspnetcore?
+В Aspnetcore я насчитал порядка 193 вызовов для создания нового логера.
+Так как логер  имя определяется полным именем класса, то в одной библиотеке может быть несколько логеров
+factory держит все создающиеся instance в ConcurrentDictionary  следовательно издержки для вызова минимальны.
+ ```
+ public class LoggerFactory : ILoggerFactory
+    {
+        private readonly ConcurrentDictionary<string, Logger> _loggers = new ConcurrentDictionary<string, Logger>(StringComparer.Ordinal);
+```
+
+логер ищет провайдеров 
+Provider1->logger1 -> Log<TState> -> StreamWriter
+Provider2->logger2 -> Log<TState> -> Console
+Provider3->logger3 -> Log<TState> -> Debug window
+Provider4->logger4 -> Log<TState> -> httpClient
+Provider5->logger5 -> Log<TState> -> Db driver
+
+
+Каким образом работают провайдеры
+
+По умолчанию у нас всего три
+DebugLogger  вызывает  `System.Diagnostics.Debug.WriteLine(message, category: name);` если Debugger.Attach is true. 
+	Display message in `debug output` window
+Event Source use  ETW `Event Tracing for Windows` следовательно если только WPF делать тогда есть смысл пользоваться. Он  сложный  но интересный, использует Node pattern и Activity. Можно добавить tool для перехвата  сообщений.
+ConsoleLogger use  Console.Write  
+
+так как provider по умолчанию  для записи в файл не реализован
+то получается, что его нужно создавать.
+
+обычно пользуются Serilog
+Можно подключить Serilog.Sinks.File
+```dotnet add package  Serilog.Sinks.File```
+```
+  var log = new LoggerConfiguration()
+            .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
+            .CreateLogger();
+  log.Information("Hi");
+```
+
+Он использует StreamWriter
+```
+Stream outputStream =  System.IO.File.Open(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read);
+outputStream.Seek(0, SeekOrigin.End);
+var  encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
+TextStream output = new StreamWriter(outputStream, encoding);
+output.Write("blue ");
+output.Write("sky");
+output.Flush();
+```
+
+но Serilog.Sinks.File никак не связан  с  Microsoft.Extensions.Logging
+у него свой ILogger
+и сообщений от внутренних aspnetcore библиотек он не перехватывает.
+
+Нужен serilog  package который будет интегрирован с Microsoft.Extensions.Logging
+ 
+поэтому нужно ставить другой extension
+  
+## Serilog.AspNetCore
+
+If to be truth I do not understand why serilog is used in many projects. Eshopcontainer for example Seriolog
+Скорей всего небыло разработаны template и вариации к нему. 
+не был добавлен.В принципе какая разница.
+
+src https://github.com/serilog/serilog/wiki/Getting-Started
+Seriolog present time can be descibed as old  repo that served already 10 years
+то что используют его говорит  о том что та часть которая пишет на диск используя stream написана корректно качественно.
+то есть низкоуровнево потому что в C# есть свои уровни можно писать File.WriteLIne а можно уровнем ниже
+то же на C# но с библиотекой которая использует совсем уж  удобный безусловно класс File.
+
+
+Nettheless it continiued to used 
+for example eshopcontainer
+
+
+`dotnet add package Serilog.AspNetCore`
+
+```
+ private static void SerilogAspNetCoreImpementation(HostApplicationBuilder builder)
+    {
+         Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
+        .WriteTo.File("FileLog.txt").WriteTo.Console()
+        .CreateLogger();
+     
+      /*  Log.Information("Starting web application");
+         or
+        Log.Logger.Write(LogEventLevel.Information, "Starting web application");
+      */
+        builder.Services.AddSerilog();
+   }
+```
+
+что делает AddSerilog 
+
+```
+Serilog.AspNetCore
+def Serilog.Log
+
+.AddSerilog  
+   call collection.AddSingleton<ILoggerFactory>(_ => new SerilogLoggerFactory());
+          SerilogLoggerFactory  ctor 
+             def   _provider= SerilogLoggerProvider : ILoggerProvider // provider is singleton too
+                 
+                CreateLogger(string name) //  every libraries  that make logging  call this method 
+                   ret  SerilogLogger: ILogger
+         		    _logger = Serilog.Log.Logger.ForContext(new[] { provider }); // our static prop
+
+	               public void Log<TState> (...) //  every libraries  that make logging call this method 
+		               call  _logger.Write(evt);
+```
+
+возвращает 
+```
+  [10:50:54 DBG] Hosting starting
+  [10:50:54 INF] Application started. Press Ctrl+C to shut down.
+  [10:50:54 INF] Hosting environment: Production
+  [10:50:54 INF] Content root path: D:\src\samples\...\bin\Debug\net8.0
+  [10:50:54 DBG] Hosting started
+```
+  
+В этом логе нет главного где произошло логирование
+Где в коде можно найти`[DBG] Hosting starting` 
+
+
+## свой filelogger
+Учитывая что serillog для debug не подходит если не поменять template, поэтому можно сделать свой по аналогии с DebugLogger
+особенность в том что StreamWriter  должна быть static  новые логгеры меняют только название класса а streamwriter должен быть один и тот же.
+```
+ builder.Services.AddSingleton<ILoggerProvider,FileLogProvider>();
+
+[ProviderAlias("FileLog")]
+public class FileLogProvider : ILoggerProvider
+{
+    // here you can add some logic to change name
+    // Microsoft.Extensions.Hosting.Internal.Host replace by Host
+    public ILogger CreateLogger(string name) => new FileLogger(name); 
+    
+    public void Dispose() { }
+}
+
+internal sealed partial class FileLogger : ILogger
+{
+    private readonly string _name;
+    private static readonly TextWriter _output;
+    private static void WriteLine( string name, string message)=> _output.WriteLine("[" + name + "] " + message);
+   
+    static FileLogger()
+    {
+        string logName = $"log_{DateTime.Now:HH-mm-ss}.txt";
+        Stream outputStream = System.IO.File.Open(logName, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read);
+        outputStream.Seek(0, SeekOrigin.End);
+        var encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
+        _output = new StreamWriter(outputStream, encoding) {AutoFlush = true};
+    }
+
+    public FileLogger(string name) => _name = name;
+    
+
+    public IDisposable BeginScope<TState>(TState state) where TState : notnull => NullScope.Instance;
+
+    public bool IsEnabled(LogLevel logLevel) => true;
+
+    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception,
+        Func<TState, Exception?, string> formatter)
+    {
+        if (!IsEnabled(logLevel)) return;
+        
+        ArgumentNullException.ThrowIfNull(formatter);
+       
+        string message = formatter(state, exception);
+
+        if (string.IsNullOrEmpty(message)) return;
+        
+        message = $"{logLevel}: {eventId.Id} {eventId.Name}: {message}";
+
+        if (exception != null) message += Environment.NewLine + Environment.NewLine + exception;
+        
+        WriteLine( _name, message);
+    }
+}
+
+class NullScope : IDisposable
+{
+    private NullScope() { }
+
+    public static NullScope Instance = new NullScope();
+
+    public void Dispose() { }
+}
+```
+
+##   тестирование LoggerMessage
+
+```
+// logging using microsoft extension but with own factory instance 
+class Dummy
+{
+    public void Run()
+    {
+        
+        var factory = new LoggerFactory();
+        
+        ILogger logger = factory.CreateLogger("Pink Floyd");
+        
+         // factory.AddFileLog(); with extension 
+        
+        factory.AddProvider(new FileLogProvider());
+        factory.AddProvider(new DebugLoggerProvider());
+
+        OptionsMonitor<ConsoleLoggerOptions> monitor = new(
+            new OptionsFactory<ConsoleLoggerOptions>(new List<IConfigureOptions<ConsoleLoggerOptions>>(),
+                Enumerable.Empty<IPostConfigureOptions<ConsoleLoggerOptions>>()),
+            Enumerable.Empty<IOptionsChangeTokenSource<ConsoleLoggerOptions>>(),
+            new OptionsCache<ConsoleLoggerOptions>());
+
+        factory.AddProvider(new ConsoleLoggerProvider(monitor));
+
+        logger.LogInformation("This is a dummy logger");
+        var list = new List<WorkItem>()
+        {
+            new WorkItem("Validate collection", Priority.High), new WorkItem("Health check network", Priority.Low)
+        };
+        
+        using var d = logger.ProcessingWorkScope(DateTime.Now);
+
+        foreach (var w in list)
+            logger.PriorityItemProcessed(w);
+    }
+}
+
+public record WorkItem(
+    string Name,
+    Priority Priority,
+    bool IsCompleted = false)
+{
+    public Guid Id { get; init; } = Guid.NewGuid();
+
+    public WorkItem MarkAsComplete() => this with { IsCompleted = true };
+
+    public override string ToString() => $"Priority-{Priority} ({Id}): '{Name}'";
+}
+
+public enum Priority
+{
+    Deferred = -1,
+    Low,
+    Medium,
+    High,
+    Extreme
+}
+
+public static class LoggerExtensions
+{
+    private static readonly Action<ILogger, WorkItem, Exception> s_processingPriorityItem;
+
+    // private static readonly Action<ILogger, Exception> s_failedToProcessWorkItem;
+    private static Func<ILogger, DateTime, IDisposable?> s_processingWorkScope;
+
+    static LoggerExtensions()
+    {
+        s_processingPriorityItem = LoggerMessage.Define<WorkItem>(LogLevel.Information,
+            new EventId(3, nameof(PriorityItemProcessed)), "Processing priority item: {Boo}"); // variable name is no matter
+        //    s_failedToProcessWorkItem = LoggerMessage.Define(LogLevel.Critical, new EventId(13, nameof(FailedToProcessWorkItem)),"Epic failure processing item!");
+        s_processingWorkScope = LoggerMessage.DefineScope<DateTime>("Processing work, started at: {DateTime}");
+    }
+
+    public static void PriorityItemProcessed(this ILogger logger, WorkItem workItem) =>
+        s_processingPriorityItem(logger, workItem, default!);
+
+    //  public static void FailedToProcessWorkItem(this ILogger logger, Exception ex) =>  s_failedToProcessWorkItem(logger, ex);
+    public static IDisposable? ProcessingWorkScope(this ILogger logger, DateTime time) =>
+        s_processingWorkScope(logger, time);
+}
+```
+
+
+
+
+## Какие еще бывают логгеры
+В serilog есть synk для Elastic search
+
+удаленные провайдеры наверняка используют httpClient.
+Remote провайдеры нужно смотреть релизацию.   
+- telemetry
+- insight для Azure
+
+
+
+
+## Общие рассуждения
+
+проблема несмотря на то что это 
+у меня всякий раз было чувство что каждое логирования ведет к замедлению, и я добавял скрепя сердецем, плюс строку форматирования нужно каждый раз разпарсить
+это 
+
+будет это serilog 
+`"[]{message}{expetion}{prop}"`
+или 
+`String.Format("Hello, {0}!", "Dolly");`
+или
+```
+var greeting="He1lo";
+var name= "Dolly";
+Log ($"{greeting},{name}");
+```
+
+Плюс нужно вывести на диск
+Тут два варианта в Seriolog потому что он комбинириует строку и несколько раз вызывает 
+Write
+и потом  только `Flash`
+но если у меня только одна запись то при инициализации StreamWriter Autflash =true предпочтительнее
+
+Какие проблемы есть с логированием 
+1. какая должна быть строка форматирования
+писать кто во что  горазд что в голову придет плохая идея
+правильным способом template 
+ее выводили  в static class
+
+Примерно:
+```
+static class logHelper
+{
+static readonly string Failed ="We are sorry";
+static readonly string Success ="{0} seems work well";
+}
+String.Format (logHelper.Success,"method Foo");
+```
+
+
+2 
+
+если сделать несколько похожих сообщений
+```
+class
+method 1(){
+...
+Log.Information("Success")
+...
+
+}
+
+method 2()
+{
+...
+Log.Information("Success")
+...
+}
+```
+
+потом тяжело искать
+
+
+
+Хорошо бы пометить сообщения кодом
+```
+class
+method 1(){
+...
+Log.Information($"[{1}] Success")
+...
+
+}
+
+method 2()
+{
+...
+Log.Information($"[{2}] Success")
+...
+}
+```
+
+искать все сообщения по коду и везде добавлять Id это неудобно наверняка можно ошибится
+поэтому стремятся сообщения собрать в одном месте
+
+можно делать вызов с помощью и я это очень люблю
+DebugLigger для тестирования репозитория это отлично но медленно.
+
+
+3 что писать
+ можно посмотреть как выглядят строки соббщения в aspnetcore, привыкнуть к стилистике
+4 где писать и сколько как часто.
+
+
+Если вы уверены в своем коде и вам нужно просто зафиксироваться тогда можно добавить лог на выходе
+```
+m1()
+{
+  m2()
+  {
+    m3()
+	{
+	  m4()
+	}
+  }
+  Log( Everything is fine)
+}
+```
+но если там ошибка то лог нужно добавлять ближе к проблемному месту
+
+предположим 
+
+```
+IamGoingToDo()
+{
+log(1)
+var  parameters =	ParameterHandler()
+log(2)
+  
+  Iamdoing (parameters);
+  log (5)
+}
+
+Iamdoing (object [] parameters)
+  {
+    log(3)
+   fetch(parameters);
+   log(4)
+  }
+
+```
+
+
+Мне кажется лучше ближе к действию то есть достаточно log(4) или уровнем выше только log(5), 
+но два сразу log(4) и  log(5) это перебор. Хотя это может случится запросто. Потому что методы могут быть разнесены по разным бибилотекам
+и классам. 
+
+Хотя по идее log(1) log(2) тоже можно. 
+Сложно сказать нужно искать золотую середину. 
+
+
+toFile (my.txt) пишет непосредственно в корень вашего проекта.
+обычно используют общие серверные адреса D:\Log
+и удаленные адрес с  Elastic search  для просмотра используя web приложение Kabana
+
+понять Enrich можно скачав какой нибудь нугет
+например
+https://github.com/pm4net/serilog-enrichers-callerinfo.git
+
+
+в serilog много кода разбора строки форматирования
+
+но сейчас делают по другому проблема format строки нужно решать в период компиляции
+
+
+```
+namespace Baz.Boom;
+
+class Foo() {
+	Do() 
+	{ 
+		....
+		  var loggerFactory = httpContext.RequestServices.GetRequiredService<ILoggerFactory>();
+		  var logger = loggerFactory.CreateLogger("Baz.Boom.Foo");
+		  var destinationUrl = ...
+		  var RouteName =...
+		  Log.RedirectToRouteResultExecuting(logger, destinationUrl, RouteName);
+		  //or use  another static partial class Log
+		  HttpResultsHelper.Log.WritingResultAsStatusCode(logger, 400);
+		...
+	}
+
+ private static partial class Log
+    {
+        [LoggerMessage(1, LogLevel.Information,
+            "Executing RedirectToRouteResult, redirecting to {Destination} from route {RouteName}.",
+            EventName = "RedirectToRouteResultExecuting")]
+        public static partial void RedirectToRouteResultExecuting(ILogger logger, string destination, string? routeName);
+    }
+}
+
+internal static partial class HttpResultsHelper{
+
+  internal static partial class Log
+    {
+        [LoggerMessage(1, LogLevel.Information,
+            "Setting HTTP status code {StatusCode}.",
+            EventName = "WritingResultAsStatusCode")]
+        public static partial void WritingResultAsStatusCode(ILogger logger, int statusCode);
+}
+}
+```
+
+похоже на структуру с event attribute  , EventListener, EventSource
+
+```
+[Event(1, Keywords = Keywords.Kwd1, Level = EventLevel.Informational, Message = "LogElements called {0}/{1}/{2}.")]
+public void LogElements(int n, short sh, long l) => WriteEvent(1, n, sh, l); 
+```
+
+Название логера формируется вручную, в aspnetcore есть ошибка например,  в названии logger
+листинг просматривал и заметил
+
+namespace Microsoft.AspNetCore.Http.HttpResults;
+
+public sealed partial class SignInHttpResult : IResult
+{
+ public Task ExecuteAsync(HttpContext httpContext){
+  var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Http.Result.SignInResult");
+ }
+}
+можно сделать скрипт который будет проверять корректность названия или сделать его частью EditorConfig
+а может другая причина
+название класса пришлось поменять а название логера решили оставить прежним потому что для пользователей это и имеет значение
+
+
+судя по тестам главное решающую роль играет LoggerMessage аттрибут
+"D:\src\runtime_libraries\runtime_libraries\_logging\Microsoft.Extensions.Logging.Abstractions\tests\Microsoft.Extensions.Logging.Generators.Tests\TestClasses"
+
+проблема в том, что generator генерит библиотеку, а не класс. Поэтому как выглядит результат нужно разбирать 
+runtime lib `\Microsoft.Extensions.Logging.Abstractions\gen `
+
+что интересны Dummy реализации
+NullLogger.Instance
+Microsoft.Extensions.Logging.Abstractions.NullLogger<T>
+NullLoggerFactory.Instance
+NullLoggerProvider.Instance
+
+
+Для того чтобы увидеть  debug лог нужно переписать LogLevel.Trace
+```
+   builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<LoggerFilterOptions>>(
+            new CustomeLevelConfigureOptions(LogLevel.Trace)));
+
+
+internal sealed class CustomeLevelConfigureOptions : ConfigureOptions<LoggerFilterOptions>
+{
+    public CustomeLevelConfigureOptions(LogLevel level) : base(options => options.MinLevel = level)
+    {
+    }
+}
+```
+
+часть сообщений можно найти в aspnetcore
+  Application started
+ но генерятся они в runtite repo в  Microsoft.Extensions.Hosting\
+
+dbug: Microsoft.Extensions.Hosting.Internal.Host[1]
+      Hosting starting
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: D:\src\samples\core\logging\abba\bin\Debug\net8.0
+dbug: Microsoft.Extensions.Hosting.Internal.Host[2]
+      Hosting started
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+dbug: Microsoft.Extensions.Hosting.Internal.Host[3]
+      Hosting stopping
+dbug: Microsoft.Extensions.Hosting.Internal.Host[4]
+      Hosting stopped
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\2025-05-25-OptionsMonitor.md
+---
+title: OptionsMonitor
+date: 2025-05-25 17:33:37 +0200
+categories: [C#]
+tags: []
+---
+options idea is settings, parameters set, necessary  aid kit, point url,  set of descriptions of obects. Look at GoogleOptions for oauth2 implementation.
+"D:\src\aspnetcore\src\Security\Authentication\Google\src\GoogleOptions.cs"
+
+src D:\src\runtime_libraries\runtime_libraries\_options\Microsoft.Extensions.Options\src\D-src-runtime_libraries-runtime_libraries-_options-Microsoft.Extensions.Options-src-.--.cs$-content.cs_
+
+participants 
+
+-OptionsBuilder adds named action for option 
+-OptionsFactory aplly action collection to оptions
+-ValidateOptionsResultBuilder collects errors received in validation. if they exist then  it output them if does not exist return success
+-OptionsCache  idea  is to keep a Lasy of Option in ConcurrentDictionary.
+-OptionsManager add option to cache.
+-UnnamedOptionsManager calls `factory. create` that invoke actions with option.
+-OptionsMonitor get option from cache.
+-Options return OptionWrapper
+-OptionWrapper is  generic pattern to return different objects in the equal manner
+-ValidateOptions keep Func and Name, and Validate(string? name, TOptions options) method that check if  Name == null || name == Name
+then Func will be invoked
+StartupValidator  ?
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\2025-05-19-Oauth2.md
+---
+title: Oauth2
+date: 2025-05-19 10:31:09 +0200
+categories: [security]
+tags: []
+mermaid: true
+---
+
+
+если смотреть одновременно rfc точный адрес что именно стоит смотреть
+есть в списке duende
+rfc 6749
+rfc 6750
+тогда становиться легче 
+тогда становится очевидным
+например
+AuthorizationEndpoint = GoogleDefaults.AuthorizationEndpoint;
+TokenEndpoint = GoogleDefaults.TokenEndpoint;
+
+
+
+лучше посмотреть 
+ASPNETCORE добавил несколько implementation для подклбчений
+в процессе работы программисты затачивали код под спецфикацию google и других identity серверов 
+// Google Identity Platform Manual:
+        // https://developers.google.com/identity/protocols/OAuth2WebServer
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\2024-01-04-Openssl.md
+---
+title: Openssl
+date: 2024-01-04 06:39:30 +0100
+categories: [web]
+tags: []
+---
+"C:\Program Files\Git\usr\ssl\openssl.cnf.dist"
+https://github.com/KosarevDmitry/openssl/blob/master/NOTES-WINDOWS.md
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\2025-06-07-Promise.md
+---
+title: Promise
+date: 2025-06-07 21:19:08 +0200
+categories: [js]
+tags: []
+---
+
+```C#
+Foo( (o) => Console.WriteLine(o.Name),  (o) => Console.WriteLine ("error: " + o.toString()) );
+
+ Foo(Action<object> resolve, Action<object> error)
+{
+   object c= {Name:Robert, id:1}; 
+  if (1+1==2)
+    resolve(c);
+ else 
+   error("description")
+};
+```
+ 
+```js
+var promise  =  Foo(Action<object> resolve, Action<object> error)
+{
+   object c= {Name:Robert, id:1}; 
+  if (1+1==2)
+    resolve(c);
+ else 
+   error("description")
+};
+
+promise().then((o) => Console.WriteLine(o.Name));
+```
+
+```
+import { Observable } from 'rxjs';
+
+const observable = new Observable((observer) => {
+  setTimeout(() => {
+    observer.next('Observable emitted value');
+    observer.complete();
+  }, 2000);
+});
+
+observable.subscribe({
+  next: (value) => console.log(value),
+  complete: () => console.log('Observable complete'),
+});
+
+```
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\2025-02-25-Runtime-debugging.md
+---
+title: Runtime debugging
+date: 2025-02-25 15:55:51 +0100
+categories: [dotnet]
+tags: [runtime]
+---
+
+
+runtime now represent themself 3 repo indeed - corefx, coreclr and runtime 
+For my purpose it doesn't matter  version I attempted to compile archived version first.
+I have got some error, so I decided to do it on my 8 version's repo. 
+
+https://github.com/dotnet/diagnostics
+
+
+Both repos now is part of runtime repo
+https://github.com/dotnet/corefx
+https://github.com/dotnet/coreclr/
+
+The smaller but at the same time integral module for studying the better
+For my aim of learnig TPL Task class it is not important that the version od coreclr already is already legacy. 
+
+important part of diagnostics . You should be carefull sorting out the repo
+https://github.com/dotnet/diagnostics
+
+
+#@ Coreclr 
+
+This manual is about C++ coreclr debugging
+https://github.com/dotnet/runtime/blob/main/docs/workflow/debugging/coreclr/debugging-runtime.md
+
+```
+cd D:\src\runtime-v8.0.110
+.\build.cmd  :: to download .dotnet create ./artifacts and comile ->  check powershell project that provide only scripts that participated in  execution
+```
+
+```
+.\build.cmd clr.nativeprereqs
+```
+
+output 
+```cmd
+  Determining projects to restore...
+  Tool 'coverlet.console' (version '6.0.0') was restored. Available commands: coverlet
+  Tool 'dotnet-reportgenerator-globaltool' (version '5.0.2') was restored. Available commands: reportgenerator
+  Tool 'microsoft.dotnet.xharness.cli' (version '8.0.0-prerelease.25064.4') was restored. Available commands: xharness
+  Tool 'microsoft.visualstudio.slngen.tool' (version '10.0.0') was restored. Available commands: slngen
+  Tool 'dotnet-format' (version '6.0.240501') was restored. Available commands: dotnet-format
+```
+
+
+`.\build.cmd -vs coreclr.sln :: open devenv.exe `
+
+> notice that $(SolutionDir)  is D:\src\runtime-v8.0.110\artifacts\obj\coreclr\windows.x64.Debug\ide
+
+Properties
+command
+$(SolutionDir)\..\..\..\..\bin\coreclr\windows.$(Platform).$(Configuration)\corerun.exe
+"D:\src\runtime-v8.0.110\artifacts\bin\coreclr\windows.x64.Debug\corerun.exe"
+
+`.\build.cmd -vs coreclr.sln`
+choose `INSTALL` project in solution treeview
+
+working dir 
+$(SolutionDir)\..\..\..\..\bin\coreclr\windows.$(Platform).$(Configuration)
+D:\src\runtime-v8.0.110\artifacts\bin\coreclr\windows.x64.Debug
+
+command argument
+factually absolute path 
+D:\src\runtime-v8.0.110\artifacts\bin\Foo\Debug\net8.0\Foo.dll  
+I added
+$(SolutionDir)\..\..\..\..\bin\Foo\Debug\net8.0\Foo.dll
+
+// Foo.dll was compiled previously by `build.cmd -restore -build -projects "D:\src\runtime-v8.0.110\src\libraries\Foo\Foo.csproj"`
+
+Enviroment
+ offer to do
+CORE_LIBRARIES=$(SolutionDir)\..\..\..\..\bin\runtime\<target-framework>-windows-$(Configuration)-$(Platform)
+factually absolute path 
+D:\src\runtime-v8.0.110\artifacts\bin\runtime\net8.0-windows-Debug-x64
+I added
+$(SolutionDir)\..\..\..\..\bin\runtime\net8.0-windows-Debug-x64
+
+I added brakepoint in clrrun.cpp main  clicked F11 
+:+1: and debugging is work, that's great.
+
+
+## CoreFx
+downloading  archive 
+https://github.com/dotnet/corefx/releases/tag/release%2F3.1
+and have been tring to ./build.cmd
+I have got error  - build-native.proj require Visual Studio 2017 or 2019. 
+So I decide not to download v19 awhile.   https://archive.org/details/vs_Community
+the manual for archive version
+https://github.com/dotnet/corefx/blob/master/Documentation/project-docs/developer-guide.md#testing-with-private-coreclr-bits
+
+
+for v9.0.100
+Debugging corefx  described in following doc
+D:\src\runtime-test_v9.0.100\docs\workflow\debugging\libraries\windows-instructions.md 
+
+it requires to install SDK and WDK, all this things were installed in `C:\Program Files (x86)\Windows Kits\10`
+ https://learn.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk
+install `winget install Microsoft.WinDbg`
+  <https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/>
+ 
+
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\2025-05-14-IdentytyServer.md
+---
+title: IdentytyServer
+date: 2025-05-14 21:18:11 +0200
+categories: [Identity]
+tags: [oid]
+---
+tesis
+1 Every middleware filter etc can serves as identity server , any method receiveing httpcontext can check, update, breake proccess 
+2. but usually class implied interface   called identityserver
+3. login and password, clientid and credential   keyvalue pair are passed in  header or body. 
+4. stages 
+  - parse  Duende.IdentityServer.Validation.ISecretParser.ParseAsync
+  - validate - compare  actual and excepted - Duende.IdentityServer.Validation.ISecretValidator.ValidateAsync
+  validate endpoint Duende.IdentityServer.Validation.IExtensionGrantValidator.ValidateAsync
+  validate beratoken "access_token" Microsoft.AspNetCore.Http.HttpRequest.ReadFormAsync
+
+A resource is set of scope.
+A scope is set of string variables.
+A claim  is keyvalue pairs.
+A principal is claim set. 
+A client can has claim set.
+A client can be accociated himself with scope set or resource set.
+A result  that the  server produces is string variable what combines an information about the client the scopes, the recource.
+This varable is named `access_token`.    
+The cryptography algorithms RSA 256, Base64string  are used to do token.
+
+The identity server  issues, verifies, decrypt, encrypt various type of tokens.
+
+
+interaction of entyties you can seen in Duende.IdentityServer.Stores.InMemoryResourcesStore class
+props `Duende.IdentityServer.Models.IdentityResource` and `Duende.IdentityServer.Models.ApiScope`
+ has set of string variables named UserClaims.
+ prop `Duende.IdentityServer.Models.ApiResource`  has several set of string variables named
+UserClaims,string Scopes sr and also Secret class with value description and expiration.
+
+
+
+// https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/api_scopes#authorization-based-on-scopes
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\softaware_estimation.md
+Yacc++ author, Intel chip designer, ex-Googler
+
+There are 3 ways I look at this question:
+
+As a corporate software engineer. In that role, I don’t talk about cost. I don’t know how they budget my team’s time. I talk about schedule and sometimes about level of effort.
+
+However, I really dislike this part of being a software engineer, because my best estimation efforts are always wrong by a factor of 4, and that’s after I have multiplied them by a factor 4. Parkinson’s law: Work grows to fill the time allotted to it. In my case, it seems to grow to 4 times the time allotted to it. I always ask my boss to secretly (i.e. don’t tell me) my schedule by 4 and I will be on time. I had only one boss who listened to me in that regard. Best boss I ever had. Actually understood me and believed me. Worked out great.
+As a contractor. I use the time/money rule from Nikolay Petrov's answer. So, I do my estimate as above. I multiply by 4. I round that up. I then charge that based upon how many weeks I estimated and what I want my labor rate to be. I end up under-charging by a factor of 4.
+
+I am so glad I’m retired and take only “fun” or “educational” contracts and am not doing this for a living anymore. I would starve my whole family to death. When I was contracting for a living, I only took pay by the hour contracts and avoided this whole issue.
+As an ISV (independent software vendor), i.e. as a company that has written software and now sells it (i.e. what my ex-partner and I did with Yacc++). Not on a contract basis, but as a product. I ignore all of the above and estimate what the software is likely to be worth to someone who would want to buy it. I use that to set what I consider a “fair price”. I don’t worry about what it cost to make it. I only worry about what it is reasonably (in my mind worth).
+
+Yacc++ made my partner and I $1m, but over the course of 15 years (and for 2 people), so it was like a salary of $30k/year each. Fortunately, we were contract programming on a per hour basis also and did just fine because of that. Otherwise, we would have starved.
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_drafts\2025-03-26-Web-security-issues.md
+---
+title: Web security issues
+date: 2025-03-26 15:57:27 +0100
+categories: [securities]
+tags: [web]
+---
+
+Rules
+
+1.  if  `target="_blank" `  add  `rel="noopener noreferrer"`
+   explanation: <https://mathiasbynens.github.io/rel-noopener/>
+  example: ` <a   href="https://reactjs.org" target="_blank"  rel="noopener noreferrer">Link  <a/>`
+
+
