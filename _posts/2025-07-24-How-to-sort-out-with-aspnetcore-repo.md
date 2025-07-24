@@ -53,4 +53,5 @@ I  created a project with a static class and added this one to my local reposito
 
 Comments are logged in markdawn That is, you need to understand that  from standard standpoint `callers` are not used  usually becouse it is slow approach,  but for debugging it is exactly that I wanted.
 
-src:  <https://github.com/KosarevDmitry/DebugLogger>
+src:  <https://github.com/KosarevDmitry/DebugLogger>  
+example of log: <https://github.com/KosarevDmitry/DebugLogger/blob/main/Cookies-2025-02-01-09-00-35.md>
