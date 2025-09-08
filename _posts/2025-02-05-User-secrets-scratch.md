@@ -11,8 +11,9 @@ tags: [user-secrets]
 
 	../AspNetCore.Docs/aspnetcore/security/app-secrets/samples/6.x/UserSecrets
 
--init
-	- `dotnet user-secrets init`
+dotnet add package Microsoft.Extensions.Configuration.Json
+dotnet add package Microsoft.Extensions.Configuration.UserSecrets
+dotnet user-secrets init
 
 As  result it will be created element in
 - csproj `<UserSecretsId> user_secrets_id </UserSecretsId>`	
@@ -20,6 +21,7 @@ As  result it will be created element in
 	- `~/.microsoft/usersecrets`
 	- `%APPDATA%\Microsoft\UserSecrets`
 
+	 
 - commands
 
 	```bash
@@ -33,9 +35,13 @@ As  result it will be created element in
 	cat ~/.microsoft/usersecrets/934ecfd0-bf73-4a27-92aa-bd6334cc944d/secrets.json
 	```
 
-- usage
+- implemintation
 
 ```csharp
+  var configuration = new ConfigurationBuilder()
+		.AddUserSecrets<Program>() 
+          .Build();
+
 	builder.AddUserSecrets(Assembly.GetExutingAssembly(),true)
 	var movieApiKey = builder.Configuration["Movies:ServiceApiKey"];
 	var moviesApiKey = _config["Movies:ServiceApiKey"]; //DI  IConfiguration 
