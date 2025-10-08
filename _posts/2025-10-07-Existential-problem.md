@@ -1,7 +1,7 @@
 ---
 title: Existential problem
 date: 2025-10-07 13:51:39 +0200
-categories: []
+categories: [common sense]
 tags: []
 ---
 
