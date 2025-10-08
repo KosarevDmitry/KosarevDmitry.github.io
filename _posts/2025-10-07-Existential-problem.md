@@ -5,27 +5,35 @@ categories: []
 tags: []
 ---
 
-Знаете, что сложно? Бывают такие здания, учреждения запутанные,  то ли  специально обученные люди их создавали, иногда это действительно так, намеренно, то ли достраивали , кроили в процессе. В общем, сложно понять как пройти, и вот ходишь, спрашивашь у всех встречных - поперечных.  Кабинеты. В принципе,  основной маршрут движения узнал. До автоматизма, но кругозора нет. Что там за поворотом или этажом ниже, выше - неизвестно.
+You know what's difficult? Some buildings, especially official residences, are so confusing that finding the right office is a real challenge.
+And even if you eventually get used to finding your office almost automatically, you often don't understand what exactly is nearby or what the workflow is like in the neighboring offices. Sometimes such buildings, I believe, were designed by specially trained people, and that's really the intention. Sometimes they've simply been redesigned several times to suit different needs, and they've been refined along the way.
 
-Скажем,  в программировании появилась тема в широком смысле слова, язык, ответвление, которые мне интересны или кажется востребованы, и  список репозиториев, библиотек, которые оказывается нужно понимать, что бы понять именно этот проект,  который только один казалось бы и нужен,  разрастается. Хочется отмахнуться от них - вперед, вперед, времени нет. Программировать уже пора, а не манулы читать.   
+Basically, in the beginning it's hard to figure out how to get around, so you walk around, asking everyone you meet. 
 
-Правда,  появляются смутные ощущения, мол, чего бежим-то, остановись, зайди в эту комнату, репо то есть, оглядись. Но проблема в том, что стоит мизинчику увязнуть - хочется код посмотреть, пояснение же не понятно написано -  и конца и краю этому не будет. Потом, что значит код почитать? Ты синтаксис изучи сначала, зависимости  библиотеки, вот тогда только. На это то же время уйдет, прилично.  
+Let's say a topic in the broad sense of the word, a language, or a programming subfield has emerged that interests me or seems in demand, and the list of repositories and libraries I need to understand this specific project, seemingly only one of which, grows. I'm tempted to brush them off— go ahead, go ahead, there's no time. It's time to code, not read manuals.
+  
+True, there's a vague feeling, like, "Why are we running? Stop, go into this room, the repo, I mean, and look around." But the problem is, as soon as you get stuck, you want to look at the code, but the explanation isn't clearly written—there's no end in sight. Besides, what do you mean, "read the code?" First, learn the syntax, the library dependencies, and only then. That'll take a fair amount of time.
 
-Бывают же люди, верю, которые прочитают summary, comment - до них доходит, что это, до меня редко, если честно. Что эта за переменная такая в конфиге, хочется тест написать input- run- output. А, теперь понятно, примерно.    
+There are people, I believe, who read the summary and the comment — they understand what it's all about, which, frankly, rarely happens to me. What means this variable in the config? At once I  want to write a test, to create sandbox solution to check purpose. Ah, now it's more or less clear.    
 
-Виртульный разговор с мануалоделателями.    
-- Чего же вы сразу-то не сказали?    
-- Сказали.    
-- А где?  
-- Так на 5-й странице в примечании. И вообще, это  продвинутый уровень, если вы хотите соучаствовать, коммитить  в наш проект, тогда да, а так, в принципе, вам это не нужно.  
--  Вот какие вы молодцы, спасибо, извините за беспокойство. А сам думаешь,  хорошо бы сразу объяснили на первой странице.  
+A virtual conversation with manual developers.
 
-Они ведь на самом деле думают, что коммент понятен, достаточен. Я и сам, когда пишу так думаю. Пройдет время и всегда одна и таже претензия к самому себе - чего же я подробнее не написал. Потому чт они в теме,  в контексте, понимают зачем эта библиотека, класс, модуль нужен в принципе нужен.  Многие вещи им кажутся очевидными.  А мне нет.
- 
-На пять минут заглянешь, в результате зависнешь неизвестно на сколько. Написано же   "cutting-edge вспомогатор" чего не понятного или "core". Что за "core", фиг его знает, а там чего только нет, интересного и полезного.  
+"Why didn't you tell me right away?"
 
-А не заглянув, не разобравшись в начале, потом в процессе чтения  мануалов и программирования,  будешь натыкаться на это слово, понятие и дальше. Примерно знаешь, но  что это - не понятно. И вызовы этого метода, особенности остаются "за кадром".  
-Не зайдешь, так  и останешься зависимым от чужого мнения, а если остановишься и зайдешь - уйдет куча времени. Еще не известно, будет ли результат, поймешь ли как там все устроено - не факт. И долго это, понимаете. 
+"We did."
 
-По мне так стоит это делать. Но твердых аргументов у меня на этот счет нет.  И с самого начала. Вместо того чтобы  код читать, я вот все программировал когда то. Зачастую и не просили,  можно было обойтись,  хотел быть полезным. И потратил кучу времени попусту на самом деле.  А когда уже решишь под капот залезть, выясняется, что другие библиотеки пора изучать. Может сразу нужно было, толку было бы больше.
- 
+"Where?"
+
+"Well, on page 5, in the footnote." And anyway, this is an advanced level. If you want to participate and commit to our project, then it is  ok, but otherwise, you don't really need it.
+
+You're so great, thank you, sorry for bothering me. And you're thinking, it would have been better if you'd explained it right away on the first page. Or you're simply saying, "Don't read our manual at all, check out unittests." You know, not every test will help. A test without knowledge of the codebase can be incomprehensible. Functional tests are generally like that. Although some are exactly what you need, they demonstrate the concept of a class.
+
+They actually think the comment is clear and sufficient. I think so myself when I write. Time passes, and they always end up complaining about themselves: why didn't I write more in detail? Because they're in the context, they understand why this library, class, or module is needed. Many things seem obvious to them. But not to me.
+
+You'll glance at it for five minutes, and end up stuck for who knows how long. It says "cutting-edge helper" or "core" for something obscure. What "core" is, who knows, but there's all sorts of interesting and useful stuff there.
+
+Without looking into it, without understanding it at the beginning, you'll keep stumbling across this word or concept as you read manuals and program. You know roughly what it is, but what it actually is isn't clear. And the method's calls and specifics remain "behind the scenes."  This can go on for years.
+
+If you don't look into it, you'll remain dependent on other people's opinions, and if you stop and look into it, it'll waste a ton of time. You don't know yet whether you'll get results, whether you'll understand how it all works—that's not a given. And it takes a long time, you see.
+
+In my opinion, it's worth doing. But I don't have any firm arguments against it. And from the very beginning. Instead of reading code, I used to program everything. Often, no one asked; I could have done without it; I wanted to be helpful. And I wasted a ton of time, really. And when you finally decide to dig under the hood, it turns out it's time to learn other libraries. Maybe I should have done it right away; it would have been more useful.
