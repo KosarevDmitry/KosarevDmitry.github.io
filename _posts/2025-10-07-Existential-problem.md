@@ -25,12 +25,14 @@ A virtual conversation with manual developers.
 
 You're so great, thank you, sorry for bothering me. And you're thinking, it would have been better if you'd explained it right away on the first page. Or you're simply saying, "Don't read our manual at all, check out unittests." You know, not every test will help. A test without knowledge of the codebase can be incomprehensible. Functional tests are generally like that. Although some are exactly what you need, they demonstrate the concept you're trying to understand.
 
-They actually think the comment is clear and sufficient. I think so myself when I write. Time passes, and they always end up complaining about themselves: why didn't I write more in detail? Because they're in the context, they understand why this library, class, or module is needed. Many things seem obvious to them. But not to me.
+They actually think the comment is clear and sufficient. I think so myself when I write. Time passes, and everything ends with complaints about oneself Why didn't I write more in detail?
+
+Because they're in the context, they understand why this library, class, or module is needed. Many things seem obvious to them. But not to me.
 
 You'll glance at it for five minutes, and end up stuck for who knows how long. It says "cutting-edge helper" or "core" for something obscure. What "core" is, who knows, but there's all sorts of interesting and useful stuff there.
 
-Without looking into it, without understanding it at the beginning, you'll keep stumbling across this word or concept as you read manuals and program. You know roughly what it is, but what it actually is isn't clear. And the method's calls and specifics remain "behind the scenes." This can go on for years.
+Without looking into it, without understanding it at the beginning, you'll keep stumbling across this word or concept as you read manuals or program. You know roughly what it is, but what it actually is isn't clear. And the method's calls and specifics remain "behind the scenes." This can go on for years.
 
 If you don't look into it, you'll remain dependent on other people's opinions, and if you stop and look into it, it'll waste a ton of time. You don't know yet whether you'll get results, whether you'll understand how it all works—that's not a given. And it takes a long time, you see.
 
-In my opinion, it's worth doing. But I don't have any firm arguments against it. And from the very beginning. Instead of reading code, I used to program everything. Often, no one asked; I could have done without it; I wanted to be helpful. And I wasted a ton of time, really. And when you finally decide to dig under the hood, it turns out it's time to learn other libraries. Maybe I should have done it right away; it would have been more useful.
+In my opinion, it's worth doing. But I don't have any firm arguments against it. And from the very beginning. Before, instead of reading code, I programmed everything. Often, no one asked; I could have done without it; I wanted to be helpful. And I wasted a ton of time, really. And when you finally decide to dig under the hood, it turns out it's time to learn other libraries. Maybe I should have done it right away; it would have been more useful.
