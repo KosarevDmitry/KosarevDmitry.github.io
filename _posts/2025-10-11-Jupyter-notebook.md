@@ -5,13 +5,13 @@ categories: [py]
 tags: []
 ---
 
-- `jupyter-notebook` file is json with  field `code`, field `comment` and field  to memorize the result of  execution of code field content.
+- jupyter-notebook `.ipynb` file is json with  fields `code`, `comment` and field  to memorize the execution result of `code` field content.
 
 The workflow (pseudocode) looks like as following:
 
 ```py
-json=jsonRead(ipynb)
-htmlRender(json)
+json=ReadFileAsJson(ipynb)
+renderAsHtml(json)
  
 # User clicks `div` with cells[1].source content
 
@@ -23,7 +23,6 @@ if obj.cell_type == "code":
   obj.metadata.outputs = result.output
   obj.execution_count++
 
-update(ipynb, json)
-htmlRender(ipynb) 
-
+update(obj, json)
+renderAsHtml(json)
 ```
