@@ -1,5 +1,5 @@
 ---
-title: How to maintain a directory of node packages
+title: How to keep notes of node packages
 date: 2025-11-30 15:57:56 +0100
 categories: [learning]
 tags: []
@@ -44,3 +44,6 @@ idea:
 So, if you maintain a directory with brief library descriptions,
 source code with comments preserved by git patch,
 plus additional test cases, then that's just the ticket.
+
+
+I have to switch between different languages, so it's important for me to leave notes if I can. Otherwise, I might forget what I was doing, the name of the package I need, or any other useful information.

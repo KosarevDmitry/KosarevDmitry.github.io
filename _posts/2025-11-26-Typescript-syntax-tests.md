@@ -1,5 +1,5 @@
 ---
-title: Typescript
+title: Typescript syntax tests
 date: 2025-11-26 21:35:54 +0100
 categories: [Nodejs]
 tags: []
@@ -18,9 +18,9 @@ All you need
 	In my opinion, the HTML presentation is great, but too dynamic to be easily read.
 	It makes it difficult to concentrate on the meaning. So, I usually download any repo and read it in Notepad++ with minimal syntax highlighting. 
 	This approach allow to write comment and whole reading process  become more productive.
-4. Create project `mkdir test && cd test && tsc --init && echo. > test.ts`
+4. Create project `mkdir test && cd test && tsc --init && echo "" > test.ts`
 5. Copy any snippet from  the reference to your source file.
-6. Run `tsc` . New js file will be created. 
+6. Run `tsc` . The new js file will be created. 
 
 This way you understand code deeply than just reading.   
  

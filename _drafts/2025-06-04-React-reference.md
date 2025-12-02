@@ -22,7 +22,7 @@ Total files: 46
 
 ### Helper
 
-- useId.md  (generation of uniq id)
+- useId.md  - generation of uniq id
 
 ### Memory optimization
 
@@ -70,7 +70,7 @@ export default function Counter() {
 
 ### Promise handler
 
-- use.md  (resolve Promise like await or Task.GetResult in C#)
+- use.md  -resolve Promise like await or Task.GetResult in C#
 
 ### Transferring a ref or a parameter
 
@@ -93,9 +93,6 @@ function Form() {
 ```
 
 - useImperativeHandle.md
-
-
-
 - createContext.md  
 - useContext.md
 
@@ -136,11 +133,11 @@ export default function ThemeSelector() {
 ### Caching
 
 
-usememo skips rendering if any variables that  are dependcies defined in function are not changed
+- `usememo` skips rendering if any variables that  are dependcies defined in function are not changed
 
 https://medium.com/geekculture/great-confusion-about-react-memoization-methods-react-memo-usememo-usecallback-a10ebdd3a316
 
-- memo.md (Skipping re-rendering when props are unchanged)
+- memo.md - Skipping re-rendering when props are unchanged
 
 ```jsx
 const Greeting = memo(function Greeting({ name }) {
