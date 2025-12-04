@@ -8,7 +8,7 @@ tags: []
 The tailwindcss repo is  a `rust project` because the repo contains `toml` file in  the root folder.  
 Cargo aka config  directs  to `members = ["crates/*"]`.  
 
-**Crates**  
+## Crates  
   *  `./node` contains napi-template. `napi` compiles a nodejs addon from `rust` src.
   * `node` crate  has dependency to `oxide` crate. 
   * `oxide` depends on `ignore` and `classification-macros`  crates.
@@ -53,10 +53,10 @@ The `.\node_modules\@tailwindcss\oxide\index.js` loads addon `./tailwindcss-oxid
 ```
 and exports Scanner `module.exports.Scanner = nativeBinding.Scanner`
 
-**Conclusion**  
+## Conclusion
 To understand properly how tailwindcss works you need to understand Rust code.
 
-**Using**  
+## Usage
 This seems to be the most convenient approach for local use
 
 0. `npm install tailwindcss @tailwindcss/cli`
