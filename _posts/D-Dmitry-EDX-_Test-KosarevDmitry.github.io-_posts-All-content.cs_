@@ -1,0 +1,2779 @@
+---
+// ### ROOT D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts
+
+Search patterns:
+Directory to include:all
+Only root dir: false
+
+Total files: 53
+.placeholder
+
+2018-01-27-how-to-test-the-validity-of-coding-style-rule.md
+
+2019-09-20-When-is-ToArray-required.md
+
+2020-01-03-Metasyntactic-variable.md
+
+2021-01-01-Curl.md
+
+2022-01-06-System.Ling.md
+
+2022-07-20-Class-vs-struct.md
+
+2022-12-29-Code-sample.md
+
+2023-01-13-REST.md
+
+2023-07-25-Manifesto-for-Agile-&-scrum.md
+
+2023-09-01-Access-to-internal-project-classes.md
+
+2023-12-05-Jekyll-tutorial.md
+
+2024-01-02-Principles-including-SOLID.md
+
+2024-01-03-Fork.md
+
+2024-01-03-Protocols.md
+
+2024-01-05-What-are-the-prospects.md
+
+2024-01-06-Design-patterns.md
+
+2024-01-10-Repos-for-Csharpdeveloper.md
+
+2024-01-25-What-does-the-middleware-pattern-look-like.md
+
+2024-02-11-Bash-script-for-Chirpy-Jekill-post-template.md
+
+2024-02-11-Is-operator.md
+
+2024-06-25-Certificates.md
+
+2024-07-27-Error-description-list.md
+
+2024-07-29-Error-warning.md
+
+2024-08-09-Web-API-libs.md
+
+2024-08-15-How-to-suppress-piece-of-code.md
+
+2024-08-22-Async-Await.md
+
+2024-08-31-Under-the-hood.md
+
+2024-09-12-How-to-change-and-test-isolation-levels.md
+
+2024-10-12-Negative-side-of-open-source-development.md
+
+2024-12-27-Clean-code.md
+
+2025-01-09-T-SQL-glossary.md
+
+2025-01-10-Briefly-about-SQL.md
+
+2025-01-12-What-is-IEnumarable-anyway.md
+
+2025-02-01-DotNetPeek.md
+
+2025-02-02-ASPNETCORE.md
+
+2025-02-04-What-are-the-most-common-name-extensions.md
+
+2025-02-04-Where-are-endpoints-created.md
+
+2025-02-05-User-secrets-scratch.md
+
+2025-02-06-Container-healthcheck-loop.md
+
+2025-02-10-How-to-add-project-in-aspnetcore-repo.md
+
+2025-02-14-Template-to-test-Reactjs.md
+
+2025-02-15-Build-the-Aspnetcore-repo.md
+
+2025-02-18-Once-again-about-IEnumerable.md
+
+2025-03-19-About-sources.md
+
+2025-05-08-Tailwindcss.md
+
+2025-07-17-The-binding-types-in-csproj.md
+
+2025-07-24-How-to-sort-out-with-aspnetcore-repo.md
+
+2025-10-07-Existential-problem.md
+
+2025-10-11-Jupyter-notebook.md
+
+2025-11-26-Typescript-syntax-tests.md
+
+2025-11-30-How-to-keep-notes-of-node-packages.md
+
+2025-12-04-Tailwindcss-assistant.md
+---
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\.placeholder
+
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2018-01-27-how-to-test-the-validity-of-coding-style-rule.md
+---
+title: How to test the validity of a Coding Style rule
+date: 2018-12-28 16:32:27
+categories: [dotnet]
+tags: [codestyle]
+---
+
+Is it possible to refute the statement by citing the code in [runtime], which is probably **fine** from Microsoft’s point of view?
+I think it's acceptable, I don't know other criteria. 
+I have a feeling that reading recommendations is useless, just as in a language you need to listen to live speech, read books, and not short topics.
+For example, there is a statement: it is desirable that there is only one exit `return statement` from a function.
+Such statements are involuntarily remembered because they are categorical and simple.  
+Maybe I'm wrong, so just in case, I typed keywords into Google **function only one return statement**
+The number of references is enough to confirm that such a statement exists.
+
+Probably, it would be possible to compile a list of statements of this kind and then refute them,
+prove that in general they mean nothing.
+
+Look at the code [HashHelpers.cs].
+
+```csharp
+  public static bool IsPrime(int candidate) 
+    { 
+        if ((candidate & 1) != 0) 
+        { 
+            int limit = (int)Math.Sqrt(candidate); 
+            for (int divisor = 3; divisor <= limit; divisor += 2) 
+            { 
+                if ((candidate % divisor) == 0) 
+                    return false; 
+            } 
+            return true; 
+        } 
+        return candidate == 2; 
+    } 
+```
+
+An alternative approach could probably be like this:
+
+```csharp
+    public static bool IsPrime(int candidate) 
+    { 
+        bool result = true;
+        if ((candidate & 1) != 0) 
+        { 
+            int limit = (int)Math.Sqrt(candidate); 
+            for (int divisor = 3; divisor <= limit; divisor += 2) 
+            { 
+                if ((candidate % divisor) == 0) 
+                    result=false; 
+                    break;
+            } 
+        }
+        else{ 
+          result = candidate == 2; 
+        }
+        return result;
+    } 
+```
+
+	
+[runtime]:https://github.com/dotnet/runtime/
+[HashHelpers.cs]:https://github.com/dotnet/runtime/blob/main/src/libraries/System.Private.CoreLib/src/System/Collections/HashHelpers.cs
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2019-09-20-When-is-ToArray-required.md
+---
+title: When is ToArray required
+date: 2019-09-20 18:19:30 +0200
+categories: [dotnet]
+tags: [linq]
+---
+
+Why is ToArray required in certain situations?
+
+
+```csharp
+
+public class LinqTests
+{
+    private static int _count1 = 0;
+    private static int _count2 = 0;
+
+    [Fact]
+    public void DelegateCaller()
+    {
+        IEnumerable<A> list = new List<A>()
+        {
+            new A(1, 1),
+            new A(1, 2),
+            new A(1, 3),
+            new A(2, 1),
+            new A(2, 2),
+            new A(2, 3)
+        }.AsEnumerable();
+
+        Func<A, bool> selector1 = (a) =>
+        {
+            _count1++;
+            return a.a > 1;
+        };
+        Func<A, bool> selector2 = (a) =>
+        {
+            _count2++;
+            return a.a > 1;
+        };
+
+
+        var ienumerable = list.Where(selector1);
+        var array = list.Where(selector2).ToArray();
+
+        var threshold = Enumerable.Range(0, 2);
+
+        foreach (var item in threshold)
+        {
+            var choosed1 = ienumerable.Where(o => o.b > item);
+            var choosed2 = array.Where(o => o.b > item);
+
+            foreach (var rec in choosed1) { }
+
+            foreach (var rec in choosed2) { }
+        }
+
+        int listCount = list.Count();
+        Assert.True(_count1 == listCount * threshold.Count());
+        Assert.True(_count2 == listCount);
+    }
+
+
+    record A(int a, int b);
+}
+
+```
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2020-01-03-Metasyntactic-variable.md
+---
+title: Metasyntactic variable
+date: 2020-01-03 19:56:47 +0100
+categories: ["common sense"]
+tags: []
+---
+
+It is necessary to use them because they simplify the understanding of the examples.  
+Everything that is not important for the compilator, are not keywords, is better to name it this way.    
+There is  the wikipedia [article] on this topic.  
+
+**List of words**
+```
+foobar, foo, bar, baz, tata,   
+titi, tutu fuga, qux, quux,   
+corge, grault, garply, waldo,  
+fred, plugh, xyzzy, thud;
+```
+Although other short words also are suitable for example- fee, boo, loo, koo. Why not?  
+But it’s still preferable to add tags `<username>`, `<host>` ets.  
+
+[article]:https://en.wikipedia.org/wiki/Metasyntactic_variable  
+
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2021-01-01-Curl.md
+---
+title: Curl
+date: 2021-01-01 10:37:18 +0100
+categories: [tools]
+tags: [curl]
+---
+
+### Curl is the universal thing for web request.  
+Sometimes it is better to avoid new dependency as `postman`, ets.
+
+src
+: <https://curl.se/docs/tutorial.html>
+: <https://man7.org/linux/man-pages/man1/curl.1.html>
+    
+
+- Keys I used in examples
+
+- `-k`  to switch off certificate checking
+- `-v` verbose information
+- `user`  -  login and password
+
+
+- You can send SOAP request this way:
+
+```shell
+curl --request 'POST' -v -k \
+--url 'https:...' \
+--user login:password \
+--header 'Content-Type: text/xml;charset=UTF-8' \
+--header 'SOAPAction: "http:/foo.ru/LIST"' \
+--output result.xml \
+--data-binary '<?xml version="1.0"?>
+<soapenv:Envelope xmlns:soapenv
+...
+</soapenv:Envelope>'
+```
+
+
+```shell
+curl --request 'POST' -v -k \
+--url 'https:...' \
+--user login:password \
+--header 'Content-Type: text/xml;charset=UTF-8' \
+--header 'SOAPAction: "http:/foo.ru/LIST"' \
+--output result.xml \
+--data-binary $data.xml
+```
+
+Very useful library `jq` ([repo](https://jqlang.github.io/jq/download/))
+
+- These are just examples: 
+
+```shell
+curl -k -v 'https://bar.net:21870' \
+-H 'Accept-Charset: utf-8' \
+-H 'Content-Type: application/json; charset=utf-8' \
+-H 'Connection: close' \
+--no-progress-meter \
+-H 'Test: test' \
+-d '{
+"orderId": "1",
+"productType": 0
+}' | jq
+```
+
+```shell
+curl -k 'https://bar.net:21870' \
+-H 'Accept-Charset: utf-8' \
+-H 'Content-Type: application/json; charset=utf-8' \
+-H 'Connection: close' \
+--no-progress-meter \
+-H 'Test: test' \
+-H 'Client: 15' \
+-d '{
+"orderId": "2",
+"OfferId": "1",
+"type": 0,
+"CreditSum": 100.00,
+}' | jq
+```
+
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2022-01-06-System.Ling.md
+---
+title: System.Ling
+date: 2022-01-06 10:59:46 +0100
+categories: [dotnet]
+tags: [linq]
+---
+
+
+
+It seems to me that apart from `test` nothing else is needed for complete understanding.
+
+tests: <https://github.com/dotnet/runtime/tree/main/src/libraries/System.Linq/tests>  
+
+>The query should be executed in the database; this is more efficient to use compiled query: stored procedure.
+If there is no access to the server then you have to manipulate the data on the client.
+>
+
+
+additional: <https://github.com/dotnet/try-samples/tree/main/101-linq-samples/src>
+full methods list:
+: [Enumerable.cs](/assets/attachment/Enumerable.cs)  
+: [Queryable.cs](/assets/attachment/Queryable.cs)
+
+
+
+### Selection
+1. `Where.cs` after 'group by' implements  'having'
+2. `Take.cs`
+1. `Skip.cs`
+1. `SkipWhile`
+1. `TakeWhile`
+
+### Uniq selection
+1. `Distinct.cs` check through  adding to Hashset
+
+### Selection of a single item
+1. `First.cs`
+1. `FirstDefault`
+1. `Last`
+1. `LastDefault`
+1. `ElementAt.cs`  is not supported in LINQ to SQL
+1. `Single.cs`  throw error if selection have several convinient records
+1. `SingleDefault`
+1. `DefaultIfEmpty`  returns null or default(TSource) if the sequence has no elements
+
+###  Aggregation, calculation
+1. `Average.cs`
+1. `Count.cs`
+1. `LongCount`
+1. `Max.cs`
+1. `Min.cs`
+1. `Sum.cs`
+1. `MaxBy`  just for IEnumerable
+1. `MinBy`  just for IEnumerable
+
+### Sorting
+1. `OrderBy`
+1. `ThenBy` sort records with same key after previous sorting
+1. `OrderByDescending`
+1. `ThenByDescending`
+1. `Reverse`
+
+### Transformation
+1. `Aggregate.cs` IEnumarable
+1. `Select.cs` option with index (m,i)  
+1. `IEnumarable<T>` T another type of items
+1. `Cast`  throw error
+1. `ofType` pass error during transformation
+1. `SelectMany.cs`  one-to-many data is taken from the second table and transferred to the response
+
+
+### Qualifiers
+1. `Contains.cs` interchangable  with `Any`
+1. `Any` interchangable with `Conains`
+1. `All.cs`
+
+### Interfaces 
+1. `Asenumerable`  doesn’t force immediate query execution  
+2. `AsQueryable`
+
+### Grouping
+1. `Grouping.cs`  
+2. `GroupJoin.cs` 
+
+### Collection manipulation
+1. `Join.cs`  LeftJoin  with assistent DefaultIfEmpty()  
+2. `Concat.cs` for first sequence come next one  
+3. `Union.cs`  uniq  
+4. `UnionBy`  
+5. `Intersect.cs`    uniq intersection  
+6. `Except.cs`  uniq diffrence not exist, not in  
+1. `Chunk.cs`   [][]   
+1. `Zip.cs`  array of anonyme types  
+
+### Compare
+1. `SequenceEqual.cs`
+
+### Add
+1. `AppendPrepend.cs`
+
+### Change a collection type 
+1. `ToArray`
+1. `ToDictionary` 
+1. `ToCollection.cs`
+1. `ToList`
+1. `ToLookUp` grouping records by arbitrary field of  table
+1. `ToHashSet`
+
+### Generation 
+1. `Range.cs` only for int. Static Enumerable  
+1. `Repeat.cs`only for int  
+1. `Empty`
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2022-07-20-Class-vs-struct.md
+---
+title: Class vs struct
+date: 2022-07-20 18:05:09 +0100
+categories: [dotnet]
+tags: []
+---
+
+
+- struct doesn't provide inheritance and poliformism; 
+- the struct  is copied slowly because  it is required to copy the value,  reference type copy only reference 64 bits on x64 OS;
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2022-12-29-Code-sample.md
+---
+title: Code sample
+date: 2022-12-29 16:44:03 +0100
+categories: [sql]
+tags: [easy-to-understand]
+---
+If you have access to the repo and to the documentation in particular, it becomes possible
+pull out the piece of information that is currently of interest in an easy-to-read form.
+As a user, I am mostly interested in sql documentation, and like in any other documentation, in fact, only the code. If the code is not obvious, then you can already look for comments and look at the entire page. That is, first the code, the test, then the words, posts and so on.
+
+You can extract sql blocks this way, for example
+
+```csharp
+    [Theory]
+    [InlineData(@"D:\src\sql\sql-docs\docs\t-sql\functions", "", @"D:\temp\t-sql-functions.sql")]
+    [InlineData(@"D:\src\sql\sql-docs\docs\t-sql\statements", "plan", @"D:\temp\statements.sql")]
+    public void GetScripts(string src, string filter, string output)
+    {
+        var items = Directory.EnumerateFiles(src);
+        if (!string.IsNullOrWhiteSpace(filter)){
+            items = items.Where(x => Path.GetFileName(x).Contains(filter));
+        }
+
+        try{
+            using (StreamWriter sw = new StreamWriter(output)){
+                sw.AutoFlush = true;
+                sw.WriteLine($"--  src: {src}");
+                Parallel.ForEach(items, (q) => Parse(q, sw));
+            }
+        }
+        catch (Exception ex){
+            Assert.Fail(ex.Message);
+        }
+    }
+
+
+    void Parse(string item, StreamWriter sw)
+    {
+        string line;
+        bool flag = false;
+        StringBuilder bld = new();
+        int count = 0;
+
+        using (StreamReader sr = new StreamReader(item)){
+            while (sr.Peek() >= 0){
+                count++;
+                line = sr.ReadLine();
+                if (line.TrimStart().StartsWith("```")){
+                    if (flag == false){
+                        bld.AppendLine("--" + Path.GetFileName(item) + " line: " + count);
+                    }
+                    else{
+                        bld.AppendLine();
+                    }
+
+                    flag = !flag;
+                    continue;
+                }
+
+                if (flag){
+                    bld.AppendLine(line);
+                }
+            }
+        }
+
+        sw.WriteLine(bld.ToString());
+    }
+```
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2023-01-13-REST.md
+---
+title: REST
+date: 2023-01-13 21:51:31 +0100
+categories: [aspnetcore]
+tags: [rest]
+---
+
+“What we want is rest,” said Harris.  
+
+“Rest and a complete change,” said George. “The overstrain upon our  
+brains has produced a general depression throughout the system. Change  
+of scene, and absence of the necessity for thought, will restore the  
+mental equilibrium.”  
+
+Three Men in a Boat (To Say Nothing of the Dog)
+
+1. Short glossary: <https://developer.mozilla.org/en-US/docs/Glossary/REST>
+
+2. Responce status codes 
+
+	<https://www.restapitutorial.com/httpstatuscodes>
+	<https://developer.mozilla.org/en-US/docs/Web/HTTP/Status>
+
+
+3. Headers <https://en.wikipedia.org/wiki/List_of_HTTP_header_fields>
+
+4. Test sites that are used in dotnet docs snippets. For example <https://github.com/dotnet/docs/blob/main/docs/fundamentals/networking/telemetry/snippets/metrics/Program.cs>, etc
+
+	- <https://httpbin.org>   
+	- <https://github.com/postmanlabs/httpbin> 
+	- <https://jsonplaceholder.typicode.com>
+
+
+5. Api guidelines  (source <https://apistylebook.com>)
+
+	- <https://github.com/Microsoft/api-guidelines>
+	- <https://microsoft.github.io/code-with-engineering-playbook/documentation/guidance/rest-apis/>
+	- <https://microsoft.github.io/code-with-engineering-playbook/design/design-patterns/rest-api-design-guidance/>
+	- <https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md>
+	
+	
+	- <https://github.com/CiscoDevNet/api-design-guide>
+	- <https://github.com/Haufe-Lexware/api-style-guide/tree/master>
+	- <https://github.com/cloudfoundry/cloud_controller_ng/blob/main/docs/v3_style_guide.md>
+	- <https://github.com/WhiteHouse/api-standards/tree/master>
+
+	- <https://geemus.gitbooks.io/http-api-design/content/en/>
+	
+	- <https://google.aip.dev/1>
+	- <https://developer.paypal.com/docs/api/invoicing/v2/>
+	
+	- <https://apiguide.readthedocs.io/en/latest/>
+	- <https://restful-api-design.readthedocs.io/en/latest/>
+
+	- <https://adidas.gitbook.io/api-guidelines>
+	- <https://opensource.zalando.com/restful-api-guidelines/>
+
+	- <https://developer.atlassian.com/server/framework/atlassian-sdk/atlassian-rest-api-design-guidelines-version-1/>
+	- <https://developer.atlassian.com/platform/marketplace/atlassian-rest-api-policy>
+
+	
+
+6. Api examples
+
+	- Twitter: <https://developer.twitter.com/en/docs/api-reference-index>
+	- Facebook: <https://developers.facebook.com/docs/reference/api/>
+	- LinkedIn: <https://developer.linkedin.com/apis>
+	- Github:   <https://api.github.com/>
+
+	
+
+	
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2023-07-25-Manifesto-for-Agile-&-scrum.md
+---
+title: Manifesto for Agile & scrum
+date: 2023-07-25 14:44:56 +0200
+categories: [common sense]
+tags: [agile]
+---
+
+ Легенда 
+> The Manifesto for Agile Software Development is a foundational document produced by 17 developers at Snowbird, Utah in 2001.  
+
+Где-то в тех краях <https://www.snowbird.com/lodging>
+
+Это совершенно правдивая версия рождения Manifesto for Agile и scrum методологии.
+
+На самом деле парней было не семнадцать, а шестнадцать изначально.  
+Троих приятелей случайно встретили уже на курорте.  
+А двое, с которыми приехали, довольно быстро отделились. Флирт оказался результативным и ребята перебрались к подругам в шале неподалеку и в общем веселье участия почти не принимали. 
+
+Писал манифест один, что естественно, писателей в тандеме - по пальцам пересчитать. Рассказывали, что он очень некстати подвихнул ногу.
+Известно также, что элементы графоманства и занудства за ним наблюдались всегда. Долго не хотел ехать, но все же собрался. И вот чуть ли ни в первый день получил травму. В результате сидел целыми днями на веранде. Делать было нечего, организм требовал роздыху. После "вчерашнего" в голове - пусто и светло. Кодить не было никакой возможности. Вот на бумажной салфетке, попросив у официанта карандаш,  тогда он  и накропал идеи, которые в скором времени возьмут на вооружение лидеры рынка.
+
+Вечером зачитал манифест приятелям в баре, хохотали, залили,  как водится, декларацию пивом. К обеду следующего дня обнаружил салфетку в кармане и машинально бросил в чемодан, пригодится. 
+
+Мир менялся. Приходилось считаться с духом времени, айтишников становилось все больше, программы сложнее, а дебаггеры все робустнее и удивительнее, а в мире руководства, контроля над програмерами в маминой вязки свитерах, ничего не происходило.  
+
+Доходило до смешного. Обычно моральные страдания экзекутив директора выглядели так. 
+
+Сначала программист, на которого возлагались надежды, что наконец-то шеф получит достоверный отчет об остатках на складаx, заинтересовано смотрел вам в глаза и отвечал в формате и духе, которые ему настоятельно рекомендовали придерживаться в кадровом агенстве. Неделю, две он еще как-то держался, казался вменяемым, пока его водили по кабинетам и знакомили с порядками в офисе. В какой-то момент происходила трансформация. С блуждающим взглядом он ел, пил кофе, ходил по коридорам, стоял у окна. Его пытались приглашать на совещания. Когда очередь высказать мнение доходила до него, отвечал вежливо, но если пытались углубить тему, задавать наводящие вопросы, "закорачивал" такие попытки излюбленной фразой - "на скорость не влияет". Руководство злилось, естественно, что они там о себе думают. То же мне, Ньютоны недоделанные, который, кстати, по легенде в палате общин сказал только одну фразу "Закройте, пожалуйста, форточку, дует".
+
+Иногда в таких случаях в отдел отправляли кого-нибудь ("будешь за них отвечать") , но результаты, честно говоря, были неубедительными. На вопрос "ребята, что вы сейчас делаете?" они несли "пургу", биты - байты, прости господи, и докладывать это руководству не было никакой возможности. Вы поймите правильно, программы писались без менеджеров даже очень хорошо, но ощущения контроля за процессом не было и это нервировало.
+Менеджеры среднего звена понимали что денежный поток уплывает мимо них, цифра в строчке бюджета "программное обеспечение" увеличивалась и с этим таки нужно было что-то делать, за управление было давно пора получать приличные бонусы. 
+
+Рынок требовал стандартизации. Управленцу нужна работа на каждый день, а не раз в месяц, а то и реже, когда деплоят очередной модуль. Требовались правила, "скрижали", лучше напечатанные в глянцевом журнале. Как говорится - дайте мне точку опоры и я это дело проверну. Нужно было что-то околонаучное.
+
+Когда опус попал к знакомому редактору именно такого престижного журнала, с декларацией, скажем откровенно, тоже поработали, не печать же в таком сыром виде. 
+Потом пошли письма читателей. Почему так, а не этак. Помните автолюбителя из Золотого теленка "А вы на Студебеккере?" или еще лучше Швейка, письма в редакцию журнала "В мире животных"? Для убедительности отвечали: коллектив авторов написал, ясно? Обсуждению не подлежит. 
+
+Вы меня, конечно, спросите, почему только 15 минут по методологии на утренний сейшн полагается?
+
+Тут, на самом деле, все просто - у редактора журнала имелся дядя, родственник, работавший на Фольксвагене в Европе когда-то, и летучки на тамошнем заводе проходили именно 15 минут. Утром собирались, перекурят, выпьют кофе, потом заходил шеф и раздавал указания жестко и быстро, по укоренившейся привычке с войны. В 9 часов включался конвейер, гонять детали по кругу на транспортере, пока они там наговорятся, никто не будет. В 9 часов рабочий уже должен стоять на линии. Совещание открывалось всегда в 8:40. Плюс 15 минут планерки и пять минут оставалось на то чтобы спуститься в цех. Кроме того ведь в приказе ведь важен не только здравый смысл, но и звенящая ясность, точность. Вот так и затвердились эти дурацкие 15 минут. 
+
+Консультантам эта штука, манифест я имею ввиду, понравилась, ISO в своем роде. Приходишь к клиенту и сходу делаешь экспресс-анализ: как долго у вас проходят совещания? Смотрящий за программистами начинает мяться - когда-как, углубляется в рассуждения. А вы ему, естественно, в присутствии шефа,  - 15 минут и ни секундой больше. Так написал Заратустра! Вы что не читали вчерашний выпуск Businessweek? Руководство имело возможность ознакомиться с методой и сделать вывод - оно таки не зря потратило изрядную сумму на парня со значком известного университета на лацкане пиджака. Как говорится, железный конь пришел на смену крестьянской лошадке! Громко и четко: контрольные функции восстановлены! Бизнес работает в штатном режиме! 
+
+Вот так, мало по малу, scrum с agile и прижились.
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2023-09-01-Access-to-internal-project-classes.md
+---
+title: Access to internal project classes
+date: 2023-09-01 09:55:20 +0200
+categories: [dotnet]
+tags: [infrastructure]
+---
+
+There are several approaches to providing access to another project's internal classes.
+
+1. Add any class (usually `/root/Properties/InternalsVisibleTo.cs`) with following content 
+    > `runtime` repo  contains at least  26 similar files  as 
+	"...runtime\src\libraries\System.Runtime.Numerics\src\Properties\InternalsVisibleTo.cs"
+	
+	```csharp
+	 using System.Runtime.CompilerServices;
+	 [assembly: InternalsVisibleTo("bar.tests"), InternalsVisibleTo("bar.tests1")] 
+	```
+
+2. Adding to Assembly.info  
+
+	```csharp
+	// Copyright The OpenTelemetry Authors
+	// SPDX-License-Identifier: Apache-2.0
+
+	using System.Runtime.CompilerServices;
+
+	[assembly: InternalsVisibleTo("OpenTelemetry" + AssemblyInfo.PublicKey)]
+	[assembly: InternalsVisibleTo("OpenTelemetry.Api.ProviderBuilderExtensions" + AssemblyInfo.PublicKey)]
+	[assembly: InternalsVisibleTo("OpenTelemetry.Api.ProviderBuilderExtensions.Tests" + AssemblyInfo.PublicKey)]
+	[assembly: InternalsVisibleTo("OpenTelemetry.Api.Tests" + AssemblyInfo.PublicKey)]
+	[assembly: InternalsVisibleTo("OpenTelemetry.Exporter.Console" + AssemblyInfo.PublicKey)]
+	[assembly: InternalsVisibleTo("OpenTelemetry.Exporter.InMemory" + AssemblyInfo.PublicKey)]
+	[assembly: InternalsVisibleTo("OpenTelemetry.Exporter.OpenTelemetryProtocol" + AssemblyInfo.PublicKey)]
+	[assembly: InternalsVisibleTo("OpenTelemetry.Exporter.OpenTelemetryProtocol.Tests" + AssemblyInfo.PublicKey)]
+	[assembly: InternalsVisibleTo("OpenTelemetry.Extensions.Hosting" + AssemblyInfo.PublicKey)]
+	[assembly: InternalsVisibleTo("OpenTelemetry.Extensions.Hosting.Tests" + AssemblyInfo.PublicKey)]
+	[assembly: InternalsVisibleTo("OpenTelemetry.Shims.OpenTracing.Tests" + AssemblyInfo.PublicKey)]
+	[assembly: InternalsVisibleTo("OpenTelemetry.Tests" + AssemblyInfo.PublicKey)]
+
+	#if SIGNED
+	file static class AssemblyInfo
+	{
+		public const string PublicKey = ", PublicKey=002400000480000094000000060200000024000052534131000400000100010051C1562A090FB0C9F391012A32198B5E5D9A60E9B80FA2D7B434C9E5CCB7259BD606E66F9660676AFC6692B8CDC6793D190904551D2103B7B22FA636DCBB8208839785BA402EA08FC00C8F1500CCEF28BBF599AA64FFB1E1D5DC1BF3420A3777BADFE697856E9D52070A50C3EA5821C80BEF17CA3ACFFA28F89DD413F096F898";
+	}
+	#else
+	file static class AssemblyInfo
+	{
+		public const string PublicKey = "";
+	}
+	#endif
+	```
+
+1. Adding items to msbuild csproj  
+
+	```csharp
+	  <ItemGroup>
+		<InternalsVisibleTo Include="StackExchange.Redis.Server" />
+		<InternalsVisibleTo Include="StackExchange.Redis.Tests" />
+	  </ItemGroup>
+	```
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2023-12-05-Jekyll-tutorial.md
+---
+title: Jekyll tutorial
+date: 2023-12-28 16:32:27
+categories: [bash]
+tags: [jekyll]
+render_with_liquid: false
+---
+
+There is a tutorial on the `jekyll` website, presented on several pages.
+
+In the process of working with it, I came up with a script that seems to me more visual and easier to understand.  
+Code is too long to post in page here. 
+
+See <https://gist.github.com/KosarevDmitry/606ded5edd97886c6428e8825e2b886b>
+
+
+
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2024-01-02-Principles-including-SOLID.md
+---
+title: Principles, including `SOLID`
+date: 2024-01-02 08:04:04 +0100
+categories: ["common sense"]
+tags: [principles]
+---
+
+- Do one thing well.  
+- Let someone else do the hard part.
+- Don't inventing the wheel.
+- `Don't repeat yourself` combined with `Rule of three`.
+-  `Composition over inheritance` - An interface (especially one with default interface methods feature of dotnet 8.0) is preferable to an abstract class.
+- Principles are an expensive thing, and not everyone can afford them.  
+- To understand the abstraction layer, you need to understand the reason for its occurrence, go down to the layer below.
+- Programmers work for themselves
+- A programmer involuntarily wants to be asked for help, so he complicates the presentation of the service he provides.
+- Any dependency leads to problems. `IDE`  is dependency also, to know СLI commands what  generated by IDE buttons are almost necessary.  Hence take the time to figure it out. There are must be  `make` file, config, cli etc somewhere.
+- The more wrappers, the more difficult to test.
+- The world model is more important than its details.
+- Comparison is the most important tool of knowledge.
+- The only way to learn a language is to read source code, and then to coding.
+- There is never enough time to do it right, but there is always enough time to do it over. 
+- Work is what horses die of
+- `Principle of least astonishment` (like as `Liskov substitution`)
+
+All `SOLID` principles are partly interconnected.
+
+1. The `Single responsibilty` of classes is about not inflating a class.
+
+	The smaller the class, the greater the possibility of reuse.
+	
+	Probably so.
+
+	Disadvantage - since instead of one class, we have several, therefore, several memory allocation operations will be required, which reduces performance.
+	In `dotnet` there is an opportunity to create a partial class and they are used. So there is a reason.
+
+	Advantages - if there are several classes, therefore, the lifetime of each of them is shorter, the object becomes available for deletion from memory earlier.
+	
+	There is rarely anything in nature with a single responsibility. It is an abstraction.
+
+2. I would add `Single responsibilty of method`
+
+	The same idea - the smaller the method, the greater the probability of reusing a block of code. Small procedures are easier to manipulate, replace.
+
+	Although usually, naturally, they first write in a single method, then deal with permutations. Reminds me of writing texts, reports, where the sequence of information presentation is important, roughly speaking, the sequence of paragraphs.
+
+	Methods in `runtime`, as a rule, are small in size, they are removed from the stack faster.
+
+	But at the same time, to improve performance, the `inlining` attribute is used, which leads to the implementation of the code of the called method into the code of the calling method.
+	Time is saved on the call. A dilemma arises - to do it yourself, or assign it to someone. Control and distribution functions require resources.
+
+
+	In `dotnet`, the ability has appeared  recently (I don’t know how long ago, in general it has not always been there) to describe a method inside another method, I often come across such code.
+
+	```csharp
+	internal A() {
+	private B()
+	private C()
+	 } 
+	```
+	If one internal method calls several private methods, nothing changes for testability. If they were all internal, then each one could be tested.
+	
+
+3. The `open/closed` is the same logic only in relation to libraries, the functionality should not be bloated.
+
+	The smaller the library, the greater the opportunity for reuse.
+	Using internal methods allows them to be tested from an external unittest project, at the same time they are closed from clients.
+
+	The less code is subject to be changed, the better.
+
+4. The `Liskov substitution` is about continuity, stability of new implementations. I would move it to the end  - SOIDL.
+
+
+5. The `Interface segregation`  is about the same, if a class implements several interfaces, it can be assumed that the object has different responsibilities.
+Don't wear a railroad uniform, beach shoes and a Panama hat simultaneously. 
+
+	```csharp
+	A :IB, IC
+	IB b = A;
+	IC c = A;
+	```
+
+	Links are created to a limited number of members of class A. 
+	
+
+
+6. `Dependency inversion` in other words, use abstract classes
+
+	Using Interface allows: 
+
+	- testing, replacing mock objects
+	- changing the library version without the need to make changes to the client code.
+
+	What reasons might there be for changing the code:
+
+	1. Shortcomings are discovered.
+	2. There is room for improvement - other logging, caching features, th additional side effects.
+	3. Changing constructions, syntax, using classes with higher performance, proposed by new versions of the language, `runtime`. For example, instead of or along with `String` or `Array`, use `StringSegment`, `StringValues`, `Segment`, `Pathstring`, `ArrayBuilderSegment<T>`, `Arraybuilder`.
+	4. Inventing a new algorithm.   
+		For example:
+		
+		- .\runtime\src\libraries\System.IO.Hashing\src\System\IO\Hashing\**XxHash64.cs  
+		based on  [xxhash_spec.md](<https://github.com/Cyan4973/xxHash/blob/f9155bd4c57e2270a4ffbb176485e5d713de1c9b/doc/xxhash_spec.md>)
+		
+		- .\runtime\src\libraries\System.Private.CoreLib\src\System\SpanHelpers.Char.cs  
+		 based on `http://www.0x80.pl/articles/simd-strfind.html#algorithm-1-generic-simd`  Algorithm 1: Generic SIMD by Wojciech Mula 
+
+
+### General remarks
+
+1. 	I met the judgement that a method with multiple `if` branches  maybe is a candidate to refactoring. Then why are these methods a quite big?  
+	- [Routing/src/Matching/DfaMatcher.cs](<https://github.com/dotnet/aspnetcore/blob/bc6dea446731850066b2872fe42687e5f5d37292/src/Http/Routing/src/Matching/DfaMatcher.cs#L32>)  
+	- [src/Infrastructure/ResourceInvoker.cs](<https://github.com/dotnet/aspnetcore/blob/2b7f69b25ebe8cda7561914cb21459fefddb58c6/src/Mvc/Mvc.Core/src/Infrastructure/ResourceInvoker.cs#L289>)
+
+2. [EventSource](<https://github.com/dotnet/runtime/blob/c3d95b4305e17ebe8dbda8efde3144a1c693499c/src/libraries/System.Private.CoreLib/src/System/Diagnostics/Tracing/EventSource.cs>)
+	contains  more than `4500` lines even without comments. Does this exactly meet the requirement of single responsibility?
+	
+	
+3. I have questions after I have glanced over an article [class-too-large.html](<https://martinfowler.com/articles/class-too-large.html>) on the Martin Fowler' site that described a refactirng experience.  
+The author presented herself as a teacher and consultant with 20 years of software development experience. If she knew so well who said what about refactoring principles, why did she make a mess of her library? Maybe she didn't even know about SOLID principles before coding? Then why her article end up on the Fowler's site? Why did he pick her article out of hundreds, maybe thousands of others? It doesn't look like she was a newbie at the time of writing. Could not she figure out without some wise advices like "Make the change easy, then make the change easy"?
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2024-01-03-Fork.md
+---
+title: Fork
+date: 2024-01-03 17:15:12 +0100
+categories: [git]
+tags: [git]
+---
+
+Suppose I forked a repo  for study, then I write a post in which I want to provide a link to the source, and not to my repo.
+In order to see the repo address on the local computer, I usually open the `/.git/config` file.
+It is faster than doing `git config remote.origin url`    
+But .git folder does not contains the information where the repo is forked from.  
+That is, you will have to add it manually. 
+
+You can do it this way:  
+
+`git config --add core.forkedfrom  https://github.com/MicrosoftDocs/sql-docs.git`    
+
+But it's probably  more naturally by   
+
+`git remote add upstream https://github.com/....git` or   
+`git remote add fork https://github.com/....git`
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2024-01-03-Protocols.md
+---
+title: Protocols
+date: 2024-01-03 21:26:11 +0100
+categories: [web]
+tags: [reference]
+---
+
+
+
+TCP - rfc9293
+: <https://www.rfc-editor.org/rfc/rfc9293.txt> 
+
+HTTP - rfc1945
+: <https://datatracker.ietf.org/doc/html/rfc1945>
+ * http codes:  <https://datatracker.ietf.org/doc/html/rfc1945#section-9>
+
+TLS - rfc5246
+https://datatracker.ietf.org/doc/html/rfc5246
+
+DOMAIN NAMES - rfc1035
+: <https://www.rfc-editor.org/rfc/rfc1035.txt>
+
+
+HTTP Semantics - rfc9110 
+: <https://datatracker.ietf.org/doc/html/rfc9110>  
+
+HTTP Caching - rfc9111
+: <https://www.rfc-editor.org/rfc/rfc9111.txt>
+
+
+PATCH Method for HTTP - rfc5789
+: <https://datatracker.ietf.org/doc/rfc5789/>
+
+---
+HTML Living standard
+: <https://html.spec.whatwg.org/#toc-introduction>
+
+Mailarchive (very interesting) 
+: <https://mailarchive.ietf.org/arch/search/?q=%22rfc5789%22>
+
+---
+How to Read an RFC by Mark Nottingham
+: <https://www.ietf.org/blog/how-read-rfc/>
+
+RFC 
+: <https://www.ietf.org/standards/rfcs/>
+
+RFC Editor
+: <https://www.rfc-editor.org/>
+
+Internet-Draft Author Resources
+: <https://authors.ietf.org/>
+
+ietf.org
+:  <https://wiki.ietf.org/>
+
+Tools
+: <https://github.com/ietf-tools>
+
+
+
+
+
+
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2024-01-05-What-are-the-prospects.md
+---
+title: What are the prospects?
+date: 2024-01-05 10:02:26 +0100
+categories: ["common sense"]
+tags: []
+---
+
+I used ASP.NET for many years and watched it decline, Useless skills of gramphone customizers,
+It’s not pleasant to see a huge corporate website that will any day become like the abandoned shells of a factory floor.
+I understand that I got on the wrong horse, but who is to blame? Although, to be honest, I always knew this.
+They hope that they will do everything for you, this is stupid. And the shortcomings were obvious.
+Now, by the way, the same thing is better, it’s still better to find time to parse React.
+Because all these useeffects (it’s good that there are few of them) don’t mean anything. Debugging is difficult.
+By modern standards, angular and react are already old.
+I wonder what will happen after them?
+
+<https://qr.ae/pKV9Kn>  
+<https://qr.ae/pKV9sQ>
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2024-01-06-Design-patterns.md
+---
+title: Design patterns
+date: 2024-01-06 17:37:40 +0100
+categories: [oop]
+tags: [patterns]
+---
+
+Mostly I took examples from <https://www.dofactory.com/> and <https://en.wikipedia.org>. 
+
+I changed the examples for clarity, added tests, and added examples if I think it’s necessary.
+
+I add interesting designs to `OtherPatterns` dir.  
+
+repo:
+:  <https://github.com/KosarevDmitry/patterns-example/tree/main>
+
+
+#### Behavioral
+1. **Strategy**  - just implementing the meaning of an abstract class or interface and nothing more.
+1. **Template**. Often used, natural as a strategy pattern. One of the implemented methods calls several abstract methods. Similar to Factory.
+1. **Visitor** The nice pattern, I would call it  as a combinator or a Heir, something like that.
+1. **ChainofResponsibility** +
+In general, the pattern, judging by the name, is obvious and in demand: each actor has, or at least needs, one to whom a task can be delegated.
+Class "A" has a "next" property of type "B". "A" and "B" implements the same interface, so you can chain A.next=>B.next=>C.next
+Thus, the process of coordinating documents always goes on. First, the document gets on the table to the secretary or the first person, which structures are determined, the chiefs of lower rank must agree on it and in what sequence.
+If "next" is not set, the case when the task is outside the competence of the current actor, and it is not possible to delegate it to someone yet, then an error is thrown.
+But still, the pattern is a little far-fetched. Any programming usually consists of chains of calls like A.method1 => B.method2=>C.method3. If the names of the methods are the same, nothing changes dramatically.
+
+1. **Command**  + The pattern is useful when you want to leave the ability to undo/rollback (Undo) or redo (Redo) an operation. Information about the performed operations is stored in an array.The calculator is a very good example. +
+1. **Interpreter**  It looks like a factory. The product goes through sequential processing. Similar to the chainofResponsibility pattern.  they are interchangeable.
+1. **Iterator** -  Enumeration, not significant. 
+1. **Mediator** + The chat participant calls the Chat.Send command. The chat stores information in the participant class.
+1.  **Memento** state saving Saving the state of the class. The trick is that the class that serves to save the Memento state is encapsulated, private. 
+1. **State** +  pattern that allows an object to alter its behavior when its internal state changes. 
+The state pattern can be interpreted as a strategy pattern, which is able to switch a strategy.The state pattern is used in computer programming to encapsulate varying behavior for the same object, based on its internal state. This can be a cleaner way for an object to change its behavior at runtime without resorting to conditional statements and thus improve maintainability.
+1. **Observer** + Good patterп.
+ 
+#### Structural
+1. **Adapter** Is it possible to convert one type to another without using adapter?
+1. **Bridge**  Fine pattern. People have similar roles, but depending on their nature, everyone performs them differently.
+1. **Composite**
+1. **Decorator**
+1. **Facade** This is what the service probably looks like. Checking counterparties, processing requests, parsing, logging, recording in database.
+1.  **FlyWeight**
+1. **Proxy**  + It's probably used. In principle it is logical.
+ 
+#### Creational
+1. **Abstract** + often used
+1. **Builder** + actions are defined by the interface. 
+1. **Factory** similar template 
+1. **LazyInitialization**  -lazy class
+1. **ObjectPool**
+1. **Prototype** - class creation through cloning.
+1. **Singleton**  complicate testing   
+1. **MultiTon**   several singleton, it complicates testing.
+1. **ResourceAcquisition**
+
+> By and large any programmer who uses interfaces and abstract classes programs with patterns in any way. There is no another choice.
+ 
+### As a joke, I present excerpts from 2 books.
+
+##### The Twelve Chairs by Ilf and Petrov
+On the third move it turned out that the grandmaster was playing eighteen Spanish games. In the remaining twelve, Black used the outdated, but quite correct Philidor Defense. If Ostap had learned that he was playing such tricky games and facing such a proven defense, he would have been extremely surprised. The fact is that the great schemer played chess for the second time in his life.
+
+##### THE MIDDLE CLASS GENTLEMAN(Le Bourgeois Gentilhomme) By MOLIÈRE
+MONSIEUR JOURDAIN: Please do. But now, I must confide in you.  
+I'm in love with a lady of great quality, and I wish that you would help me write something to her in a little note that I will let fall at her feet.   
+PHILOSOPHY MASTER: Very well.   
+MONSIEUR JOURDAIN: That will be gallant, yes?   
+PHILOSOPHY MASTER: Without doubt. Is it verse that you wish to write her?   
+MONSIEUR JOURDAIN: No, no. No verse.   
+PHILOSOPHY MASTER: Do you want only prose?   
+MONSIEUR JOURDAIN: No, I don't want either prose or verse.   
+PHILOSOPHY MASTER: It must be one or the other.   
+MONSIEUR JOURDAIN: Why?   
+PHILOSOPHY MASTER: Because, sir, there is no other way to express oneself than with prose or verse.   
+MONSIEUR JOURDAIN: There is nothing but prose or verse?   
+PHILOSOPHY MASTER: No, sir, everything that is not prose is verse, and everything that is not verse is prose.   
+MONSIEUR JOURDAIN: And when one speaks, what is that then?   
+PHILOSOPHY MASTER: Prose.   
+MONSIEUR JOURDAIN: What! When I say, "Nicole, bring me my slippers, and give me my nightcap," that's prose?   
+PHILOSOPHY MASTER: Yes, Sir.   
+MONSIEUR JOURDAIN: By my faith! For more than forty years I have been speaking prose without knowing anything about it, and I am much obliged to you for having taught me that.  
+
+
+
+
+
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2024-01-10-Repos-for-Csharpdeveloper.md
+---
+title:  Basic repos for C# developer
+date: 2024-01-10 09:32:11 +0100
+categories: [dotnet]
+tags: [repo]
+---
+
+Main repositories
+- <https://github.com/dotnet/sdk.git> 
+- <https://github.com/dotnet/msbuild.git>
+- <https://github.com/dotnet/runtime.git>
+- <https://github.com/dotnet/aspnetcore.git>
+
+Repos including at least sdk, msbuild, runtime, aspnetcore
+: <https://github.com/dotnet/dotnet>
+
+- <https://github.com/Azure/azure-sdk-for-net.git>
+- <https://github.com/aspnet/KestrelHttpServer.git>
+- <https://github.com/dotnet/core.git>
+- <https://github.com/dotnet/corert.git>
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2024-01-25-What-does-the-middleware-pattern-look-like.md
+---
+title: What does the middleware pattern look like
+date: 2024-01-25 06:00:06 +0100
+categories: [aspnetcore]
+tags: [patterns]
+---
+
+What does the middleware pattern in ASPNETCORE look like?
+A simplified schema without initialization using reflection.
+This is not an easy thing, so it is good to have it on hand.
+The test demonstrates the sequence of delegate calls.
+
+<https://github.com/KosarevDmitry/patterns-example/tree/main/src/Other/Middleware>
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2024-02-11-Bash-script-for-Chirpy-Jekill-post-template.md
+---
+title: Bash script for Chirpy Jekill post template
+date: 2024-02-11 11:42:47 +0100
+categories: [bash]
+tags: [jekyll]
+---
+
+There is a principle of shifting work to others " `Let someone else do the hard part` but faithful adherence to this principle creates new dependencies.  
+There is a ruby gem to generate post template.  
+But I prefer to do it myself, although this often doesn’t justify it.  
+
+if the script had been written in `powershell` or `nodejs` it would have been clearer, but I wanted to write `bash`.  
+
+```bash
+#!/usr/bin/env bash
+title=${1^} # $1 - title has to start with uppercase
+F=$(date +"%F|%T|%z")
+d=$(echo $F | cut -d'|' -f 1) # date
+t=$(echo $F | cut -d'|' -f 2) # time
+z=$(echo $F | cut -d'|' -f 3) # timezone
+name=$d-${title// /-}.md #  replaces whitespace with underscore in title
+
+md='../_posts/'$name
+if [[ ${PWD##*/} = "KosarevDmitry.github.io" ]]; then
+md='./_drafts/'$name
+fi 
+
+cat >$md <<EOF
+---
+title: ${1^}
+date: $d $t $z
+categories: [${2}]
+tags: [${3}]
+---
+EOF
+
+notepad $md
+
+#use ./post.sh mytitle categorie1,categorie2 mytag
+
+# Legend
+# tags: [authorisation] # tags names should always be lowercase
+# categories: [Csharp, microservise] are designed to contain up to two elements
+
+```
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2024-02-11-Is-operator.md
+---
+title: Is operator
+date: 2024-02-11 15:17:58 +0100
+categories: [dotnet]
+tags: [is_operator]
+---
+
+I haven't seen this use case for `is` operator before and it doesn't seem to be mentioned in the manual. The idea comes down to the fact that you can add checks based on the type and value of properties.  
+
+<https://github.com/dotnet/dotnet/blob/a0bfad9e77c2eeeeb094533850ae69eebb295f7f/src/command-line-api/src/System.CommandLine/Parsing/StringExtensions.cs#L417>
+
+```csharp
+using FluentAssertions;
+
+namespace Tests;
+
+public class Istests
+{
+    
+    private const string Earth = nameof(Earth);
+    private const string Sky = nameof(Sky);
+
+    [Fact]
+    private void Test()
+    {
+        var b1 = new B1();
+     
+        b1.Directives.Add(new CliDirective());
+        b1.Directives.Add(new CliDirective());
+
+        Parse(b1).Should().Be(Response.AisB1withDirectivesList);
+        
+        b1.Sphere = Earth;
+        Parse(b1).Should().Be(Response.AisB1withEarh);
+        
+        b1.Sphere = Sky;
+        Parse(b1).Should().Be(Response.AisB1withSky);
+
+        b1.Directives = new CliDirective[0];
+        Parse(b1).Should().Be(Response.AisB1withDirectivesArray);
+
+        var b = new B();
+        Parse(b).Should().Be(Response.AisB);
+    }
+
+
+    enum Response
+    {
+        AisB,
+        AisB1withDirectivesList,
+        AisB1withSky,
+        AisB1withEarh,
+        AisB1withDirectivesArray
+    }
+
+    Response? Parse(A a)
+    {
+        if (a is B { Commands: IList<CliDirective> commands })
+        {
+            return Response.AisB;
+        }
+
+        if (a is B1 { Directives: CliDirective[] directives1 })
+        {
+            return Response.AisB1withDirectivesArray;
+        }
+
+        if (a is B1 { Directives: List<CliDirective> directives })
+        {
+            _ = directives.Count;
+
+
+            if (a is B1 { Sphere: Sky } b1)
+            {
+                _ = b1.Directives.Count;
+                return Response.AisB1withSky;
+            }
+
+            if (a is B1 { Sphere: Earth } b2)
+            {
+                _ = b2.Sphere;
+                return Response.AisB1withEarh;
+            }
+
+            return Response.AisB1withDirectivesList;
+        }
+
+        return default;
+    }
+
+
+    class A
+    {
+    }
+
+    class B1 : A
+    {
+        public IList<CliDirective> Directives = new List<CliDirective>();
+        public string Sphere = String.Empty;
+    }
+
+    class B : A
+    {
+        public IList<CliDirective> Commands = new List<CliDirective>();
+    }
+    class CliDirective
+    {
+    }
+
+}
+
+```
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2024-06-25-Certificates.md
+---
+title: Certificates
+date: 2024-06-25 00:03:37 +0200
+categories: [aspnetcore]
+tags: [security]
+---
+
+- There only two exports type: pfx and pem  
+: <https://github.com/dotnet/aspnetcore/blob/a450cb69b5e4549f5515cdb057a68771f56cefd7/src/Shared/CertificateGeneration/CertificateExportFormat.cs#L6>
+
+
+- X509Certificate2
+: A convenient point of consideration might be <https://github.com/dotnet/aspnetcore/blob/0acb0e4c76a6db50baba3546343b0d27848b81f7/src/Tools/dotnet-dev-certs/src/Program.cs>
+
+- The main work is done by Crypt32.dll, which opens the storage
+: <https://github.com/dotnet/runtime/blob/2327a36c5222a8e4e522ab27455bcbd8002efd06/src/libraries/System.Security.Cryptography/src/System/Security/Cryptography/X509Certificates/WindowsInterop.crypt32.cs#L48>
+
+
+- **How build a project with strong name**
+
+	- generate key `mykey.snk`
+	- add it to `csproj`
+
+		```
+		 <AssemblyOriginatorKeyFile>../mykey.snk</AssemblyOriginatorKeyFile>
+			<SignAssembly>True</SignAssembly>
+		```
+
+	- display public key
+
+		cd  in `bin` subfolder where the assembly is located  
+		`sn -Tp tests.dll`
+
+
+
+
+
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2024-07-27-Error-description-list.md
+---
+title: Error description list
+date: 2024-07-27 10:06:01 +0200
+categories: [dotnet]
+tags: [syntax]
+---
+
+It’s interesting to look error descriptions through your phone  in idle time and try on all sorts of mistakes for yourself.
+
+Warning messages 
+: <https://learn.microsoft.com/bs-latn-ba/dotnet/csharp/misc/cs0183>
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2024-07-29-Error-warning.md
+---
+title: Turn a warning into an error
+date: 2024-07-29 07:46:13 +0200
+categories: [dotnet]
+tags: [warning]
+---
+That way you will receive a more strict warning that will look like an error. 
+
+`<MSBuildTreatWarningsAsErrors>True</MSBuildTreatWarningsAsErrors>`
+
+JetBrain Rider displays `Succeeded: False`, however the compilation will be successful.
+
+```console
+0>Program.cs(5,29): Error CS8625 : Cannot convert null literal to non-nullable reference type.
+temp -> D:\Dmitry\EDX\_Test\temp\temp\bin\Debug\net8.0\temp.dll
+0>------- Finished building project: temp. Succeeded: False. Errors: 1. Warnings: 0
+Build completed in 00:00:01.378
+```
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2024-08-09-Web-API-libs.md
+---
+title: Web API libs
+date: 2024-08-09 17:42:40 +0200
+categories: [dotnet]
+tags: [rest]
+---
+
+
+1.  If we have only several endpoints for requests - use `httpclient`, define address, base address, path, query, get a response and deserialize it into model.
+Pattern <https://github.com/dotnet/docs/tree/main/docs/core/extensions/snippets/http>
+
+2. If it needs to create API from a controller. Use <https://github.com/swagger-api/swagger-ui>
+
+3. If you want to simplify  code for sending http request.  If you want do it simpler than httpclient does. Use <https://github.com/restsharp/RestSharp>.
+   
+4. if we want to make models based on the existing API. How can we turn `jaml` into a class? Use  <https://openapi-generator.tech/docs/generators/csharp>.
+
+5. How does it write the interface without transformation manually, but clearly. Use  <https://www.nuget.org/packages/RestEase.SourceGenerator>
+	
+6. If the server is not working yet, but we were given an API and we would like to write the processing code so that everything looks like we are requesting a real server and getting a response.
+Use <https://github.com/WireMock-Net/WireMock.Net>
+
+7. Specify a query string for each interface field to obtain it and create an object that will automatically create a class for the interface and methods for queries.
+Use <https://www.nuget.org/packages/refit.httpclientfactory>
+
+Other 
+
+- <https://github.com/KosarevDmitry/Hypermedia>
+- <https://github.com/FluentValidation/FluentValidation>
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2024-08-15-How-to-suppress-piece-of-code.md
+---
+title: How to suppress piece of code?
+date: 2024-08-15 17:52:06 +0200
+categories: [dotnet]
+tags: [suppress]
+---
+
+
+- For class and  members  
+
+```csharp
+ [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+ ```
+ 
+-  inside a method 
+
+```csharp
+ #pragma warning disable CS0618 // Type or member is obsolete
+ //code
+ #pragma warning restore CS0618 // Type or member is obsolete
+ ```
+ 
+ 
+-  Using props and parameter
+ 
+<https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/nullable-analysis>
+
+```csharp
+public class Test
+{
+    [Fact]
+    private void Run()
+    {
+        var s = new StaticAnalisisAttr();
+        s.ScreenName =
+            null; // without [AllowNull] over `ScreenName` get `Warning CS8625 : Cannot convert null literal to non-nullable reference type.`
+    }
+}
+
+internal class StaticAnalisisAttr
+{
+    [AllowNull]
+    public string ScreenName
+    {
+        get => _screenName;
+        set => _screenName = value ?? "temp";
+    }
+
+    private string _screenName = "temp";
+}
+ ```
+ 
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2024-08-22-Async-Await.md
+---
+title: Async-Await
+date: 2024-08-22 16:20:32 +0200
+categories: [dotnet]
+tags: [multithreading, task]
+---
+
+To understand `await/async` try debug the following code. 
+
+You will see that `await`  automatically call the `GetAwaiter()` of class implementing INotifyCompletion.
+And then CLR automatically calls `IsCompleted()`, then if it returns `true`, `GetResult()` is called, if `false`, `OnCompleted()` and `GetResult()` subsequently are called.  
+  
+`Debugger.Break()` I added it on purpose, if you don't put the breakpoints there, the debugger won't go there.  
+
+- My test: <https://github.com/KosarevDmitry/patterns-example/blob/main/src/Other/Async_Await_Pattern.cs>
+- Roslyn repo tests: <https://github.com/dotnet/roslyn/blob/main/src/Compilers/CSharp/Test/Semantic/Semantics/BindingAwaitTests.cs>
+
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2024-08-31-Under-the-hood.md
+---
+title: Is there a necessity to know what's going on under the hood?
+date: 2024-08-31 13:24:37 +0200
+categories: ["common sense"]
+tags: [learning]
+---
+
+Microsoft opinion in 2012 г.  
+WARNING: This post goes deep into an advanced area of .NET that most developers never need to think about.  
+
+This is the opinion of a great developer, Microsoft employee, lead developer of `Tasks library`.
+
+- 2012
+
+	ExecutionContext is one of those things that the vast majority of developers **never need to think about**. It’s kind of like air:
+	it’s important that it’s there, but except at some crucial times (e.g. when something goes wrong with it), we don’t think about
+	it being there. ExecutionContext is actually just a container for other contexts. Some of these other contexts are ancillary,
+	while some are vital to the execution model of .NET, but they all follow the same philosophy I described for
+	ExecutionContext:** if you have to know they’re there, either you’re doing something super advanced, or something’s gone wrong**.
+
+- 2023
+
+	While it’s common to use this support without knowing exactly what’s happening under the hood, 
+	I’m a firm believer that understanding how something actually works helps you to make even better use of it. 
+
+
+ 
+I suppose he knew it before, but Microsoft had the opportunity to sell closed source code. 
+
+No books, blogs, eloquent explanations, pictures, Stanford courses can replace the code itself, you will only waste time. 
+The feeling that I don’t know a damn thing remains. And there is no “clean code”.
+This will always continue, everything will need to be done quickly and all the sites in the world will tell how easy it is.
+
+Download the source code, find this word that is not clear, find tests.
+I can’t do it any other way.
+
+
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2024-09-12-How-to-change-and-test-isolation-levels.md
+---
+title: How to change and test isolation levels
+date: 2024-09-12 20:52:06 +0200
+categories: [sql]
+tags: [t-sql]
+---
+
+Operation levels prevent and regulate the ability to perform certain operations in parallel on one data array.
+For example, if a certain isolation level is set, until a transaction is completed by one thread, another thread can perform `Select`, but not `Update`.  
+That's the idea.
+Suppose I needed to change the settings.  
+The question arises how to test the statements and explanation from the reference source.  
+How to clearly demonstrate this to yourself and use it with confidence.  
+
+The idea is to start two sessions and open a transaction and stop the thread `WAITFOR DELAY '00:00:15';`,  15 sec is enough.  
+Then launch the second session while the first session is hanging and check the reaction.
+
+Execution of commands `select`, `update`, `delete`, `insert` can behave differently:    
+
+- wait ending of blocked transaction - the execution will hang with message  `executing query`;  
+- throw error;  
+- executes before the blocking transaction ends;
+
+Therefore, it is better to check them separately.
+
+So you need open in `SQL Server Management Studio` the two sessions.
+
+1. First create a procedure to show  `isolation level` in current session just for convenience.
+
+```sql
+CREATE PROCEDURE [dbo].[DisplayIsolationLevel]
+
+AS
+BEGIN
+SET NOCOUNT ON;
+
+DECLARE @res Varchar(100)
+Declare @T table (Options varchar(100),Value varchar(100))
+Insert Into @T
+Exec('DBCC USEROPTIONS')
+
+SELECT @res=Value From @T  Where Options ='isolation level'
+Select @res;
+
+END
+```
+
+2. Change the ISOLATION LEVEL each of sessions  at your own discretion
+
+	```sql
+	use test -- any db for testing
+
+	SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+
+	SET TRANSACTION ISOLATION LEVEL READ COMMITTED
+
+	SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
+
+	SET TRANSACTION ISOLATION LEVEL SNAPSHOT
+
+	SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
+
+	--check
+	Exec  dbo.Displayisolationlevel
+	```
+ 
+ I use db `Test` with table `dbo.name`
+
+2. Run in the first session tab
+
+	```sql
+	begin try
+		Begin tran A
+			BEGIN  
+			-- Update dbo.name Set name = 'active' where id=1;  
+			Select * from  dbo.name
+			WAITFOR DELAY '00:00:15';   --15 sec
+			--   Update dbo.name Set name = 'active1' where id=1;  
+			END;
+		commit tran A
+	end try
+
+	begin catch
+		select
+			ERROR_NUMBER() AS ErrorNumber,  
+			ERROR_SEVERITY() AS ErrorSeverity,  
+			ERROR_STATE() AS ErrorState,  
+			ERROR_PROCEDURE() AS ErrorProcedure,  
+			ERROR_LINE() AS ErrorLine,  
+			ERROR_MESSAGE() AS ErrorMessage;
+
+	end catch
+	```
+
+3. Run in the second session tab
+ 
+	```sql
+	begin try
+	  Begin tran B
+	-- command examples
+	-- Select name from  dbo.name where id=1
+	-- Update dbo.name Set name = 'passiive' where id=1;
+	-- Insert into dbo.name values ('bobo1')
+
+	   commit tran B
+	end try
+	begin catch
+	 select
+	   ERROR_NUMBER() AS ErrorNumber,  
+	   ERROR_SEVERITY() AS ErrorSeverity,  
+	   ERROR_STATE() AS ErrorState,  
+	   ERROR_PROCEDURE() AS ErrorProcedure,  
+	   ERROR_LINE() AS ErrorLine,  
+	   ERROR_MESSAGE() AS ErrorMessage;
+
+	end catch
+	```
+
+This way, you will clearly see the result, how the operations will be carried out and whether you actually need it.
+
+
+- This is a list of isolation level commands that I used
+
+	- `READ UNCOMMITTED`
+
+		```sql
+		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+		exec [dbo].[DisplayIsolationLevel]
+		```
+
+	- `read committed`
+
+		```sql
+		ALTER DATABASE test
+		SET READ_COMMITTED_SNAPSHOT OFF;
+		SET TRANSACTION ISOLATION LEVEL READ COMMITTED  
+		exec [dbo].[DisplayIsolationLevel]
+	```
+
+	- `read committed snapshot`  
+
+		```sql
+		 ALTER DATABASE test                             
+		 SET READ_COMMITTED_SNAPSHOT ON; 
+		 SET TRANSACTION ISOLATION LEVEL READ COMMITTED
+		 exec [dbo].[DisplayIsolationLevel]
+		```
+
+	- `REPEATABLE READ`
+
+		```sql
+		SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
+		exec [dbo].[DisplayIsolationLevel]
+	```
+
+	- `snapshot`
+
+		```sql
+		SET TRANSACTION ISOLATION LEVEL SNAPSHOT
+		exec [dbo].[DisplayIsolationLevel]
+		 ```
+
+	- `serializable`
+	 
+		```sql
+		SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
+		exec [dbo].[DisplayIsolationLevel]
+		```
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2024-10-12-Negative-side-of-open-source-development.md
+---
+title: Negative side of open-source development
+date: 2024-10-12 10:26:52 +0200
+categories: ["common sense"]
+tags: [open-source]
+---
+
+Posts reflecting the negative side of open-source development
+
+- <https://natemcmaster.com/blog/2023/06/18/less-code/>
+- <https://github.com/zloirock/core-js/blob/master/docs/2023-02-14-so-whats-next.md>
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2024-12-27-Clean-code.md
+---
+title: Clean code
+date: 2024-12-27 21:22:12 +0100
+categories: ["common sense"]
+tags: [theory]
+---
+There is no such thing as `clean  code` - it's a myth. Abandon all hope, ye who enter here.
+
+This reminds me of Cyril Northcote Parkinson's preface on the wise choice of statesmen "Do not think that we want to discourage the inquisitive from learned books about business and administrative life...".
+I am in this topic too. You save, then destroy them en masse, I know what these certificates, instructions, orders and words are worth.
+
+Let's get back to programming. My opinion.
+
+The code was born in someone's head, then something came out, maybe it remained on the stand, drafts, in the process of explaining to yourself and your comrades.
+It was more or less clear when the code was written, when I explained it to the testers. Then no one was interested in it. The creator-creator moved on.
+
+If it is so `clean code`, why do they comment on it for years, publish books, plus courses, posts, everyone in their own way, mamamia.
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2025-01-09-T-SQL-glossary.md
+---
+title: T-SQL glossary
+date: 2025-01-09 18:39:34 +0100
+categories: [sql]
+tags: [t-sql]
+---
+
+As I write this post, there is a good chance that  T-SQL will not required for me in the near future. Almost. I have aspire and opentelemetry on my agenda. But now I have to deal with T-SQL, such are the circumstances.
+
+I had enough vocabulary and practice for a few years, then I was preparing for the `assessment`, but gradually my active source transformed into passive. If you don't use it for a long time, it can disappear almost completely. I needs to restore my ability. 
+ 
+This reminded me of comments by Kato Lomba, who knew a bunch of languages. The analogy is apt.
+
+**Excerpt from the book "How I Learn languages"**
+> Question one: is it possible to know sixteen languages?  
+	Answer: no, you can't. At least you can't know them at the same level. I have only one native language - Hungarian. But five languages ​​live in me at the same time: Russian, English, French, German and Hungarian. Working with these languages, I translate from one to another in any combination and "switch on" to translation instantly. Before starting work related to the use of Italian, Spanish, Japanese,
+	Chinese or Polish, I usually spend half a day looking through my notes to refresh my knowledge. With the other six languages, I work only as a translator of fiction and specialized literature, that is, I have only passive practice here.
+
+I mean that time will be needed to "refresh the knowledge". A couple of days.
+The question is how these "own records" should look, for T-SQL in this case.
+
+
+- Usually we start with a dictionary. We make or look for a dictionary. There is reserved keyword list. You can look through them and make comments.
+	<https://learn.microsoft.com/en-us/sql/t-sql/language-elements/reserved-keywords-transact-sql?view=sql-server-ver16> 
+
+	I did it this way, but I didn't like the result. The list of keywords is not complete. For example, from my point of view `login` is a keyword in the expression `EXECUTE AS LOGIN`. However, there is no such keyword in the list.
+
+	I'm interested in functions, metadata, not just keywords, there are words that relate to topics that I would like to exclude from consideration. And a lot of time is spent on selecting examples.
+	
+
+- Where to store the glossary.
+	I thougt to create database - a table with reserved keywords and descriptions and a table with expamples related to them. It is not difficult. And Rider, which I like, is great at working with databases. But using a database makes the processes more complex, an extra dependency appears. You want something light, a draft, why bother.
+
+Choices 
+
+1. You can read the own code, old db, educational databases. As glossary, this approach does'n suitable, too many dublication, repetition the same functions, procedures. And  becouse there is focus on `DDD`, development theme, and not on features of language. 
+
+2. You can read book, listing to them espesially, as `Exam Ref 70-761. Querying Data with Transact-SQL Ben-Gan.` 
+
+	The disadvantage is that no book is an encyclopedia, and the material it contains gradually becomes outdated.
+	Books can be useful as an addition to the basic structure of knowledge, but not as a foundation. The matrix must be comprehensive, the cells will be filled after that.
+	
+3. Read the reference from A to Z.
+
+	It is possible, but there are too much text and the codes are distributed across several fragments. Often I immediately copy the fragment into the IDE, run and save the example and as a result I get a set of scripts, but there is no sense of universality. And the `copy-paste` procedure is often tedious.
+
+4. You can see functions in SSMS object tree and recall its point.
+ I have made this way too, but in this case you must write  tests yourself, ad parameter to run procedure and so on. It turns out to be long. "Let the iron saw work".
+
+	It is also necessary to consider that the directories in SSMS and the reference may not match. For `graph` and `logic` in SSMS 2019 there are no directories at all. `OpenQuery` in reference is included in the `Relation operators` group, and it is considered `Rowset functions` in SSMS. Although these are, in general, trifles.
+
+
+General conclusion.
+ I would like to have the whole range of sql examples in one or several text files, listing, essentialy, but it should to be a complete and up-to-date reference.
+ Here I came up with the idea of trying to download snippets from markdown. I'm used to looking at the repo. It turned out well.
+
+Result:  [language-elements.sql](/assets/language-elements.sql)
+
+By this script I received the code that ready for execution. All that remains is to open the file in SSMS.
+
+<script src="https://gist.github.com/KosarevDmitry/b64f73a4824b280db2d80652463361e9.js"></script>
+
+I view and execute the code without copy-paste operation, you just need `select and execute`, if comments are needed, I look the source `html` or `md`. The each block has a link `--string-split-transact-sql.md line: 143`, where the file name without the extension matches the page name in the `url` `https://learn.microsoft.com/en-us/sql/t-sql/` plus the `language-elements/` section and the title.
+
+Perhaps after viewing the code, you will want to add a short comment. It is difficult to advise something here, brevity is the sister of talent and the stepmother of a royalties, so the comment may be useless, I often fail, that is, to write briefly enough, but so that it conveys the essence, and clings to me. Usually I want to somehow express the idea. I added comments starting with `--!`. The highlighting in the code works, you can view it in a text editor as `notepad++`.
+
+There may be display errors when the entire code turns red. Because of unclosed quotes, for example, in the surname D'Hers of French origin. Of course, there were obvious things e that are not interesting me. Therefore, I left comments on what interests me and then  I will find the record marked with my comments,  by search in the `IDE` or `Notepad++`.
+
+After viewing the listing, I will already know the material quite well. In my opinion, it turned out very well. I would like to have in my "RAM" information about what options exist in principle. In a semi-finished version, in the state of "I've already seen this". When you don't know about the existence of an option, it is more problematic to write "good" code. Therefore, a complete and up-to-date reference book is needed, the only question is the presentation format and so that the use of the “copy-paste” operation is not required.
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2025-01-10-Briefly-about-SQL.md
+---
+title: Briefly about SQL
+date: 2025-01-10 08:52:26 +0100
+categories: [sql]
+tags: [t-sql]
+---
+
+
+-  There are no libriries  
+	Base issues or merits, call it as you would like, in usual language  as C# are libraries. 
+	Moreover, it is necessary to know the form and content, to track the creation of httpcontext, how it becomes overgrown with details and what good they do.
+ 	Everyone is trying to teach syntax, commands, figuratively speaking, 48 form Tai Chi - put your foot here, move your hand here, and you will be fine, something like that.	It's fascinating, probably inevitable, to get the hang of it, to get used to the local slang. Who can't do small things can't do big things.
+	But in reality, ultimately, it is necessary to understand entire composition, if translated into the concepts of literature, then the programmer will have to read a lot of stories and novels. The form of study through reading copy-paste snippets, paragraphs from books, is depressing and you will not get far with it. Libraries are the most important thing.
+
+	In SQL - the situation is simpler. Only scripts, one or two, maybe 3, well, 5 at most in a bundle and that's it.
+
+
+-  There are no tests
+	
+	Without tests, it's like coding on the knee. But you can come up with something. You can do a test for each procedure, for example crete add Abc_test procedure fo "Abc" one. Though it looks redundant.
+	I don't know if they do it this way or not.
+	I also saw the link https://tsqlt.org/. I didn't figure it out. As deutsches say 'Morgen, morgen nur nicht heute'.
+
+
+- You can write extensions, write code in C# and generate procedures that way.
+
+- Open source  
+
+	When the syntax and structures are clear, where to get resources, code for reading, for getting used to the language standards, what to practice on. The main thing is to understand the code written by others.
+	1. You can decompile procedures and look at their implementation.
+	2. `SharePoint` has a large `db`, a lot of code.
+	3. For C,C++ programmer, who geeks it, Sqlite, Posgre DB source code is available.
+	
+-   There is no marker showing that the function is used somewhere.
+	In a modern IDE for C#, a description is generated for each class member. If a method is not used at all, is not involved, does not twitch anywhere, then the kind IDE will highlight such a method in pale gray font.
+	Or it will throw a warning, if configured. For methods called via reflection, the `Dynamic` attribute is added so that the compiler does not remove it from the assembly altogether as unnecessary.
+	 
+	In SSMS it is not visible whether the procedure is in demand or not, and the databases are growing very quickly, Maybe the procedure is no longer needed. Let's say there was a client. The client was reworked or has already ceased to exist, but the SQL code remains.
+	The number of clients per base can be quite decently. Employee list  maybe  is needs for somebody ,  by `ODBC` in  `Excel` to be requested, why does't to give the access?  Someone else needs some other source, table,etc. This happens, maybe you agree. It's not always the paradigm: one application - one database.
+	Everything will have to be taken into account, the office writes. It looks like the story of Tom Sawyer with painting the fence, who hasn't painted it. Teams come and go, but the data base is eternal. I felt this in the bank, having leafed through the general bank. Oracle.
+
+	What to do with this? You can download all the procedures and functions and look for references to the function manually using a regularsearch. Or better yet, make a code parser and look for names that are mentioned only once when declared and that's it. But this is what concerns  internal consumption. As for external use, I have no ideas. It is not clear how to emulate `public`, `private`.
+
+- Call for execution
+	Everything is fine with this. I selected a piece of code, launched it, it's just luxury.
+	
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2025-01-12-What-is-IEnumarable-anyway.md
+---
+title: What is IEnumarable anyway
+date: 2025-01-12 10:55:10 +0100
+categories: [dotnet]
+tags: [ienumerable]
+---
+
+What is IEnumarable anyway.
+
+How many years have passed, and I still read into these `yield return`, "Mene tekel Peres" of sorts, and didn't understand a thing.
+Then I found it again, in one of Toub's articles I read that it was a `state machine`, in an old article, when the trees were still big and open source - no way.
+And I was already in my  "dug deeper" period.
+And then for some reason I opened `DotNetPeek`. Wow, so that's what a reindeer he is! Why did you fool me. It is easy.
+If you replace the unusual (with tags) variable names with familiar ones, you will get working code. And no need to explain anything. Thanks everyone, you are all free to go.
+
+<https://github.com/KosarevDmitry/patterns-example/blob/029206e68cffadfa16977ea79f81c63be794e300/src/Other/IEnumerableTest.cs#L69>
+
+And the same approach - seeing the decompiled code - works with different functions, such as
+
+`Props {get;set;}`  
+`async/await`  
+`out`  
+`record`  
+
+Better yet, look at the IL code in `Rider`. And make it a rule to always do this with a new C# innovations.
+Very clear and convincing.
+
+
+![Il code](/assets/ILcode_panel.jpg)
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2025-02-01-DotNetPeek.md
+---
+title: Specificity of DotNetPeek
+date: 2025-02-01 20:06:46 +0100
+categories: [dotnet]
+tags: [tools]
+---
+
+There are several states of code:
+- C# code
+- compiled code, optimized one or not. If decompile compiled code, it will be different from source code.
+- IL code 
+- binary 
+
+DotNetPeek provides
+
+- decompiled code.  There is sense to look at decompiled code otherwise, you have not got a clue how 	it looks like  `IEnumerable`, `record`,  and other features of C#.   
+- IL code.  You will be able at least to see that the boxing operation represented by  ILCode commands -  `box` and `box.any`.
+- decompiled pdb file
+
+IL code has  popup tips  with  descriptions similar to the one presented on this page
+<https://en.wikipedia.org/wiki/List_of_CIL_instruction>
+
+
+If you have access to the source code and use `JetBrain IDE`, it is very convenient to view the decompiled code and IL directly in the `IDE`.
+Searching for the current code fragment in a dll file, for example, located in the output directory `aspnetcore\artifacts\bin\Microsoft.AspNetCore.Mvc\Debug\net8.0` dll, is not so easy.
+
+The panel with IL code in the `Rider`
+
+![The panel with IL code in `Rider](/assets/DotNetPeek.jpg) 
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2025-02-02-ASPNETCORE.md
+---
+title: ASPNETCORE
+date: 2025-02-02 21:21:13 +0100
+categories: [aspnet]
+tags: [debug]
+---
+
+Aspnetcore похож на завод c цехами, мастерскими,  складами полуфабрикатов. И конвейром. Часть деталей получают от сторонних поставщиков, что-то делается внутри у себя в цехах.  
+Продукцией завода согласно документации, представленной всем желающим, является http responce.   
+Сначала мастерские запасаются необходимыми для работы инструментами, материалами, коллекциями, настройками, классами, определяются кто в какой очередности и что будет делать.  
+И только потом запускается конвейер.  
+Есть там свои отчеты, проверки качества, раньше назывались  ОТК и конечно рабочие, разнорабочие helpers, бригадиры-providers, библиотеки, вне кода - мерчендайзеры, зазывалы-популяризаторы  и технологи. Я помню свои ощущения,стоявшего в тоске и печали на пятачке у выхода в цеха настоящего завода, на пригреве, курил  и ни фига не понимал с чего начать. Как во всем этом разобраться.  
+Обычное дело.   
+Можно, конечно, ходить по цехам смотреть кто-что делает, но после это некий сумбур остается в голове. Причинность, название инструментов и коллекций, всяких деталей не понятна. Можно сравнить с `лего`, разложенное по пакетикам, готовый продукт там не угадывается.  
+Проку мало.  
+Есть одна замечательная штука почти в каждом коде - это возможность писать лог, он дает свободу, чувство контроля над конвейром. Лента бежит, а ты получаешь информацию, что там происходит.   
+Представьте что вы идете по незнакомым местам, и ставите зарубки или крестики мелом.  
+Если этого не делать, то вам придется постоянно вспоминать: так здесь, я кажется повернул налево, потом нужно направо, эту штуку я где-то уже видел.  
+Территория большая, конвейер работает быстро, все мелькает, только отвлекся, смотришь - зачем то на сторону в  collection сохранилось, или hadler дернули. Зачем сделали - не понятно, может технолог из другого цеха попросил.  
+Много помещений, лифтов, туннелей. Запутаешся.  
+Если же  делать пометки когда пробираешься по лабиринту aspnetсore, то значительнее веселее. Беспокойство испаряется, не потеряешься, знай себе зарубки делай, когда нужен будет весь отчет, вот, пожалуйста, все ходы записаны.   
+
+Как у Высоцкого "Ну вот, исчезла дрожь в руках,...".  
+Короче говоря, "треугольник будет выпит, будь он хоть паралелепипед...".  
+По большому счету, больше ничего не нужно, ни кино, youtube я имею ввиду, ни советы бывалых, да и reference тоже. Тем более что reference тяготеет к абстракции и не дает ощущения, что же там внутри.  
+Нужны логи непосредственно в source ASPNETCORE и баста.  
+Нужно скачать репо, в solution пристроить свой logger и писать что в голову придет.  
+Я сначала читая, код, делал комментарии, но последовательность вызовов  важна. Да и назначение класса можно понять только в часть процесса, как я уже сказал.  
+Я добавил в repo библиотеку со статическим методом вызова, чтобы не путать с системными логами и удалять его тоже проще, если дать ему отличное от стандартного лога название и записи находить удобно.  
+Потом включить во все проекты ссылку на него. Потому в собщение добавить номер строки вызова, название класса, пользуясь caller атрибутами, добавить свои кастомные понятия, а не стандартные (warning, error), можно markdown symbols :lamp:, :exlamation: добавить, и выводить его в `.md`, почему нет.  
+Получится некий отчет - где будут представлены этапы, блоки, скрытые работы - как в строительстве, которые актируются по мере готовности, а не при завершении строительства.  
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2025-02-04-What-are-the-most-common-name-extensions.md
+---
+title: What are the most common name extensions?
+date: 2025-02-04 18:40:32 +0100
+categories: [aspnetcore]
+tags: [statistics]
+---
+
+The idea is to find out what file name extensions are used.
+By names I mean  the  last name section started with uppercase char.
+
+Look at what happened 
+[NameExtensionStatistics.txt](/assets/NameExtensionStatistics.txt)
+
+This is script
+<script src="https://gist.github.com/KosarevDmitry/6ce12b67652c2814d3eb20f1b4bf22da.js"></script>
+
+And then to find out there are any  differences  between files  by their purpose: Provider vs Builder vs Factory. I haven't done this yet
+
+
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2025-02-04-Where-are-endpoints-created.md
+---
+title: Where are endpoints created?
+date: 2025-02-04 11:02:40 +0100
+categories: [aspnetcore]
+tags: [endpoints]
+---
+
+Since the CreatePoints call is not done directly. I couldn't find it quickly. I fiddled around. Therefore, for those who, like me, like to answer direct questions with simple answers, I inform you.
+
+Endpoints list creation  are started by `Subscribe()` in Microsoft.AspNetCore.Mvc.Routing. ControllerActionEndpointDataSource ctor.
+In the base class `Subscribe` passes `UpdateEndpoints` as action   to `ChangeToken.OnChange`.
+The `UpdateEndpoints()` calls `CreatePoints()`.
+
+There is not enough information for one post, but it needs to be saved somewhere.
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2025-02-05-User-secrets-scratch.md
+---
+title: User-secrets scratch
+date: 2025-02-05 12:12:52 +0100
+categories: [dotnet]
+tags: [user-secrets]
+---
+
+- source
+
+	<https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-8.0&tabs=linux>
+
+	../AspNetCore.Docs/aspnetcore/security/app-secrets/samples/6.x/UserSecrets
+
+dotnet add package Microsoft.Extensions.Configuration.Json
+dotnet add package Microsoft.Extensions.Configuration.UserSecrets
+dotnet user-secrets init
+
+As  result it will be created element in
+- csproj `<UserSecretsId> user_secrets_id </UserSecretsId>`	
+ - storage path to `/<user_secrets_id>/secrets.json`
+	- `~/.microsoft/usersecrets`
+	- `%APPDATA%\Microsoft\UserSecrets`
+
+	 
+- commands
+
+	```bash
+	dotnet user-secrets init
+	dotnet user-secrets set "Movies:ServiceApiKey" "12345"
+	dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp1\src\WebApp1"
+	cat ./input.json | dotnet user-secrets set
+	dotnet user-secrets list
+	dotnet user-secrets remove "Movies:ConnectionString"
+	dotnet user-secrets clear
+	cat ~/.microsoft/usersecrets/934ecfd0-bf73-4a27-92aa-bd6334cc944d/secrets.json
+	```
+
+- implemintation
+
+```csharp
+  var configuration = new ConfigurationBuilder()
+		.AddUserSecrets<Program>() 
+          .Build();
+
+	builder.AddUserSecrets(Assembly.GetExutingAssembly(),true)
+	var movieApiKey = builder.Configuration["Movies:ServiceApiKey"];
+	var moviesApiKey = _config["Movies:ServiceApiKey"]; //DI  IConfiguration 
+```
+- create poco settings class
+
+```csharp
+  
+  public class MovieSettings {
+	   public string ConnectionString { get; set; }
+	   public string ServiceApiKey { get; set; }
+```
+
+```csharp
+	var moviesConfig = 
+		Configuration.GetSection("Movies").Get<MovieSettings>();
+	_moviesApiKey = moviesConfig.ServiceApiKey;
+```
+
+```csharp
+
+	// SqlConnectionStringBuilder builder
+	var conStrBuilder = new SqlConnectionStringBuilder(
+			builder.Configuration.GetConnectionString("Movies"));
+	conStrBuilder.Password = builder.Configuration["DbPassword"];
+	var connection = conStrBuilder.ConnectionString;
+```
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2025-02-06-Container-healthcheck-loop.md
+---
+title: Container healthcheck loop
+date: 2025-02-06 13:59:03 +0100
+categories: [docker]
+tags: [docker]
+---
+
+A year ago I was figuring out the topic and simultaneously practicing with `puml`. Sometimes it is very useful in a graphic form, it seems clear to me.
+
+- Script 
+
+	```bash
+	FROM ubuntu 
+	HEALTHCHECK --interval=12s --timeout=3s \ 
+	CMD curl -f http://localhost/ || exit 1 
+	```
+
+- Args
+
+	- `--interval=DURATION (default: 30s) `
+	- `--timeout=DURATION (default: 30s) `
+	- `--retries=N (default: 3) `
+	- `--start-period=DURATION (default: 0s) `
+	- `--start-interval=DURATION (default: 5s) `
+
+- Loop
+
+![Healthcheck loop](/assets/scheme_healthcheck_loop.png)
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2025-02-10-How-to-add-project-in-aspnetcore-repo.md
+---
+title: How to add project in aspnetcore repo?
+date: 2025-02-10 19:38:50 +0100
+categories: [aspnetcore]
+tags: [aspnetcore]
+---
+
+I tried to add  my project as described in `\aspnetcore\docs\ReferenceResolution.md`
+but some of the explanations were not obvious to me, so I made a small guide.
+
+1. Add project  (it is obvious) in dir  `\src\MyProject`. Add a inner dir `src` as is customary here  so eventually path to project  will be `\src\MyProject\sec`.
+
+2. Add  in `\eng\Build.props`
+	```xml
+	  <DotNetProjects Include="
+							  $(RepoRoot)src\MyProject\**\src\*.csproj;
+						   ...
+							  "
+							Exclude="
+							  ..."
+							Condition=" '$(BuildMainlyReferenceProviders)' == 'true' " />
+	```
+	
+3. Run `\eng\scripts\GenerateProjectList.ps1`
+4. Add  in `eng\Dependencies.props`  
+	
+	```xml
+	<ItemGroup Label=".NET team dependencies (Non-source-build)" Condition="'$(DotNetBuildFromSource)' != 'true'">
+    ...
+		<LatestPackageReference Include="MyProject" />
+	</ItemGroup>
+	```
+	
+5. Run `\restore.cmd`
+
+6. `dotnet sln AspNetCore.sln add .\src\MyProject\src`
+7. Now you can add links to any `csproj`
+ `<Reference Include="MyProject" /> `
+8. Add scripts to `\src\MyProject\` to work with project 
+
+	- build.cmd
+		```
+		@ECHO OFF
+		SET RepoRoot=%~dp0..\..
+
+		%RepoRoot%\eng\build.cmd -projects %~dp0**\*.*proj %*
+	```
+
+	- MyProject.slnf 
+		```
+		{
+		  "solution": {
+			"path": "..\\..\\AspNetCore.sln",
+			"projects": [
+			  "src\\MyProject\\src\\MyProject.csproj"
+			]
+		  }
+		}
+		```
+
+	- startvs.cmd
+
+		```
+		@ECHO OFF
+
+		%~dp0..\..\startvs.cmd %~dp0MyProject.slnf
+		```
+
+
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2025-02-14-Template-to-test-Reactjs.md
+---
+title: Template to test Reactjs
+date: 2025-02-14 16:45:16 +0100
+categories: [node]
+tags: [react]
+---
+
+It would be easier for me if the reactjs  explained from the very beginning how to figure it out myself, but usually it doesn't happen that way. That's how the world of programmers works.
+They probably assume that everyone already knows nodejs, webpack, babel. All I don't know is react.js.
+
+Maybe I'm exaggerating but before dealing with react.js , you need to look at the nodejs documentation, and  even better the repo, it will be clearer, then the webpack and babel documentation.
+`Node_modules` is huge, first a lot of code is executed before it gets to `React` - first auxiliary packages, then babel, webpack.
+in addition, the file is not compiled into a file, but into memory. And the webpack packed   bunch of files  into one.
+
+Аutomation is good when you more or less understand everything.
+
+And this script will add a project for you with which you can already experiment with converting from `jsx` to `js`. You can test `js`  without going deep into `node_modules`, by added  brakepoints to
+`\distr\react.development.js.`
+ 
+Every time you run `npx babel` you will get new `js`.
+
+> Maybe there is no point in looking at `jsx` transformation because everyone uses `typescript`, including developers of `react.dev`. All components are `tsx`: <https://github.com/reactjs/react.dev/tree/main/src/components>
+
+<script src="https://gist.github.com/KosarevDmitry/304c0dc65000d262764db4899f6762c1.js"></script>
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2025-02-15-Build-the-Aspnetcore-repo.md
+---
+title: Build the Aspnetcore repo
+date: 2025-02-15 19:07:20 +0100
+categories: [aspnetcore]
+tags: [tools]
+---
+
+Usually the assembly goes well.
+
+I  build by `.\eng\build.cmd -all -pack -arch x64` though  if to check `build.ps1` appears that `x64` is the default option.
+More often  I  use `build.cmd` instances that are located in "\src". I add comments or tests for myself so I do it regularly.
+
+You can always to clear `\artifacts` and will try to build again.
+The order of compilation to `artifacts` due to the implementation of 
+ArcadeSdk (https://github.com/dotnet/arcade/blob/main/Documentation/ArcadeSdk.md)
+
+Recently I received a error. 
+
+```console
+D:\src\aspnetcore\eng\targets\Java.Common.targets(54,5): error MSB3073:   
+The command "../gradlew  compileJava" exited with code 1.  
+[D:\src\aspnetcore\src\SignalR\clients\java\signalr\core\signalr.client.java.core.javaproj]  
+```
+
+After careful viewing of `\docs\BuildFromSource.md` I noticed  `.\eng\scripts\InstallJdk.ps1`.    
+After executing `InstallJdk.ps1`,  `D:\src\aspnetcore\src\SignalR\build.cmd` worked successfuly.
+  
+I decided to check `global.json` version by  `git log -p global.json > temp.txt`
+
+It turned out that the `jdk` version has not been updated, it is the same since 2019 year. 
+Valid version is "jdk": "11.0.3".
+So the reason is not a change in the version used during assembly.
+Looked further.
+
+The script checks if "D:\src\aspnetcore\.tools\jdk\win-x64\bin\javac.exe" exists.
+If file does not exist, so script will download  "https://netcorenativeassets.blob.core.windows.net/resource-packages/external/windows/java/jdk-${JdkVersion}_windows-x64_bin.zip" "$tempDir/jdk.zip"
+and unzip the archive  to  D:\src\aspnetcore\.tools\jdk\win-x64\bin
+
+`\.tools` is included  in `.gitignore`. 
+I didn't understand why I was getting this error because I didn't seem to delete the `\.tools` content.
+ 
+When the build failed, I got a message.
+
+```console
+PS D:\src\aspnetcore\src\SignalR> .\build.cmd
+Detected JDK in C:\Program Files\Java\jdk-21 (via JAVA_HOME)
+ ```
+This's correct.
+
+```console
+PS D:\src\aspnetcore> echo $env:JAVA_HOME
+C:\Program Files\Java\jdk-21
+ ```
+
+From the script logic it is clear that the message  is a sign  that  the  `.\tools` jdk is not installed
+but despite this the build process will continue with a version from `program files`. 
+
+I have updated  `Java` a couple of months ago. 
+So it means that previous version was compatible with 11.0.3,  v21.0.1 is not.
+
+Now in a compile time I get a message that suits me better.
+
+```console
+Detected JDK in D:\src\aspnetcore\eng\..\.tools\jdk\win-x64\ (via local repo convention)`
+```
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2025-02-18-Once-again-about-IEnumerable.md
+---
+title: Once again about IEnumerable
+date: 2025-02-18 14:49:15 +0100
+categories: [dotnet]
+tags: [ienumerable]
+---
+
+IEnumerable is such a nature that it is essentially a action and not an object. The only way to be sure of this is to look at what it is transformed by msbuild.
+
+It's like the difference between the subject and the predicate from  point of view  of grammar and philology  - the object and the action. 
+Both are parts of speech. Elements (aka object) from the point of view of philology and syntax, having their own properties and features.  
+Psychologically, to think about IEnumerable  as action helps to perceive reality more easily.
+
+`string[]` is a reference to an object. It already has a value.
+
+`IEnumerable` is a reference to  an Enumerator (object of course), but being an action, before getting a value it must be executed.
+ 
+Here the everything are  static. 
+
+```csharp
+int [] a;
+int [] b;
+int[] c  = [..a, ..b];
+```
+
+Here, everything is possible, including any side effect, just like when performing any function.
+
+```csharp
+IEnumarable<string>  a;
+IEnumarable<string>  b;
+var c = [..a, ..b];
+```
+
+Examples
+- <https://github.com/dotnet/docs/blob/main/docs/csharp/language-reference/statements/snippets/yield/Program.cs>
+	- especially  this one	<https://github.com/dotnet/docs/blob/d9cf6dbc0552f5763e4d20f41dff6891c0bb4684/docs/csharp/language-reference/statements/snippets/yield/Program.cs#L82>
+- <https://github.com/dotnet/docs/blob/main/docs/csharp/snippets/iterators/Generators.cs>
+
+
+- How it is commonly used.
+ 
+	```csharp
+	class Snippet
+	{
+		internal IEnumerable<int> @Yield()
+		{
+			yield return 1;
+			yield return 2;
+		}
+
+      public IEnumerable<int> DoWhile()
+      {
+        int index = 0;
+        while (index < 10)
+            yield return index++;
+     }
+	
+		internal IEnumerable<int> @Array => new[] { 1, 2, };
+
+		internal IEnumerable<int> @For()
+		{
+			foreach (int i in Enumerable.Range(0,2))
+			{
+				Console.WriteLine(i);
+				yield return i;
+			}
+		}
+
+		internal IEnumerable<int> SeveralFor()
+		{
+			foreach (int i in Enumerable.Range(0, 2))
+				yield return i;
+
+			foreach (int i in Enumerable.Range(2, 2))
+				yield return i;
+			
+		}
+				
+		internal void Enumerate()	
+		{
+		
+			List<int> collection=	[4,5];
+			IEnumerator<int> enumerator = collection.GetEnumerator();
+			
+			while (enumerator.MoveNext())
+			{
+				Console.WriteLine( enumerator.Current.ToString());
+			}
+		}
+		
+		internal IEnumerable<int[]> WithSideEffect(int i)
+		{
+			// These messages will only be in the first loop!
+			Console.WriteLine(i);  
+			if (i>0) Console.WriteLine(i);
+			Console.WriteLine("first loop");
+			yield return [1, 2];
+			
+			
+			Console.WriteLine("second loop");
+			yield return [3, 4];
+		}
+		
+		internal IEnumerable<int> Wrapper
+		{
+			get
+			{
+				int CreateParameters(int i)
+				{
+					Console.WriteLine(i);
+					return i;
+				}
+				yield return CreateParameters( 1);
+				yield return CreateParameters( 2);
+			}
+		}
+		// xunit MemberData  
+		internal IEnumerable<object[]> MemberData
+		{
+			get
+			{
+				object[] CreateParameters(Action<int> call, int expected)
+				{
+				   return new object[] { call, expected };
+				}
+
+				yield return CreateParameters(Console.WriteLine, 1);
+				yield return CreateParameters(Console.WriteLine, 2);
+			}
+		}
+	}
+	```
+	
+
+	
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2025-03-19-About-sources.md
+---
+title: About sources
+date: 2025-03-19 19:41:25 +0100
+categories: [aspnet]
+tags: [indexer]
+---
+
+I got the impression that the average programmer, and maybe any programmer, frankly, is in a pretty stupid state when he turns to the Internet. Always with an outstretched hand. Meanwhile, essentially, all he needs are the basic repositories he works with. But we surf the Internet. I did it all the time, non-stop. and I was in constant anxiety whether I would be able to find the right pattern. Or, on the contrary, I was excited because I found it. Then I used the dtsearch indexer for a very long time and I still use it, but very rarely. Then I made snippets. I did it almost automatically - if I came across an interesting example, I saved it, thinking that it would be useful later. But this is not a systematic approach.
+
+If you take the source code as a whole, it is better to look at it by sections, by libraries. And tests for them, although they can be quite specific. For "deep drilling"
+And sometimes, on the contrary, only with their help can you clearly and convincingly understand the meaning of a method or object.
+But if we talk about patterns and snippets, then this is not what is needed.
+But examples from these libraries are needed. And they are there, for example, in aspnetcore.
+And there are also general educational illustrative ones and as part of the general system of support and popularization of Microsoft.
+- <https://github.com/dotnet/AspNetCore.Docs> 
+- <https://github.com/dotnet/AspNetCore.Docs.Samples> 
+- <https://github.com/dotnet/samples> 
+- <https://github.com/dotnet/aspnetcore> 
+- etc
+
+If you select only the directories that contain examples in these repositories, you'll get about 1,500 `*. csproj`.
+And then combine all the `*.cs` files, remove the `///` comments, why the hell do you need them, and add your own single line comment with the file path, you'll get the final file, all in one bottle, only about 20 MB in size. Just imagine, only 20 MB!
+
+That is, what my computer can handle more or less successfully and can show in `notepad++` with highlighting. Just leave the `.cs` extension or with `.cs_` may be such way 
+![assets/notepad_ext.jpg](/assets/notepad_ext.jpg)  
+
+No need for any search engines. When everything is at hand in one file, it's nice, you must admit.
+If you really want to, you can make notes in the margins there, but it's easier than copy-pasting snippets from there.
+True, you still need the code from https://github.com/dotnet/dotnet-api-docs.git - it's 16 MB. I look at 2 files. Because 36 MB in one file is too much for my machine.
+
+Perhaps you will say that, generally speaking, the examples may be weak, imperfect, for beginners.
+There is such a moment. I agree.
+But in `dotnet/aspnetcore` the examples are professional, because they were written by the developers of this software, and not consultants.
+
+This is not a panacea, it is not even discussed, such an approach does not exempt from a systemic review of projects or target repositories. But it is easier than opening each project separately in the IDE or viewing the source code page by page. Only a text editor with highlighting is enough. In principle, for searching in `notepad++`, everything I need exists: `regex`, selections `Find all in current document`.  
+The same way you can merge files of large repositories. For example, the total size of aspnetcore `.cs` files is about 55 Mb.
+
+To write script or cli for merging files you can using any language.
+My result looks like this 
+![assets/content.jpg](/assets/content.jpg)    
+
+In any case, it is better to look at "your tested" code,  which you know where it came from, and then request your issue on the Internet or big brother Artifical Intelligence, whose  "spectre is haunting Europe".
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2025-05-08-Tailwindcss.md
+---
+title: Tailwindcss
+date: 2025-05-08 21:36:11 +0200
+categories: [nodejs]
+tags: []
+---
+
+The tailwindcss repo is  a `rust project` because the repo contains `toml` file in  the root folder.  
+Cargo aka config  directs  to `members = ["crates/*"]`.  
+
+## Crates  
+  *  `./node` contains napi-template. `napi` compiles a nodejs addon from `rust` src.
+  * `node` crate  has dependency to `oxide` crate. 
+  * `oxide` depends on `ignore` and `classification-macros`  crates.
+
+So `oxide` obviously is main crate. 
+
+`yarn build` produces npm package with addon whose name depends on OS. 
+
+If to look at [https://github.com/napi-rs](<https://github.com/napi-rs/napi-rs?tab=readme-ov-file>) you will see that the `.\crates\node` has similar properties.
+napi has [napi-rs package-template](<https://github.com/napi-rs/package-template>) for addon creation. To check, try creating a project as described in `readme.md`.
+
+After `clone` and `yarn install` run `npx napi rename --help`. You will see that the command add the following :
+  - package name
+  - addon name
+  - repo url 
+  - descrpiption 
+
+`.\npm` contains npm package configs for several OS.
+ 
+Before building you need to add package `yarn add @napi-rs/package-template`, then  to execute `yarn build`. A file with  extension `.node`
+,for instance `myaddonwin32-x64-msvc.node`, will appear in the root directory. It is your addon.  
+Run `yarn test` just in case.
+
+I have node project with tailwind package.  
+When I install `tailwindcss` package, yarn/npm installes the package type that fits my OS. `tailwindcss-oxide.win32-x64-msvc.node` in my case.  
+The `.\node_modules\@tailwindcss\oxide\index.js` loads addon `./tailwindcss-oxide.win32-x64-msvc.node`  
+
+ ```js
+ if (process.arch === 'x64') {
+      try {
+        return require('./tailwindcss-oxide.win32-x64-msvc.node')
+      } catch (e) {
+        loadErrors.push(e)
+      }
+      try {
+        return require('@tailwindcss/oxide-win32-x64-msvc')
+      } catch (e) {
+        loadErrors.push(e)
+      }
+
+    }
+```
+and exports Scanner `module.exports.Scanner = nativeBinding.Scanner`
+
+## Conclusion
+To understand properly how tailwindcss works you need to understand Rust code.
+
+## Usage
+This seems to be the most convenient approach for local use
+
+0. `npm install tailwindcss @tailwindcss/cli`
+1. add to empty `./input.css`  `@import "tailwindcss";`
+2. create empty `src/style.css`
+3. execute `npx @tailwindcss/cli -i ./input.css -o ./src/style.css --watch`
+4. run on localhost any html with `<link href="./style.css" rel="stylesheet">`
+
+The watch command assumes that if class list is changed in any file that references to style.css , then Tailwind CLI will parse the file and update styles.css
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2025-07-17-The-binding-types-in-csproj.md
+---
+title: The binding types in csproj
+date: 2025-07-17 22:22:49 +0200
+categories: [C#]
+tags: []
+---
+
+What types of binding are possible in `csproj`
+
+1.  project   `dotnet add reference`
+
+2.  package 
+`dotnet  add package`
+
+3. dll
+
+	```xml
+	<ItemGroup>
+		<Reference Include="Microsoft.DotNet.RemoteExecutor">
+		  <HintPath>..\Microsoft.DotNet.RemoteExecutor\src\bin\Release\net9.0\publish\Microsoft.DotNet.RemoteExecutor.dll</HintPath>
+		</Reference>
+	  </ItemGroup>
+	```
+
+4. files
+
+	```xml
+	 <Compile Include="$(CommonTestPath)System\Diagnostics\Tracing\TestEventListener.cs" Link="Common\System\Diagnostics\Tracing\TestEventListener.cs" />
+	```
+
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2025-07-24-How-to-sort-out-with-aspnetcore-repo.md
+---
+title: How to sort out with aspnetcore repo
+date: 2025-07-24 14:08:04 +0200
+categories: [aspnetcore]
+tags: [C#]
+---
+In my opinion, this is my first finding that solved my problems with aspnetcore, reduced the stress in understanding the process, allowed me to calm down, the process of tracking the flow has become more controlled, optimized one.
+
+The fact is that the process of creating a webapi app consists of two parts at least.
+First of all it is worth mentioning that the whole process resemebles factory conveyor.
+I myself worked on conveyor little bit being a student.
+The conveyor belt is moving, each worker performs a short simple operation, for example, I inserted insoles into shoes.
+This was our practice to get acquainted with factory.
+First, the worker must stock up on these insoles so that they are at hand.
+He must get them from the warehouse, unpack the box, well, something like that.
+Then the line is turned on, the conveyor belt runs.
+The first process in the assembly before the request goes into work
+is the creation of a mass of services.
+And when you look at these operations, then, frankly, nothing is clear.
+It's like opening Lego packages.
+I want it to be clear, not just that the property, service  were added
+but why, why exactly this way and why it is needed at all.
+The questions will still remain.
+But still, it is easier to understand if you track when which service is attached  and where.
+
+Familiarity with the Protocols makes it easier to understand.
+After all, there is nothing mysterious there, eventually.
+We agreed that the response should have a header of such type and its length and value can be such and such.
+Why exactly this name, we agreed and wrote it down in a document that everyone follows
+that is, no matter how difficult it may seem first, you need to remember that the input is always http request
+the output is always http response. It is easier to get used to the appearance of these entities using js, for example `expresjs`
+because the text format is very visual, and in dotnetcore there are already abstractions
+it is effective but what this final thing looks like is not clear there you need to constantly monitor it.
+In principle it is not so difficult, having understood that at the beginning an object is created, called httpcontext and to it are added
+request and response and a set of all the features, properties.
+That is, in principle, you can serialize them and see what happened at this stage.
+what does this blank look like that the facrory lathe work with. or speaking about the conveyor, if there are insoles, have they already been put there?
+how many are there? For some reason they put 2 pieces in each shoe, which is strange, but nevertheless there is some logic there.
+
+What I wrote about my problems, I solved it by adding my logger, that is, one that shows where the recording took place and my personal
+description, although not perfect, is already something. 
+
+The thing is that at first I made comments in the aspnetcore repo somehow tried to capture reality, describe it,
+conditionally speaking, what I see. Why this class and so on or just comments, for example, there are pieces of code that I would like to have in my arsenal
+then this is essentially a snippet with an algorithm that is understandable to me and can be encountered again and than reinvent the wheel, of course, it is better to take this implementation
+that is, extract it from the entire bunch of classes and save it somewhere.
+The work was not very successful.
+
+
+Then I decided to do logging, that is, pulling my comments out with a time reference.
+The sequence of events is important as the event itself.
+I  created a project with a static class and added this one to my local repository https://github.com/dotnet/aspnetcore.git. to make it easier to understand its processes. 
+
+Comments are logged in markdawn That is, you need to understand that  from standard standpoint `callers` are not used  usually becouse it is slow approach,  but for debugging it is exactly that I wanted.
+
+src:  <https://github.com/KosarevDmitry/DebugLogger>  
+example of log: <https://github.com/KosarevDmitry/DebugLogger/blob/main/Cookies-2025-02-01-09-00-35.md>
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2025-10-07-Existential-problem.md
+---
+title: Existential problem
+date: 2025-10-07 13:51:39 +0200
+categories: [common sense]
+tags: []
+---
+
+You know what's difficult? Some buildings, especially official residences, are so confusing that finding the right office is a real challenge. And even if you eventually get used to finding your office almost automatically, you often don't understand what exactly is nearby or what the workflow is like in the neighboring offices. Sometimes such buildings, I believe, were designed by specially trained people, and that's really the intention. Sometimes they've simply been redesigned several times to suit different needs, and they've been refined along the way. Basically, in the beginning it's hard to figure out how to get around, so you walk around, asking everyone you meet. 
+
+Let's say a topic in the broad sense of the word, a language, or a programming subfield has emerged that interests me or seems in demand, and the list of repositories and libraries I need to understand this specific project, seemingly only one of which, grows. I'm tempted to brush them off— go ahead, go ahead, there's no time. It's time to code, not read manuals.
+ 
+True, there's a vague feeling, like, "Why are we running? Stop, go into this room, the repo, I mean, and look around." But the problem is, as soon as you get stuck, you want to look at the code, but the explanation isn't clearly written—there's no end in sight. Besides, what do you mean, "read the code?" First, learn the syntax, the library dependencies, and only then. That'll take a fair amount of time.
+
+There are people, I believe, who read the summary and the comment — they understand what it's all about, which, frankly, rarely happens to me. What means this variable in the config? At once I want to write a test, to create sandbox solution to check purpose. Ah, now it's more or less clear. 
+
+A virtual conversation with manual developers.
+
+"Why didn't you tell me right away?"
+
+"We did."
+
+"Where?"
+
+"Well, on page 5, in the footnote." And anyway, this is an advanced level. If you want to participate and commit to our project, then it is ok, but otherwise, you don't really need it.
+
+You're so great, thank you, sorry for bothering me. And you're thinking, it would have been better if you'd explained it right away on the first page. Or you're simply saying, "Don't read our manual at all, check out unittests." You know, not every test will help. A test without knowledge of the codebase can be incomprehensible. Functional tests are generally like that. Although some are exactly what you need, they demonstrate the concept you're trying to understand.
+
+They actually think the comment is clear and sufficient. I think so myself when I write. Time passes, and everything ends with complaints about oneself Why didn't I write more in detail?
+
+Because they're in the context, they understand why this library, class, or module is needed. Many things seem obvious to them. But not to me.
+
+You'll glance at it for five minutes, and end up stuck for who knows how long. It says "cutting-edge helper" or "core" for something obscure. What "core" is, who knows, but there's all sorts of interesting and useful stuff there.
+
+Without looking into it, without understanding it at the beginning, you'll keep stumbling across this word or concept as you read manuals or program. You know roughly what it is, but what it actually is isn't clear. And the method's calls and specifics remain "behind the scenes." This can go on for years.
+
+If you don't look into it, you'll remain dependent on other people's opinions, and if you stop and look into it, it'll waste a ton of time. You don't know yet whether you'll get results, whether you'll understand how it all works—that's not a given. And it takes a long time, you see.
+
+In my opinion, it's worth doing. But I don't have any firm arguments against it. And from the very beginning. Before, instead of reading code, I programmed everything. Often, no one asked; I could have done without it; I wanted to be helpful. And I wasted a ton of time, really. And when you finally decide to dig under the hood, it turns out it's time to learn other libraries. Maybe I should have done it right away; it would have been more useful.
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2025-10-11-Jupyter-notebook.md
+---
+title: Jupyter-notebook
+date: 2025-10-11 15:26:06 +0200
+categories: [py]
+tags: []
+---
+
+- jupyter-notebook `.ipynb` file is json with  fields `code`, `comment` and field  to memorize the execution result of `code` field content.
+
+The workflow (pseudocode) looks like as following:
+
+```py
+json=ReadFileAsJson(ipynb)
+renderAsHtml(json)
+ 
+# User clicks `div` with cells[1].source content
+
+obj=json.cells[1]
+								
+if obj.cell_type == "code":
+  result = (py obj.source)
+  obj.metadata.ExecuteTime = result.executeTime
+  obj.metadata.outputs = result.output
+  obj.execution_count++
+
+update(obj, json)
+renderAsHtml(json)
+```
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2025-11-26-Typescript-syntax-tests.md
+---
+title: Typescript syntax tests
+date: 2025-11-26 21:35:54 +0100
+categories: [Nodejs]
+tags: []
+---
+
+When you start to sort out with some library, CLI or sotmething similar, it initially seems  enormous, but gradually it becomes user-friendly maybe even comfortable and cozy and its imaganary size  shrink and shrink. There is only single issue how to get this state quickly.  
+Despite of existence of highly interactive, complex and attractive websites created specially for learning libraries,you alway need  to find the compiler and  invoke it with `--help` parameter.  
+I like a simple approach. Try the same with Typescript.
+
+
+All you need    
+
+1. To check that `tsc` CLI is installed
+2. Run `tsc --help` just in case. It is an usual approach.
+3. Download  <https://github.com/microsoft/TypeScript-Website.git>, open `.\packages\documentation\copy\en\referene` and	read  markdown files. 
+	In my opinion, the HTML presentation is great, but too dynamic to be easily read.
+	It makes it difficult to concentrate on the meaning. So, I usually download any repo and read it in Notepad++ with minimal syntax highlighting. 
+	This approach allow to write comment and whole reading process  become more productive.
+4. Create project `mkdir test && cd test && tsc --init && echo "" > test.ts`
+5. Copy any snippet from  the reference to your source file.
+6. Run `tsc` . The new js file will be created. 
+
+This way you understand code deeply than just reading.   
+ 
+Pecular recommendations about appropriate config settings I can not give.  Problems are resolved as they arise.
+At least `target`, `module` are  certainly important.
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2025-11-30-How-to-keep-notes-of-node-packages.md
+---
+title: How to keep notes of node packages
+date: 2025-11-30 15:57:56 +0100
+categories: [learning]
+tags: []
+---
+
+Let's say you're struggling with the number of libraries (because learning anything in a short time becomes a challenge).
+
+What can you do to improve the process: understand - remember - apply?
+
+Let's say you have a flagship industry repo, and you're curious about how it works. What do all its dependencies mean?
+
+Let's say you don't understand enough the description in the readme.md and still have questions after superficial reading of code and running src in debug mode.
+
+When reading code, I like to comment on the code or to add extra file with node.assert expression and want to keep this instance of the package, as it stores what I consider important notes.
+
+You can:
+1. Add an exception to .gitignore that allows you to keep individual packages, even though they're in node_packages. Commit them to Git.
+
+The downside of this approach: maintaining all repositories is counterproductive, as they will eventually become too large.
+It may be enough to save only files with your comments or individual parts of the code. 
+Perhaps, despite the current availability of valuable "smart" AI assistants, custom snippets can still be useful.
+You can store only individual code fragments, marking them like this:
+`// <snippet> // </snippet>`
+Perhaps even simpler, by adding `//`\`\`` at the beginning and the end of code and processing all files for searching and subsequent extraction using StreamReader and StreamWriter.
+
+However, storing only snippets is often insufficient, as understanding the code requires a broader context.
+I think it's better to use `git diff > my_changes.patch` and store the patch.
+
+Besides in some cases, a short description of each library is even sufficient. That's why I make brief notes for each library. Such files can be stored in a separate repository or in a repository dedicated exclusively to snippets.
+
+
+My template `lib.ps1` currently looks like this :
+
+```powershell
+Set-Content -Path ".\scratch.md" -Value @"
+git:
+used by:
+idea:
+"@
+```
+
+So, if you maintain a directory with brief library descriptions,
+source code with comments preserved by git patch,
+plus additional test cases, then that's just the ticket.
+
+
+I have to switch between different languages, so it's important for me to leave notes if I can. Otherwise, I might forget what I was doing, the name of the package I need, or any other useful information.
+
+
+// ### D:\Dmitry\EDX\_Test\KosarevDmitry.github.io\_posts\2025-12-04-Tailwindcss-assistant.md
+---
+title: Tailwindcss assistant
+date: 2025-12-04 14:34:40 +0100
+categories: [Tailwindcss]
+tags: [Tailwindcss]
+---
+
+In the near future, I might have to use `m-..` instead of `margin`, but
+right now I can a more or less quickly recall CSS keywords, and I don't want to have to look up classes in the tailwindcss website every time to find out how to translate from tailwindcss to regular CSS.
+Perhaps later, I'm even sure it won't matter to me, but right now it doesn't. IntellySence only offers a hint: if I enter the tailwindcss class, it will show the CSS.
+The situation is similar to if you started using a foreign language and had a dictionary with a one-way translation from the foreign language to your native language, but not vice versa.
+
+Furthermore, the latest version of the tailwindcss repository does not contains  the comprehensive CSS file.
+Older versions do have it; for example, `tailwindcss@2.2.19` contains `tailwind.css`.
+
+So I created a powershell script that parse `tailwind.css` and placed it in one of directories stored in the Path environment variable.
+If you enter, for instance, `tail prewrap`, the script will output to the console all classes that contain this css property.
+If you enter `tail prewrap -f`, the script will output the results to a random file in the `temp` directory and open it.
+
+![Tailwindcss](assets/tailwind-script.jpg)
+
+

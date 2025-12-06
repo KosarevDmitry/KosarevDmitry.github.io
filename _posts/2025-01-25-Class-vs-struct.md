@@ -1,6 +1,6 @@
 ---
 title: Class vs struct
-date: 2022-07-20 18:05:09 +0100
+date: 2025-01-25 18:05:09 +0100
 categories: [dotnet]
 tags: []
 ---
