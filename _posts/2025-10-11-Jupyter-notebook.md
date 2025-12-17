@@ -26,3 +26,24 @@ if obj.cell_type == "code":
 update(obj, json)
 renderAsHtml(json)
 ```
+
+- ipynb to html
+
+```powershell
+Param(
+ [string][Alias('n')]$name
+  )
+
+if ($name -like "*.html"  ){
+  & npx http-server . -o $name -p 5001	
+}
+elseif ($name -like "*.ipynb") {
+  & jupyter nbconvert --to html $name 
+  $html = $name.Substring(0, $name.Length - 6) +".html"
+  & npx http-server . -o $html -p 5001
+}
+else 
+{
+  Write-Host  "The only allowed extensions are .html|.ipynb "  -ForegroundColor Green
+}
+```
