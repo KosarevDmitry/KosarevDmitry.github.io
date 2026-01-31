@@ -27,7 +27,17 @@ update(obj, json)
 renderAsHtml(json)
 ```
 
-- ipynb to html
+The usual way to display `ipynb` is to use the `jupyter` library, which runs a local web server with a web application to automatically display `ipynb`.
+
+```powershell
+& py -m venv venv
+& .\venv\Scripts\Activate.ps1
+pip install jupyter
+& jupyter notebook
+
+```
+
+- to compile ipynb to html without running webserver use  `nbconvert` library
 
 ```powershell
 Param(
@@ -47,3 +57,4 @@ else
   Write-Host  "The only allowed extensions are .html|.ipynb "  -ForegroundColor Green
 }
 ```
+
