@@ -21,5 +21,10 @@ permalink: /sec/
 ### Частные сыщики: Западное побережье 2026
 <https://kinogo.org/143560-chastnye-syschiki-zapadnoe-poberezhe.html>
 
+# c 4 серией 2 ресурса
+<https://mov.kinogo1.biz/27003-chastnye-syschiki-zapadnoe-poberezhe-2026-kinogo/player-2>
+
+<https://seasonvar.ru/serial-50649-CHastnye_syshiki_Zapadnoe_poberezh_e.html>
+
 ### Томми и Таппенс
  <https://kinogo.org/140996-tommi-i-tappens.html>
