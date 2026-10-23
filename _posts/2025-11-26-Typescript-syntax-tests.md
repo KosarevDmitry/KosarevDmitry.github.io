@@ -1,8 +1,8 @@
 ---
 title: Typescript syntax tests
 date: 2025-11-26 21:35:54 +0100
-categories: [Nodejs]
-tags: []
+categories: [nodejs]
+tags: [nodejs]
 ---
 
 When you start to sort out with some library, CLI or sotmething similar, it initially seems  enormous, but gradually it becomes user-friendly maybe even comfortable and cozy and its imaganary size  shrink and shrink. There is only single issue how to get this state quickly.  

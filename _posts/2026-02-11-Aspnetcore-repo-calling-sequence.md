@@ -1,8 +1,8 @@
 ---
 title: Aspnetcore repo calling sequence
 date: 2026-02-11 13:55:51 +0100
-categories: [Aspnetcore]
-tags: []
+categories: [aspnetcore]
+tags: [aspnetcore]
 ---
 
 When I started sorting out the ASP repo more deeply two years ago, many things weren't obvious at all.

@@ -7,22 +7,26 @@ tags: [user-secrets]
 
 - source
 
-	<https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-8.0&tabs=linux>
+	-	<https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-8.0&tabs=linux>
+    -	../AspNetCore.Docs/aspnetcore/security/app-secrets/samples/6.x/UserSecrets
 
-	../AspNetCore.Docs/aspnetcore/security/app-secrets/samples/6.x/UserSecrets
+- packages  
+  - `dotnet add package Microsoft.Extensions.Configuration.Json`  
+  - `dotnet add package Microsoft.Extensions.Configuration.UserSecrets`  
 
-dotnet add package Microsoft.Extensions.Configuration.Json
-dotnet add package Microsoft.Extensions.Configuration.UserSecrets
-dotnet user-secrets init
+- initial command  
+  - `dotnet user-secrets init`
 
-As  result it will be created element in
-- csproj `<UserSecretsId> user_secrets_id </UserSecretsId>`	
- - storage path to `/<user_secrets_id>/secrets.json`
-	- `~/.microsoft/usersecrets`
+As a result, a new tag 
+`<UserSecretsId> user_secrets_id </UserSecretsId>`  
+will be added to the  .csproj project file and 
+the settings file  `/<user_secrets_id>/secrets.json`   
+will be created in the directory  
+	- `~/.microsoft/usersecrets`  
 	- `%APPDATA%\Microsoft\UserSecrets`
 
 	 
-- commands
+- command examples
 
 	```bash
 	dotnet user-secrets init
@@ -35,7 +39,7 @@ As  result it will be created element in
 	cat ~/.microsoft/usersecrets/934ecfd0-bf73-4a27-92aa-bd6334cc944d/secrets.json
 	```
 
-- implemintation
+- usage
 
 ```csharp
   var configuration = new ConfigurationBuilder()
@@ -46,7 +50,7 @@ As  result it will be created element in
 	var movieApiKey = builder.Configuration["Movies:ServiceApiKey"];
 	var moviesApiKey = _config["Movies:ServiceApiKey"]; //DI  IConfiguration 
 ```
-- create poco settings class
+- poco settings class
 
 ```csharp
   

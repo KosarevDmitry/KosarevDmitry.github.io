@@ -1,8 +1,8 @@
 ---
 title: The binding types in csproj
 date: 2025-07-17 22:22:49 +0200
-categories: [C#]
-tags: []
+categories: ['C#']
+tags: ['C#']
 ---
 
 What types of binding are possible in `csproj`
