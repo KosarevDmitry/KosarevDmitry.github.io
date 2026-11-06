@@ -18,7 +18,8 @@ permalink: /sec/
 [Тайны гаражной распродажи 2016](https://kinogo.online/filmy/54684-garage-sale-mystery-guilty-until-proven-innocent.html)|[Тайны гаражной распродажи 2017](https://kinogo.online/filmy/67904-tajny-garazhnoj-rasprodazhi-poslednee-soobschenie.html)
 [Тайны гаражной распродажи 2018-1](https://kinogo.online/filmy/54542-tajny-garazhnoj-rasprodazhi-ubijstva-iz-jaschika-pandory.html) |[Тайны гаражной распродажи 2018-2](https://kinogo.online/filmy/71387-tajny-garazhnoj-rasprodazhi-ubijstvo-pod-maskoj.html) 
 [Коронер  4 сезона](https://kinogo.online/serialy/33212-koroner.html)|[Шериф Франция](https://kinogo.online/serialy/33922-sherif.html)
-[Хадсон и Рекс](https://kinogo.online/original/32795-hadson-i-reks.html)|[Пропавшие письма США](https://kinogo.online/serialy/33934-propavshie-pisma.html)
+[Хадсон и Рекс](https://kinogo.online/original/32795-hadson-i-reks.html) |[Хадсон и Рекс  др вариант](https://seasonvar.ru/serial-50536-Hadson_i_Reks-9-season.html)
+[Пропавшие письма США](https://kinogo.online/serialy/33934-propavshie-pisma.html)
 [Pokerface](https://kinogo.online/original/49732-pokerfejs.html)|[Касл](https://kinogo.online/serialy/37089-kasl.html)   
 [Инспектор Алейн](https://seasonvar.ru/serial-12565-Inspektor_Allejn_rassleduet_psaefbc-1-season.html)|
 
